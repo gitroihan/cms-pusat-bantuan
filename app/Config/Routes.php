@@ -6,7 +6,11 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('/login', 'Home::login');
+$routes->get('/login', 'User::index');
+$routes->post('/aksilogin', 'User::login'); 
+$routes->post('/logout', 'User::logout');
+
+
 $routes->get('/cmshome', 'Home::dashboard');
 $routes->get('/cmsmenu', 'Home::menu');
 $routes->get('/cmshistori', 'Home::histori');

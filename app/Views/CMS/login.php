@@ -12,12 +12,12 @@
 <body>
     <div class="container">
         <div class="login">
-            <form method="POST" action="">
+            <form method="POST"  action="<?= base_url('/aksilogin') ?>">
                 <h1>login</h1>
                 <hr>
                 <p>Goldstep indonesia</p>
-                <label for="name">username</label>
-                <input type="text" name="name" id="name" placeholder="username" required>
+                <label for="username">username</label>
+                <input type="text" name="username" id="username" placeholder="username" required>
 
                 <label for="password">password</label>
                 <input type="password" name="password" id="password" placeholder="password" required>

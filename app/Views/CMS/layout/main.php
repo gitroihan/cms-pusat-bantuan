@@ -77,11 +77,6 @@
                 <i class="fa-solid fa-address-book"></i>
                 <span>Kontak</span></a>
             </li>
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsmenu') ? 'active' : ''; ?>"">
-                <a class=" nav-link" href="/cmsmenu">
-                <i class="fa-solid fa-bars"></i>
-                <span>Menu</span></a>
-            </li>
             <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmshistori">
                 <i class="fa-solid fa-rectangle-history-circle-user"></i>
@@ -105,7 +100,7 @@
                     </div>
                     <div class="modal-body text-center">
                         <div class="mt-5 centered col-8 m-auto text-center">
-                            <form action="" method="post" enctype="multipart/form-data">
+                            <form action="/logout" method="post" enctype="multipart/form-data">
                                 <button type="submit" class="btn btn-danger">Logout</button>
                             </form>
                         </div>

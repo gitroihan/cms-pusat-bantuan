@@ -8,10 +8,6 @@ class Home extends BaseController
     {
         return view('welcome_message');
     }
-    public function login()
-    {
-        return view('CMS/login');
-    }
     public function dashboard()
     {
         return view('CMS/dashboard');
