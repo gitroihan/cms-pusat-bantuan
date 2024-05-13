@@ -17,14 +17,22 @@ Kontak
                 <input type="text" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="nama">no telepon</label>
+                <label for="telephon">no telepon</label>
                 <input type="text" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="nama">alamat</label>
                 <textarea name="" id="" class="form-control"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#kontakModal">SIMPAN</button>
+            <div class="mb-3">
+                <label for="nama">link whatsapp</label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="nama">link instagram</label>
+                <input type="text" class="form-control" required>
+            </div>
+            <button type="submit" class="btn text-light" data-toggle="modal" data-target="#kontakModal" style="background-color: #03C988">SIMPAN</button>
         </form>
     </div>
 

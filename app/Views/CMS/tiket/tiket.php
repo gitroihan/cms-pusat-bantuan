@@ -21,52 +21,52 @@ Tiket
                 <tr>
                     <td>aditha</td>
                     <td>aditha@gmail.com</td>
-                    <td><a href="/detail_tiket">detail</a></td>
+                    <td class="text-center"><a href="/detail_tiket"><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>ahmad</td>
                     <td>ahmad@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>surya</td>
                     <td>surya@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>ghazi</td>
                     <td>ghazi@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>aditha</td>
                     <td>aditha@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>ahmad</td>
                     <td>ahmad@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>surya</td>
                     <td>surya@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>ghazi</td>
                     <td>ghazi@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>aditha</td>
                     <td>aditha@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
                 <tr>
                     <td>ghazi</td>
                     <td>ghazi@gmail.com</td>
-                    <td><a href="">detail</a></td>
+                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
             </tbody>
         </table>

@@ -11,8 +11,8 @@ Menu
         <div class="d-sm-flex align-items-center justify-content-between mb-3">
             <h1 class="h3 mr-auto mb-0 text-gray-800">Menu</h1>
             <div class="my-1">
-                <button type="button" class=" btn btn-warning text-light shadow-sm mr-3" data-toggle="modal" data-target="#createmenuModal"><i class="fa-solid fa-plus"></i>
-                    menu
+                <button type="button" class=" btn text-light shadow-sm mr-3" data-toggle="modal" data-target="#createmenuModal" style="background-color: #03C988;"><i class="fa-solid fa-plus"></i>
+                    Menu
                 </button>
             </div>
         </div>
@@ -44,31 +44,29 @@ Menu
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="mt-5 col-8 m-auto">
-                        <form action="/menu_save" method="post" enctype="multipart/form-data">
-                            <div class="mb-3 p-2 pt-0">
-                                <label for="nama">Nama</label>
-                                <input type="text" name="title" class="form-control" required>
-                            </div>
-                            <div class="mb-3 p-2 pt-0">
-                                <label for="username">Deskripsi</label>
-                                <textarea name="description" class="form-control" rows="3"></textarea>
-                            </div>
-                            <div class="mb-3 p-2 pt-0">
-                                <label for="nama">Link</label>
-                                <input type="text" name="title" class="form-control" required>
-                            </div>
-                            <div class="mb-3 p-2 pt-0">
-                                <label for="nama">Kategori</label>
-                                <input type="text" name="title" class="form-control" required>
-                            </div>
-                            <div class="mb-3 p-2 pt-0">
-                                <label for="nama">Urutan</label>
-                                <input type="text" name="title" class="form-control" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">SIMPAN</button>
-                        </form>
-                    </div>
+                    <form action="/menu_save" method="post" enctype="multipart/form-data">
+                        <div class="mb-3 p-2 pt-0">
+                            <label for="nama">Nama</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+                        <div class="mb-3 p-2 pt-0">
+                            <label for="username">Deskripsi</label>
+                            <textarea name="description" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3 p-2 pt-0">
+                            <label for="nama">Link</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+                        <div class="mb-3 p-2 pt-0">
+                            <label for="nama">Kategori</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+                        <div class="mb-3 p-2 pt-0">
+                            <label for="nama">Urutan</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn text-light" style="background-color: #03C988;">SIMPAN</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -121,6 +119,9 @@ Menu
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title centered text-center" id="deletemenuModalLabel">Yakin ingin menghapus menu ini?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body text-center"> <!-- Tambahkan kelas text-center di sini -->
                     <div class="mt-5 centered col-8 m-auto text-center">

@@ -7,29 +7,27 @@ User
 
 <div class="container-fluid">
     <div class="card px-4 py-4 border-0 shadow w-50 mx-auto">
-        <div>
-        <div class="d-flex position-relative justify-content-center align-items-center mb-3 bordered ">
-            <img id="profilePicture" class="rounded-circle border " src="cms/img/wall12.jpg" width="150" height="150">
-        </div>
-        <div class="mb-3">
-            <label for="nama">nama</label>
-            <input type="text" class="form-control" required readonly>
-        </div>
-        <div class="mb-3">
-            <label for="username">email</label>
-            <input type="text" class="form-control" required readonly>
-        </div>
-        <div class="mb-3">
-            <label for="nama">role</label>
-            <input type="text" class="form-control" readonly>
-        </div>
-        <a href="/edituser" class="btn text-light mt-3" style="background-color: #03C988;">
-        UBAH
-        </a>
-        <button type="button" class=" btn text-light shadow-sm mt-3" data-toggle="modal" data-target="#passwordModal" style="background-color: #03C988;">
-            UBAH PASSWORD
-        </button>
-    </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="d-flex position-relative justify-content-center align-items-center mb-3 bordered ">
+                <img id="profilePicture" class="rounded-circle border " src="cms/img/wall12.jpg" width="150" height="150">
+                <button type="button" class="btn btn-light rounded-circle position-absolute shadow" style="top: 75%; left: 55%;" data-toggle="modal" data-target="#profilepictureModal">
+                    <i class="fas fa-camera fa-1x"></i>
+                </button>
+            </div>
+            <div class="mb-3">
+                <label for="nama">nama</label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="username">email</label>
+                <input type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="nama">role</label>
+                <input type="text" class="form-control" readonly>
+            </div>
+            <button type="submit" id="editProfileButton" class="btn text-light mt-3" style="background-color: #03C988;">SIMPAN</button>
+        </form>
     </div>
 
     <div class="modal fade" id="profilepictureModal" tabindex="-1" role="dialog" aria-labelledby="profilepictureModalLabel" aria-hidden="true">

@@ -7,89 +7,100 @@ Tambah Artikel
 
 <div class="container-fluid">
 
-    <div class="card px-4 py-3 border-0 shadow">
+    <div class="card px-4 py-3 border-0  mb-4 shadow">
         <h1 class="h3 mr-auto mb-0 text-gray-800">Tambah artikel</h1>
-        <form action="/submit_article" method="post">
-            <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
+        <form action=" " method="post">
+            <div class="col-12 mt-3 ">
+                <div class="ps-2" style="text-align: left;">
+                    <label for="exampleFormControlInput1" class="form-label d-flex justify-content-between">
+                        Layout : </label>
+                </div>
+                <div class="col-12 d-flex gap-2">
+                    <div class="p-2 col" style="text-align: left;">
+                        <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
+                            <h4 class="text-middle">Layout A</h4>
+                        </div>
+                        <br>
+                        <div class="form-check  col-12 d-flex justify-content-center">
+                            <input class="form-check-input border-dark" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label for="exampleFormControlInput1" class="form-label d-flex justify-content-between ml-3">
+                                A </label>
+
+                        </div>
+                    </div>
+                    <div class="p-2 col " style="text-align: left;">
+                        <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
+                            <h4 class="text-middle">Layout B</h4>
+                        </div>
+                        <br>
+                        <div class="form-check col-12 d-flex justify-content-center">
+                            <input class="form-check-input border-dark" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label for="exampleFormControlInput1" class="form-label d-flex justify-content-between ml-3">
+                                B </label>
+                        </div>
+                    </div>
+                    <div class="p-2 col" style="text-align: left;">
+                        <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
+                            <h4 class="text-middle">Layout C</h4>
+                        </div>
+                        <br>
+                        <div class="form-check col-12 d-flex justify-content-center">
+                            <input class="form-check-input border-dark" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label for="exampleFormControlInput1" class="form-label d-flex justify-content-between ml-3">
+                                C </label>
+                        </div>
+                    </div>
+                </div>
+                          
+            </div>
+            <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-8">
                     <label for="judul">Judul</label>
-                    <input type="text" class="form-control" id="judul" name="judul">
+                    <input type="text" class="form-control border-dark" id="judul" name="judul">
                 </div>
                 <div class="form-group col-4">
                     <label for="pembuat">Pembuat</label>
-                    <input type="text" class="form-control" id="pembuat" name="pembuat">
+                    <input type="text" class="form-control border-dark" id="pembuat" name="pembuat">
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-6">
                     <label for="kategori">Kategori</label>
-                    <button type="button" class="btn btn-light border form-control" data-toggle="modal" data-target="#kategoriModal">
-                    </button>
+                    <select class="js-example-basic-single form-control border border-dark" name="state">
+                        <option value="AL">kategori 1</option>
+                        <option value="WY">kategori 2</option>
+                    </select>
                 </div>
                 <div class="form-group col-6">
                     <label for="tag">Tag</label>
-                    <input type="text" class="form-control" id="tag" name="tag">
+                    <select class="js-example-basic-multiple form-control border border-dark" name="states[]" multiple="multiple">
+                        <option>tag 1</option>
+                        <option>tag 2</option>
+                    </select>
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-7 mt-7">
                     <label for="editor">Isi</label>
-                    <textarea id="" name="editor" class="form-control" cols="80" rows="10" placeholder="isi artikel"></textarea>
+                    <textarea id="" name="editor" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"></textarea>
                 </div>
-                <div class="form-group col-5 mt-7">
+                <div class="form-group row col-5 mt-7">
                     <label for="editor">upload gambar</label>
-                    <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                    <div class="form-group col-5 mt-7">
-                        <img id="previewImage" src="#" alt="Preview">
-                        <label for="editor">Deskripsi</label>
+                    <input type="file" class="form-control border-dark" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    <div class="form-group col-5 mt-3">
+                        <div class="image-box border border-dark" style="width: 200px; height: 200px;">
+                            <img id="previewImage" src="#" alt="Preview" style="width: 100%; height: 100%; object-fit: fit;">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-4">
-                <button type="submit" class="btn btn-primary">Draft</button>
+            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
+                <button type="submit" class="btn text-light ml-auto" style="background-color: #03C988;">DRAFT</button>
             </div>
         </form>
     </div>
 
-</div>
-
-<div class="modal fade" id="kategoriModal" tabindex="-1" role="dialog" aria-labelledby="kategoriModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="kategoriModalLabel">Tambah kategori</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="mt-2 col-12 m-auto">
-                    <form action=" " method="post" enctype="multipart/form-data">
-                        <input type="text" class="form-control bg-light border-2 small" placeholder="Cari..." aria-label="Search" aria-describedby="basic-addon2">
-                        <table class="table table-bordered table-sm" style="text-align: center; ">
-                            <tbody class="">
-                                <tr>
-                                    <td>kategori</td>
-                                </tr>
-                                <tr>
-                                    <td>kategori</td>
-                                </tr>
-                                <tr>
-                                    <td>kategori</td>
-                                </tr>
-                                <tr>
-                                    <td>kategori</td>
-                                </tr>
-                                <tr>
-                                    <td>kategori</td>
-                                </tr>
-                            </tbody>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>

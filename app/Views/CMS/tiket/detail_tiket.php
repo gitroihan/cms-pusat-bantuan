@@ -31,6 +31,6 @@ Tiket
         </tr>
     </table>
     <textarea id="editor" name="editor" class="form-control" cols="30" rows="10"></textarea>
-    <button type="submit" class="btn btn-success mt-3">ubah status</button>
+    <button type="submit" class="btn text-light mt-3" style="background-color: #03C988;">ubah status</button>
 </div>
 <?php $this->endSection() ?>

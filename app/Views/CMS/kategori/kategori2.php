@@ -10,15 +10,15 @@ Kategori
     <div class="d-sm-flex align-items-center justify-content-between mb-5">
         <h1 class="h3 mr-auto mb-0 text-gray-800">Kategori</h1>
         <div class="my-1">
-            <button type="button" class=" btn btn-warning shadow-sm mr-3" data-toggle="modal" data-target="#createCategoryModal"><i class="fa-solid fa-plus"></i>
+            <button type="button" class=" btn shadow-sm mr-3 text-light" data-toggle="modal" data-target="#createCategoryModal" style="background-color: #03C988;"><i class="fa-solid fa-plus"></i>
                 kategori
             </button>
         </div>
         <div class="input-group" style="width: 300px;">
             <input type="text" class="form-control border-2 small" placeholder="Cari..." aria-label="Search" aria-describedby="basic-addon2" style="background-color: white; color: white;">
             <div class="input-group-append">
-                <button class="btn btn-warning" type="button">
-                    <i class="fas fa-search fa-sm"></i>
+            <button class="btn" type="button" style="background-color: #03C988;">
+                    <i class="fas fa-search fa-sm text-light"></i>
                 </button>
             </div>
         </div>
@@ -37,13 +37,13 @@ Kategori
 
                             <div class="col">
                                 <a href="#" class="text-decoration-none">
-                                    <h5 class="card-title custom-title text-warning mb-2">Setting</h5>
+                                    <h5 class="card-title custom-title mb-2" style="color: #13005A;">Setting</h5>
                                 </a>
                                 <p class="card-text mb-0">Modul setting, digunakan untuk melakukan penyesuaian data-data master yang berkaitan dengan pelayanan saat menggunakan sistem HIS seperti master harga dan data pegawai</p>
                             </div>
                             <div class="dropdown no-arrow">
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v" style="color: black;"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updateCategoryModal">
@@ -137,6 +137,9 @@ Kategori
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title centered text-center" id="deleteCategoryModalLabel">Yakin ingin menghapus kategori ini?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body text-center"> <!-- Tambahkan kelas text-center di sini -->
                 <div class="mt-5 centered col-8 m-auto text-center">

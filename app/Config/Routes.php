@@ -12,6 +12,7 @@ $routes->get('/cmsmenu', 'Home::menu');
 $routes->get('/cmshistori', 'Home::histori');
 $routes->get('/cmskontak', 'Home::kontak');
 $routes->get('/cmsuser', 'Home::user');
+$routes->get('/edituser', 'Home::edituser');
 
 $routes->get('/cmskategori', 'Kategori::index');
 $routes->get('/cmskategori2', 'Kategori::kategori2');

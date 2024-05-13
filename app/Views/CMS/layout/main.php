@@ -20,7 +20,8 @@
     <script src="<?= base_url('ckeditor5-build-classic/ckeditor.js') ?>"></script>
     <!-- datatable -->
     <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.6/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/r-3.0.2/datatables.min.css" rel="stylesheet">
-
+    <!-- tag atau select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -37,7 +38,7 @@
                     <img src="<?= base_url('cms/img/logo-goldstep.png') ?> " alt="Nama Gambar" class="fas fa-laugh-wink" width="45" height="45">
                 </div>
                 <div class="sidebar-brand-text mx-3">
-                    <div class="text-warning">Goldstep</div>indonesia
+                    <div class="" style="color: #03C988;">Goldstep</div>indonesia
                 </div>
             </a>
 
@@ -54,18 +55,18 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmskategori') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmskategori' || $_SERVER['REQUEST_URI'] === '/cmskategori2') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmskategori">
                 <i class="fa-solid fa-folder-open"></i>
                 <span>Kategori</span></a>
             </li>
 
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsartikel') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsartikel' || $_SERVER['REQUEST_URI'] === '/tambah_artikel' || $_SERVER['REQUEST_URI'] === '/detail_artikel') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmsartikel">
                 <i class="fa-solid fa-newspaper"></i>
                 <span>Artikel</span></a>
             </li>
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmstiket') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmstiket' || $_SERVER['REQUEST_URI'] === '/detail_tiket') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmstiket">
                 <i class="fa-solid fa-ticket-simple"></i>
                 <span>Tiket</span></a>
@@ -98,6 +99,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title centered text-center" id="logoutmodalLabel">yakin ingin keluar dari akun ini?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                     </div>
                     <div class="modal-body text-center">
                         <div class="mt-5 centered col-8 m-auto text-center">
@@ -144,7 +148,7 @@
                                     Profile
                                 </a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutmodal">
-                                <i class="fa-solid fa-right-from-bracket mr-2 text-gray-400"></i>
+                                    <i class="fa-solid fa-right-from-bracket mr-2 text-gray-400"></i>
                                     logout
                                 </a>
                             </div>
@@ -183,6 +187,7 @@
 <style>
     .nav-item.active .nav-link {
         color: #ffffff;
+        background-color: #03C988;
     }
 </style>
 
@@ -210,7 +215,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.6/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/r-3.0.2/datatables.min.js"></script>
-
+<!-- tag atau select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- table datatable -->
 <script>
     $(document).ready(function() {
@@ -234,6 +240,19 @@
             }
         });
     });
+</script>
+<!-- tag -->
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
+<!-- tag -->
+<!-- kategori -->
+<script>
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
 </script>
 
 </html>

@@ -32,4 +32,8 @@ class Home extends BaseController
     {
         return view('CMS/user');
     }
+    public function edituser()
+    {
+        return view('CMS/user_edit');
+    }
 }

@@ -10,14 +10,14 @@ Kategori
     <div class="d-sm-flex align-items-center justify-content-between mb-5">
         <h1 class="h3 mr-auto mb-0 text-gray-800">Kategori</h1>
         <div class="my-1">
-            <button type="button" class=" btn btn-warning text-light shadow-sm mr-3" data-toggle="modal" data-target="#createCategoryModal"><i class="fa-solid fa-plus"></i>
-                kategori
+            <button type="button" class=" btn text-light shadow-sm mr-3" data-toggle="modal" data-target="#createCategoryModal" style="background-color: #03C988;"><i class="fa-solid fa-plus"></i>
+                Kategori
             </button>
         </div>
         <div class="input-group" style="width: 300px;">
             <input type="text" class="form-control border-2 small" placeholder="Cari..." aria-label="Search" aria-describedby="basic-addon2" style="background-color: white; color: white;">
             <div class="input-group-append">
-                <button class="btn btn-warning" type="button">
+                <button class="btn" type="button" style="background-color: #03C988;">
                     <i class="fas fa-search fa-sm text-light"></i>
                 </button>
             </div>
@@ -34,7 +34,7 @@ Kategori
                     </div>
                     <div class="title-category flex-grow-1">
                         <a href="/cmskategori2" style="text-decoration: none;">
-                            <p class="m-0 fw-semibold text-warning" style="font-size: 20px;">
+                            <p class="m-0 fw-semibold" style="font-size: 20px; color: #13005A;">
                                 produk
                             </p>
                         </a>
@@ -46,7 +46,7 @@ Kategori
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updateCategoryModal">
-                                    <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
+                                <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
                                     edit
                                 </a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal">
@@ -141,6 +141,9 @@ Kategori
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title centered text-center" id="deleteCategoryModalLabel">Yakin ingin menghapus kategori ini?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body text-center"> <!-- Tambahkan kelas text-center di sini -->
                 <div class="mt-5 centered col-8 m-auto text-center">
