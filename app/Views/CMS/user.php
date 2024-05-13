@@ -12,15 +12,15 @@ User
             <img id="profilePicture" class="rounded-circle border " src="cms/img/wall12.jpg" width="150" height="150">
         </div>
         <div class="mb-3">
-            <label for="nama">nama</label>
+            <label for="nama">Nama</label>
             <input type="text" class="form-control" required readonly>
         </div>
         <div class="mb-3">
-            <label for="username">email</label>
+            <label for="username">Email</label>
             <input type="text" class="form-control" required readonly>
         </div>
         <div class="mb-3">
-            <label for="nama">role</label>
+            <label for="nama">Role</label>
             <input type="text" class="form-control" readonly>
         </div>
         <a href="/edituser" class="btn text-light mt-3" style="background-color: #03C988;">

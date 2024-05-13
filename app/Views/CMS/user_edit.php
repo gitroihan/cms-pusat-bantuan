@@ -15,15 +15,15 @@ User
                 </button>
             </div>
             <div class="mb-3">
-                <label for="nama">nama</label>
+                <label for="nama">Nama</label>
                 <input type="text" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="username">email</label>
+                <label for="username">Email</label>
                 <input type="text" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="nama">role</label>
+                <label for="nama">Role</label>
                 <input type="text" class="form-control" readonly>
             </div>
             <button type="submit" id="editProfileButton" class="btn text-light mt-3" style="background-color: #03C988;">SIMPAN</button>
