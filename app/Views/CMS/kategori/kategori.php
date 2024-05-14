@@ -46,7 +46,7 @@ Kategori
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updateCategoryModal">
-                                <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
+                                    <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
                                     edit
                                 </a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal">
@@ -82,20 +82,20 @@ Kategori
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form id="create-category-form" method="post" enctype="multipart/form-data">
                     <div class="mb-3 p-2 pt-0">
                         <label for="nama">Judul</label>
-                        <input type="text" name="title" class="form-control" required>
+                        <input type="text" name="nama_kategori" class="form-control" required>
                     </div>
                     <div class="mb-3 p-2 pt-0">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea name="description" class="form-control" rows="5"></textarea>
+                        <textarea name="deskripsi_kategori" class="form-control" rows="5"></textarea>
                     </div>
                     <div class="mb-3 p-2 pt-0">
                         <label for="newProfilePicture">Pilih ikon:</label>
-                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <input type="file" name="ikon" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                     </div>
-                    <button type="submit" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                    <button type="submit" id="btn-save" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
                 </form>
             </div>
         </div>
@@ -155,4 +155,47 @@ Kategori
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#btn-save').click(function() {
+            var formData = new FormData($("#create-category-form")[0]);
+
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                url: '/tambah_kategori',
+                data: formData,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response.status === true) {
+                        alert('Kategori berhasil ditambahkan!');
+                        $('#createCategoryModal').modal('hide');
+                        $('#create-category-form')[0].reset();
+                        window.location.href = '/cmskategori';
+                    } else {
+                        alert('Gagal menambahkan kategori.');
+                    }
+                },
+                beforeSend: function() {
+                    // Optional: Logic before sending the request
+                },
+                complete: function() {
+                    // Optional: Logic after the request is complete
+                },
+                error: function(response) {
+                    alert('Terjadi kesalahan saat menambahkan kategori.');
+                }
+            });
+        });
+    });
+</script>
+
+
 <?php $this->endSection() ?>

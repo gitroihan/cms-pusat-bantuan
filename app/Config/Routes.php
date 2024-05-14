@@ -21,6 +21,7 @@ $routes->get('/cmshome', 'Home::dashboard');
 $routes->get('/cmskontak', 'Home::kontak');
 
 $routes->get('/cmskategori', 'Kategori::index');
+$routes->post('/tambah_kategori', 'Kategori::tambah_kategori');
 $routes->get('/cmskategori2', 'Kategori::kategori2');
 
 $routes->get('/cmsartikel', 'Artikel::index');
