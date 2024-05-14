@@ -80,7 +80,7 @@
             <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmshistori">
                 <i class="fa-solid fa-rectangle-history-circle-user"></i>
-                <span>Histori</span></a>
+                <span>Riwayat</span></a>
             </li>
 
             <!-- Divider -->
@@ -134,11 +134,11 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle mr-3" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-3 d-none d-lg-inline text-gray-600 small">Admin</span>
-                                <img class="img-profile rounded-circle" src="cms/img/wall12.jpg">
+                                <span class="mr-3 d-none d-lg-inline text-gray-600 small"><?= esc($data['nama']); ?></span>
+                                <img class="img-profile rounded-circle" src="<?= base_url('uploads/' . esc($data['foto_profile'])); ?>">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/cmsuser">
+                                <a class="dropdown-item" href="/lihat_profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>

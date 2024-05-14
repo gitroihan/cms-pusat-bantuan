@@ -4,15 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class LogAktivitasModel extends Model
 {
-    protected $table            = 'users';
+    protected $table            = 'log_aktivitas';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['nama', 'email', 'password', 'status', 'role','foto_profile'];
+    protected $allowedFields = [
+        'id_ref', 'log_tipe', 'aktivitas', 'alamat_ip', 'id_user', 'updated_at'
+    ];
+    public function semua_data()
+    {
+        return $this->findAll();
+    }
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -43,9 +49,4 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getUserById($id)
-    {
-        return $this->find($id);
-    }
 }

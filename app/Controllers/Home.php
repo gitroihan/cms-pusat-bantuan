@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\LogAktivitasModel;
+use App\Models\UserModel;
+
 class Home extends BaseController
 {
     public function index(): string
@@ -10,26 +13,33 @@ class Home extends BaseController
     }
     public function dashboard()
     {
-        return view('CMS/dashboard');
-    }
-    public function histori()
-    {
-        return view('CMS/histori');
-    }
-    public function menu()
-    {
-        return view('CMS/menu');
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $data = $model->getUserById($userId);
+
+        return view('CMS/dashboard', ['data' => $data]);
     }
     public function kontak()
     {
-        return view('CMS/kontak');
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $data = $model->getUserById($userId);
+        return view('CMS/kontak' ,['data' => $data]);
     }
-    public function user()
+    public function histori()
     {
-        return view('CMS/user');
-    }
-    public function edituser()
-    {
-        return view('CMS/user_edit');
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $data['data'] = $model->getUserById($userId);
+
+        $riwayatModel = new LogAktivitasModel();
+        $data['logs'] = $riwayatModel->semua_data();
+        return view('CMS/histori', $data);
     }
 }
