@@ -25,46 +25,48 @@ Kategori
     </div>
 
     <div class="basis pengetahuan" style="overflow-y: auto; height: 555px; display: flex; flex-wrap: wrap;">
-
-        <div class="col-md-4 mb-2">
-            <div class="card px-4 py-3 border-0 shadow" style="height: 250px; width: 370px">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div class="image-box mr-3" style="width: 45px; height: 45px;">
-                        <img src="logo-goldstep.png" alt="" style="width: 100%; height: 100%; object-fit: fit;">
-                    </div>
-                    <div class="title-category flex-grow-1">
-                        <a href="/cmskategori2" style="text-decoration: none;">
-                            <p class="m-0 fw-semibold" style="font-size: 20px; color: #13005A;">
-                                produk
-                            </p>
-                        </a>
-                    </div>
-                    <div class="menu">
-                        <div class="dropdown no-arrow">
-                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v" style="color: black;"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updateCategoryModal">
-                                    <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
-                                    edit
-                                </a>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal">
-                                    <i class="fa-solid fa-trash mr-2 text-gray-400"></i>
-                                    hapus
-                                </a>
+        <?php foreach ($kategori as $kat) : ?>
+            <div class="col-md-4 mb-2">
+                <div class="card px-4 py-3 border-0 shadow" style="height: 250px; width: 370px">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <div class="image-box mr-3" style="width: 45px; height: 45px;">
+                            <img src="<?= base_url('uploads/icons/' . esc($kat['ikon'])); ?>" alt="" style="width: 100%; height: 100%; object-fit: fit;">
+                        </div>
+                        <div class="title-category flex-grow-1">
+                            <a href="/cmskategori2" style="text-decoration: none;">
+                                <p class="m-0 fw-semibold" style="font-size: 20px; color: #13005A;">
+                                    <?= esc($kat['nama_kategori']) ?>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="menu">
+                            <div class="dropdown no-arrow">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v" style="color: black;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updateCategoryModal">
+                                        <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
+                                        edit
+                                    </a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal<?= $kat['id'] ?>">
+                                        <i class="fa-solid fa-trash mr-2 text-gray-400"></i>
+                                        hapus
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <p>Goldstep Product</p>
-                </div>
-                <div class="card-footer bg-white border-0">
-                    <p class="m-0 text-muted fw-semibold small">kategori</p>
+                    <div class="card-body">
+                        <p><?= esc($kat['deskripsi_kategori']) ?></p>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <!-- <p class="m-0 text-muted fw-semibold small">kategori</p> -->
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endforeach; ?>
+
 
     </div>
 
@@ -95,7 +97,7 @@ Kategori
                         <label for="newProfilePicture">Pilih ikon:</label>
                         <input type="file" name="ikon" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                     </div>
-                    <button type="submit" id="btn-save" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                    <button type="button" id="btn-save" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
                 </form>
             </div>
         </div>
@@ -135,26 +137,27 @@ Kategori
     </div>
 </div>
 
-<!-- delete category -->
-<div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title centered text-center" id="deleteCategoryModalLabel">Yakin ingin menghapus kategori ini?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center"> <!-- Tambahkan kelas text-center di sini -->
-                <div class="mt-5 centered col-8 m-auto text-center">
-                    <form action="" method="post" enctype="multipart/form-data">
+<!-- Delete Category Modal -->
+<?php foreach ($kategori as $kat) : ?>
+    <div class="modal fade" id="deleteCategoryModal<?= $kat['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryModalLabel<?= $kat['id'] ?>" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCategoryModalLabel<?= $kat['id'] ?>">Yakin ingin menghapus kategori ini?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <form action="/hapus_kategori/<?= $kat['id'] ?>" method="post">
+                        <?= csrf_field() ?>
                         <button type="submit" class="btn btn-danger">HAPUS</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+<?php endforeach; ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

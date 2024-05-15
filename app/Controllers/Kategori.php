@@ -15,8 +15,10 @@ class Kategori extends BaseController
         $userId = $session->get('user_id');
 
         $model = new UserModel();
-        $data = $model->getUserById($userId);
-        return view('CMS/kategori/kategori', ['data' => $data]);
+        $kategoriModel = new KategoriModel();
+        $data['data'] = $model->getUserById($userId);
+        $data['kategori'] = $kategoriModel->data_id_parent_null();
+        return view('CMS/kategori/kategori',  $data);
     }
     public function tambah_kategori()
     {
@@ -46,6 +48,16 @@ class Kategori extends BaseController
         $kategoriModel->save($data);
 
         return $this->response->setJSON(['status' => true]);
+    }
+    public function hapus_kategori($id)
+    {
+        $kategoriModel = new KategoriModel();
+        if ($kategoriModel->find($id)) {
+            $kategoriModel->delete($id);
+            return redirect()->to('/cmskategori')->with('message', 'Kategori berhasil dihapus.');
+        } else {
+            return redirect()->to('/cmskategori')->with('error', 'Kategori tidak ditemukan.');
+        }
     }
     public function kategori2()
     {

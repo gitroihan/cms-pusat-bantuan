@@ -14,9 +14,9 @@ class KategoriModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = ['nama_kategori', 'deskripsi_kategori', 'ikon', 'urutan', 'id_parent', 'id_user'];
 
-    public function semua_data()
+    public function data_id_parent_null()
     {
-        return $this->findAll();
+        return $this->where('id_parent', null)->findAll();
     }
     
     protected bool $allowEmptyInserts = false;
