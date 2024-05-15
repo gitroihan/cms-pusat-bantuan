@@ -22,11 +22,20 @@ $routes->get('/cmskontak', 'Home::kontak');
 
 $routes->get('/cmskategori', 'Kategori::index');
 $routes->post('/tambah_kategori', 'Kategori::tambah_kategori');
+$routes->post('/ubah_kategori/(:num)', 'Kategori::ubah_kategori/$1');
 $routes->post('/hapus_kategori/(:num)', 'Kategori::hapus_kategori/$1');
+$routes->get('/cari_kategori', 'Kategori::cari_kategori');
+
+$routes->get('/cmssubkategori/(:num)', 'Kategori::index_subkategori/$1');
+$routes->post('/tambah_subkategori', 'Kategori::tambah_subkategori');
+$routes->post('/ubah_subkategori/(:num)', 'Kategori::ubah_subkategori/$1');
+$routes->post('/hapus_subkategori/(:num)', 'Kategori::hapus_subkategori/$1');
+$routes->get('/cari_subkategori', 'Kategori::cari_subkategori');
+
+
 
 // $routes->delete('/hapus_kategori/(:num)', 'Kategori::hapus_kategori/$1');
 
-$routes->get('/cmskategori2', 'Kategori::kategori2');
 
 $routes->get('/cmsartikel', 'Artikel::index');
 $routes->get('/tambah_artikel', 'Artikel::tambah_artikel');
