@@ -19,6 +19,7 @@ $routes->get('/cmshistori', 'Home::histori');
 
 $routes->get('/cmshome', 'Home::dashboard');
 $routes->get('/cmskontak', 'Home::kontak');
+$routes->post('/ubah_kontak', 'Home::ubah_kontak');
 
 $routes->get('/cmskategori', 'Kategori::index');
 $routes->post('/tambah_kategori', 'Kategori::tambah_kategori');
@@ -43,4 +44,4 @@ $routes->get('/detail_artikel', 'Artikel::detail_artikel');
 
 
 $routes->get('/cmstiket', 'Tiket::index');
-$routes->get('/detail_tiket', 'Tiket::detail_tiket');
+$routes->get('/detail_tiket/(:num)', 'Tiket::detail_tiket/$1');

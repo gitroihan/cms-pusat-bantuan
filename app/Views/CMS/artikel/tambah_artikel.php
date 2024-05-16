@@ -54,13 +54,9 @@ Tambah Artikel
                           
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
-                <div class="form-group col-8">
+                <div class="form-group col-12">
                     <label for="judul">Judul</label>
                     <input type="text" class="form-control border-dark" id="judul" name="judul">
-                </div>
-                <div class="form-group col-4">
-                    <label for="pembuat">Pembuat</label>
-                    <input type="text" class="form-control border-dark" id="pembuat" name="pembuat">
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
@@ -82,7 +78,7 @@ Tambah Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-7 mt-7">
                     <label for="editor">Isi</label>
-                    <textarea id="" name="editor" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"></textarea>
+                    <textarea id="editor" name="editor" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"></textarea>
                 </div>
                 <div class="form-group row col-5 mt-7">
                     <label for="editor">upload gambar</label>

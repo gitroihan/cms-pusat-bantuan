@@ -38,7 +38,7 @@ h1 {
     text-transform: uppercase;
 }
 hr {
-    border-top: 2px solid #FCB040;
+    border-top: 2px solid #03C988;
 }
 p {
     text-align: center;
@@ -87,10 +87,10 @@ button{
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
-    background: #FCB040;
+    background: #03C988;
 }
 button:hover {
-    background:#1F1F1F;
+    background:#1C82AD;
 }
 @media  (max-width: 880px){
  .container {

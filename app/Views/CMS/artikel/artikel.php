@@ -19,10 +19,10 @@ Artikel
             </div>
         <table id="myTable" class="table table-bordered table-sm" style="text-align: center; ">
             <thead class="thead-dark">
-                <td>Judul</td>
+                <td style="width: 40%;">Judul</td>
                 <td>Pembuat</td>
                 <td>Kategori</td>
-                <td>Tanggal unggah</td>
+                <td style="width: 20%;">Tanggal unggah</td>
                 <td style="width: 5%;"></td>
             </thead>
             <tbody>
@@ -32,69 +32,6 @@ Artikel
                     <td>onboarding</td>
                     <td>24-04-2024</td>
                     <td class="text-center"><a href="/detail_artikel"><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel a</td>
-                    <td>ghazi</td>
-                    <td>radiologi</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel A</td>
-                    <td> Ahmad</td>
-                    <td>onboarding</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel a</td>
-                    <td>ghazi</td>
-                    <td>radiologi</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel A</td>
-                    <td> Ahmad</td>
-                    <td>onboarding</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel a</td>
-                    <td>ghazi</td>
-                    <td>radiologi</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel A</td>
-                    <td> Ahmad</td>
-                    <td>onboarding</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel a</td>
-                    <td>ghazi</td>
-                    <td>radiologi</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel A</td>
-                    <td> Ahmad</td>
-                    <td>onboarding</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>artikel a</td>
-                    <td>ghazi</td>
-                    <td>radiologi</td>
-                    <td>24-04-2024</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
             </tbody>
         </table>

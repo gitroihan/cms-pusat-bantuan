@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\KategoriModel;
+use App\Models\LogAktivitasModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -47,6 +48,21 @@ class Kategori extends BaseController
 
         $kategoriModel->save($data);
 
+        // Data untuk tabel riwayat
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+        $logData = [
+            'id_ref' => $userId,
+            'log_tipe' => 'tambah',
+            'aktivitas' => 'menambah kategori',
+            'alamat_ip' => $alamat_ip,
+            'id_user' => $userId,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        // Simpan log ke tabel riwayat
+        $riwayatModel->insert($logData);
+
         return $this->response->setJSON(['status' => true]);
     }
     public function ubah_kategori($id)
@@ -68,6 +84,22 @@ class Kategori extends BaseController
         // Simpan perubahan ke dalam database
         $kategoriModel->update($id, $data);
 
+        // Data untuk tabel riwayat
+        $session = session();
+        $userId = $session->get('user_id');
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+        $logData = [
+            'id_ref' => $userId,
+            'log_tipe' => 'ubah',
+            'aktivitas' => 'mengubah kategori',
+            'alamat_ip' => $alamat_ip,
+            'id_user' => $userId,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        // Simpan log ke tabel riwayat
+        $riwayatModel->insert($logData);
+
         // Redirect pengguna ke halaman yang sesuai
         return redirect()->to("/cmskategori");
     }
@@ -76,6 +108,23 @@ class Kategori extends BaseController
         $kategoriModel = new KategoriModel();
         if ($kategoriModel->find($id)) {
             $kategoriModel->delete($id);
+
+            // Data untuk tabel riwayat
+            $session = session();
+            $userId = $session->get('user_id');
+            $riwayatModel = new LogAktivitasModel();
+            $alamat_ip = $this->request->getIPAddress();
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'hapus',
+                'aktivitas' => 'menghapus kategori',
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+
             return redirect()->to('/cmskategori')->with('message', 'Kategori berhasil dihapus.');
         } else {
             return redirect()->to('/cmskategori')->with('error', 'Kategori tidak ditemukan.');
@@ -116,9 +165,19 @@ class Kategori extends BaseController
         $data['id_kat'] = $id_kategori;
         $data['parent_kategori'] = $kategoriModel->where('id', $id_kategori)->first();
 
-        // Ambil kategori induk
+
         $parent_category = $kategoriModel->find($id_kategori);
-        $data['parent_id'] = $parent_category ? $parent_category['id_parent'] : null;
+        if ($parent_category) {
+            $data['parent_id'] = $parent_category['id_parent'];
+            if ($data['parent_id']) {
+                $data['parent_name'] = $kategoriModel->where('id', $data['parent_id'])->first()['nama_kategori'];
+            } else {
+                $data['parent_name'] = null;
+            }
+        } else {
+            $data['parent_id'] = null;
+            $data['parent_name'] = null;
+        }
 
         return view('CMS/kategori/subkategori', $data);
     }
@@ -149,6 +208,21 @@ class Kategori extends BaseController
 
         $kategoriModel->save($data);
 
+        // Data untuk tabel riwayat
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+        $logData = [
+            'id_ref' => $userId,
+            'log_tipe' => 'tambah',
+            'aktivitas' => 'menambah subkategori',
+            'alamat_ip' => $alamat_ip,
+            'id_user' => $userId,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        // Simpan log ke tabel riwayat
+        $riwayatModel->insert($logData);
+
         return $this->response->setJSON(['status' => true]);
     }
     public function ubah_subkategori($id)
@@ -171,6 +245,22 @@ class Kategori extends BaseController
         // Simpan perubahan ke dalam database
         $kategoriModel->update($id, $data);
 
+        // Data untuk tabel riwayat
+        $session = session();
+        $userId = $session->get('user_id');
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+        $logData = [
+            'id_ref' => $userId,
+            'log_tipe' => 'ubah',
+            'aktivitas' => 'mengubah subkategori',
+            'alamat_ip' => $alamat_ip,
+            'id_user' => $userId,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        // Simpan log ke tabel riwayat
+        $riwayatModel->insert($logData);
+
         // Redirect pengguna ke halaman yang sesuai
         return redirect()->to("/cmssubkategori/{$id_subkategori}");
     }
@@ -181,36 +271,51 @@ class Kategori extends BaseController
         $id_subkategori = $this->request->getPost('id_parent');
         if ($kategoriModel->find($id)) {
             $kategoriModel->delete($id);
+
+            // Data untuk tabel riwayat
+            $session = session();
+            $userId = $session->get('user_id');
+            $riwayatModel = new LogAktivitasModel();
+            $alamat_ip = $this->request->getIPAddress();
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'hapus',
+                'aktivitas' => 'menghapus subkategori',
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
             return redirect()->to("/cmssubkategori/{$id_subkategori}")->with('message', 'Kategori berhasil dihapus.');
         } else {
             return redirect()->to('/cmssubkategori')->with('error', 'Kategori tidak ditemukan.');
         }
     }
     public function cari_subkategori()
-{
-    $kategoriModel = new KategoriModel();
+    {
+        $kategoriModel = new KategoriModel();
 
-    // Ambil nilai 'id_parent' dari query string
-    $id_subkategori = $this->request->getGet('id_parent');
+        // Ambil nilai 'id_parent' dari query string
+        $id_subkategori = $this->request->getGet('id_parent');
 
-    // Ambil nilai pencarian dari query string
-    $cari = $this->request->getGet('cari');
-    $data['subkategori'] = $kategoriModel->where('id_parent', $id_subkategori)->findAll();
-    $data['subkategori_limit'] = array_slice($data['subkategori'], 0, 4);
+        // Ambil nilai pencarian dari query string
+        $cari = $this->request->getGet('cari');
+        $data['subkategori'] = $kategoriModel->where('id_parent', $id_subkategori)->findAll();
+        $data['subkategori_limit'] = array_slice($data['subkategori'], 0, 4);
         $data['total_subkategori'] = count($data['subkategori']);
 
-    // Lakukan pencarian jika ada kata kunci pencarian
-    if ($cari) {
-        $kategoriModel->like('nama_kategori', $cari);
-        // Tetapkan URL baru dengan id_subkategori dan parameter pencarian
-        $newUrl = base_url("/cmssubkategori/{$id_subkategori}?cari={$cari}");
-    } else {
-        // Tetapkan URL baru tanpa parameter pencarian
-        $newUrl = base_url("/cmssubkategori/{$id_subkategori}");
+        // Lakukan pencarian jika ada kata kunci pencarian
+        if ($cari) {
+            $kategoriModel->like('nama_kategori', $cari);
+            // Tetapkan URL baru dengan id_subkategori dan parameter pencarian
+            $newUrl = base_url("/cmssubkategori/{$id_subkategori}?cari={$cari}");
+        } else {
+            // Tetapkan URL baru tanpa parameter pencarian
+            $newUrl = base_url("/cmssubkategori/{$id_subkategori}");
+        }
+
+        // Redirect ke URL baru
+        return redirect()->to($newUrl);
     }
-
-    // Redirect ke URL baru
-    return redirect()->to($newUrl);
-}
-
 }

@@ -17,58 +17,15 @@ Tiket
                 <td>email</td>
                 <td style="width: 10%;"></td>
             </thead>
+            <?php foreach ($tiket as $tiket) : ?>
             <tbody>
                 <tr>
-                    <td>aditha</td>
-                    <td>aditha@gmail.com</td>
-                    <td class="text-center"><a href="/detail_tiket"><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>ahmad</td>
-                    <td>ahmad@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>surya</td>
-                    <td>surya@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>ghazi</td>
-                    <td>ghazi@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>aditha</td>
-                    <td>aditha@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>ahmad</td>
-                    <td>ahmad@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>surya</td>
-                    <td>surya@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>ghazi</td>
-                    <td>ghazi@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>aditha</td>
-                    <td>aditha@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
-                </tr>
-                <tr>
-                    <td>ghazi</td>
-                    <td>ghazi@gmail.com</td>
-                    <td class="text-center"><a href=""><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
+                    <td><?= $tiket['nama_kontak'] ?></td>
+                    <td><?= $tiket['email'] ?></td>
+                    <td class="text-center"><a href="/detail_tiket/<?= $tiket['id'] ?>"><i class="fa-solid fa-circle-info fa-2x"></i></a></td>
                 </tr>
             </tbody>
+            <?php endforeach; ?>
         </table>
         </div>
     </div>

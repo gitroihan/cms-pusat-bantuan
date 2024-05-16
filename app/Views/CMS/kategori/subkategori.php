@@ -30,7 +30,7 @@ Kategori
     </div>
 
     <?php if ($parent_kategori && $parent_kategori['id_parent']) : ?>
-        <a href="<?= base_url('cmssubkategori/' . $parent_kategori['id_parent']); ?>" class="btn btn-secondary mb-3">Kembali ke Kategori Sebelumnya</a>
+        <a href="<?= base_url('cmssubkategori/' . $parent_kategori['id_parent']); ?>" class="btn btn-secondary mb-3">Kembali ke <?= $parent_name; ?> </a>
     <?php endif; ?>
 
     <div class="basis pengetahuan" style="overflow-y: auto; height: 555px;">
