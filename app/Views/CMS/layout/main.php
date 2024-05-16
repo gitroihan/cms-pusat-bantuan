@@ -95,8 +95,8 @@
                     <div class="modal-header">
                         <h5 class="modal-title centered text-center" id="logoutmodalLabel">yakin ingin keluar dari akun ini?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body text-center">
                         <div class="mt-5 centered col-8 m-auto text-center">
@@ -210,12 +210,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.6/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/r-3.0.2/datatables.min.js"></script>
-<!-- tag atau select2 -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- table datatable -->
+
+<!-- table tiket -->
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable({
+        $('#table_tiket').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '<?= base_url('/tiket/getTiketData') ?>', // URL ke controller untuk mendapatkan data
+                type: 'POST'
+            },
             language: {
                 "sEmptyTable": "Tidak ada data yang tersedia di tabel",
                 "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
@@ -232,10 +237,65 @@
                     "sSortAscending": ": aktifkan untuk mengurutkan kolom secara meningkat",
                     "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
                 }
-            }
+            },
+            columns: [{
+                    data: 'nama_kontak'
+                },
+                {
+                    data: 'email'
+                },
+                {
+                    data: 'id',
+                    render: function(data, type, row) {
+                        return '<a href="/detail_tiket/' + data + '"><i class="fa-solid fa-circle-info fa-2x"></i></a>';
+                    },
+                    orderable: false
+                }
+            ]
         });
     });
 </script>
+<!-- table riwayat -->
+<script>
+    $(document).ready(function() {
+        $('#table_riwayat').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '<?= base_url('/riwayat/getRiwayatData') ?>', // URL ke controller untuk mendapatkan data riwayat
+                type: 'POST'
+            },
+            language: {
+                "sEmptyTable": "Tidak ada data yang tersedia di tabel",
+                "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ total entri)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "Tampilkan_MENU_",
+                "sLoadingRecords": "Memuat...",
+                "sProcessing": "Memproses...",
+                "sSearch": "Cari:",
+                "sZeroRecords": "Tidak ada data yang cocok ditemukan",
+                "oAria": {
+                    "sSortAscending": ": aktifkan untuk mengurutkan kolom secara meningkat",
+                    "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
+                }
+            },
+            columns: [
+                { data: 'id_ref' },
+                { data: 'log_tipe' },
+                { data: 'aktivitas' },
+                { data: 'alamat_ip' },
+                { data: 'id_user' },
+                { data: 'updated_at' }
+            ]
+        });
+    });
+</script>
+
+<!-- tag atau select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- tag -->
 <script>
     $(document).ready(function() {
@@ -245,9 +305,9 @@
 <!-- tag -->
 <!-- kategori -->
 <script>
-$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
 </script>
 
 </html>

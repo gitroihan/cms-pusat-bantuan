@@ -14,6 +14,7 @@ $routes->get('/lihat_profile', 'User::lihat_profile');
 $routes->get('/ubah_profile', 'User::ubah_profile');
 $routes->post('/simpan_profile', 'User::simpan_profile');
 $routes->post('/ubah_foto', 'User::ubah_foto');
+$routes->post('/riwayat/getRiwayatData', 'Home::getRiwayatData');
 $routes->get('/cmshistori', 'Home::histori');
 
 
@@ -43,5 +44,6 @@ $routes->get('/tambah_artikel', 'Artikel::tambah_artikel');
 $routes->get('/detail_artikel', 'Artikel::detail_artikel');
 
 
+$routes->post('/tiket/getTiketData', 'Tiket::getTiketData');
 $routes->get('/cmstiket', 'Tiket::index');
 $routes->get('/detail_tiket/(:num)', 'Tiket::detail_tiket/$1');

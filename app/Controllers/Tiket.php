@@ -17,9 +17,44 @@ class Tiket extends BaseController
         $model = new UserModel();
         $tiketmodel = new TiketModel();
         $data['data'] = $model->getUserById($userId);
-        $data['tiket'] =$tiketmodel->findAll();
+        $data['tiket'] = $tiketmodel->findAll();
         return view('CMS/tiket/tiket', $data);
     }
+    public function getTiketData()
+    {
+        $request = \Config\Services::request();
+        $tiketmodel = new TiketModel();
+
+        $draw = $request->getPost('draw');
+        $start = $request->getPost('start');
+        $length = $request->getPost('length');
+        $searchValue = $request->getPost('search')['value'];
+
+        $totalRecords = $tiketmodel->countAll();
+        $totalRecordwithFilter = $tiketmodel->like('nama_kontak', $searchValue)->orLike('email', $searchValue)->countAllResults();
+
+        $records = $tiketmodel->like('nama_kontak', $searchValue)->orLike('email', $searchValue)
+            ->orderBy('id', 'DESC')->findAll($length, $start);
+
+        $data = [];
+        foreach ($records as $record) {
+            $data[] = [
+                'nama_kontak' => $record['nama_kontak'],
+                'email' => $record['email'],
+                'id' => $record['id']
+            ];
+        }
+
+        $response = [
+            "draw" => intval($draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalRecordwithFilter,
+            "data" => $data
+        ];
+
+        return $this->response->setJSON($response);
+    }
+
     public function detail_tiket($id)
     {
         $session = session();
@@ -29,6 +64,6 @@ class Tiket extends BaseController
         $tiketmodel = new TiketModel();
         $data['data'] = $model->getUserById($userId);
         $data['tiket'] = $tiketmodel->where('id', $id)->findAll();
-        return view('CMS/tiket/detail_tiket',$data);
+        return view('CMS/tiket/detail_tiket', $data);
     }
 }
