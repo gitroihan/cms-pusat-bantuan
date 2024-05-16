@@ -51,12 +51,20 @@ Tambah Artikel
                         </div>
                     </div>
                 </div>
-                          
+
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
-                <div class="form-group col-12">
+                <div class="form-group col-6">
                     <label for="judul">Judul</label>
                     <input type="text" class="form-control border-dark" id="judul" name="judul">
+                </div>
+                <div class="form-group col-3">
+                    <label for="gambar 1">Gambar 1</label>
+                    <input type="file" class="form-control border-dark" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                </div>
+                <div class="form-group col-3">
+                    <label for="gambar 2">Gambar 2</label>
+                    <input type="file" class="form-control border-dark" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
@@ -81,11 +89,11 @@ Tambah Artikel
                     <textarea id="editor" name="editor" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"></textarea>
                 </div>
                 <div class="form-group row col-5 mt-7">
-                    <label for="editor">upload gambar</label>
-                    <input type="file" class="form-control border-dark" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    <label for="gambar_artikel">Gambar artikel</label>
+                    <input type="file" class="form-control border-dark" type='file' onchange="readURL(this);" accept="image/*">
                     <div class="form-group col-5 mt-3">
                         <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                            <img id="previewImage" src="#" alt="Preview" style="width: 100%; height: 100%; object-fit: fit;">
+                            <img id="preaview" src="#" alt="Preview" style="width: 100%; height: 100%; object-fit: fit;">
                         </div>
                     </div>
                 </div>
@@ -99,6 +107,11 @@ Tambah Artikel
 
 </div>
 
+<!-- preaview photo -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="preaviewgambar.js"></script>
 <script>
     ClassicEditor
         .create(document.querySelector('#editor'), {})

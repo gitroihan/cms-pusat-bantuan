@@ -48,7 +48,7 @@ User
                             <div class="mb-3">
                                 <input class="form-control border-dark" type='file' onchange="readURL(this);" accept="image/*" name="foto_profile" />
                                 <div class="d-flex position-relative justify-content-center align-items-center mb-3 mt-3 bordered ">
-                                    <img id="profilePicture" class="rounded-circle border" alt="preview" src="" width="150" height="150">
+                                    <img id="preaview" class="rounded-circle border" alt="preview" src="" width="150" height="150">
                                 </div>
                             </div>
                             <button type="submit" class="btn text-light ml-0" style="background-color: #03C988;">simpan</button>

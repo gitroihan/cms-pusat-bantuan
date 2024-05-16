@@ -17,7 +17,7 @@
     <!-- bootstrap -->
     <link href="<?= base_url('bootstrap-5.3.0-dist/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!-- ckeditor -->
-    <script src="<?= base_url('ckeditor5-build-classic/ckeditor.js') ?>"></script>
+    <script src="<?= base_url('ckeditor5-41.3.1-z2x1ah3b0t8e/build/ckeditor.js') ?>"></script>
     <!-- datatable -->
     <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.6/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/r-3.0.2/datatables.min.css" rel="stylesheet">
     <!-- tag atau select2 -->

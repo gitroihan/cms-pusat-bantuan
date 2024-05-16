@@ -3,7 +3,7 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function(e) {
-            document.getElementById('profilePicture').src = e.target.result;
+            document.getElementById('preaview').src = e.target.result;
         }
 
         reader.readAsDataURL(input.files[0]);
