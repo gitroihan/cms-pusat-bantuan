@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2024 at 10:07 AM
+-- Generation Time: May 16, 2024 at 10:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,10 +32,24 @@ CREATE TABLE `artikel` (
   `judul_artikel` varchar(255) NOT NULL,
   `pembuat` varchar(255) NOT NULL,
   `isi` text DEFAULT NULL,
+  `gambar_artikel` varchar(255) NOT NULL,
+  `gambar_1` varchar(255) NOT NULL,
+  `gambar_2` varchar(255) NOT NULL,
   `tanggal_unggah` date NOT NULL,
   `id_kategori` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `artikel_layout`
+--
+
+CREATE TABLE `artikel_layout` (
+  `id` int(11) NOT NULL,
+  `nama_layout` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -53,6 +67,19 @@ CREATE TABLE `kategori` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id`, `nama_kategori`, `deskripsi_kategori`, `ikon`, `urutan`, `id_parent`, `id_user`) VALUES
+(1, 'setting kategori', '2', '1715776609_9d0864ddf91aba5764bd.png', 1, NULL, 1),
+(2, 'produk', '3', '1715765051_8f03b4d5f1deb940d59f.png', 1, NULL, 1),
+(4, 'setting', 'Modul setting, digunakan untuk melakukan penyesuaian data-data master yang berkaitan dengan pelayanan saat menggunakan sistem HIS seperti master harga dan data pegawai', '1715763560_c46f81e640a986bbc4a8.png', 1, 1, 1),
+(12, 'produk', 'produk deskripsi oke', '1715824827_97b60de429d2c8faefb9.png', 1, 2, 1),
+(13, 'produk3', '3', '1715765107_cd84f59dd6864c4e6ce7.png', 1, 12, 1),
+(17, 'produk 4', '4', '1715765119_f53b7c57939d83975fde.png', 1, 13, 1),
+(20, 'produkk', '123', '1715766398_5ed60419eda643836b0d.png', 1, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -61,10 +88,20 @@ CREATE TABLE `kategori` (
 
 CREATE TABLE `kontak` (
   `id` int(11) NOT NULL,
-  `nama_kontak` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `nomber_telepon` varchar(255) NOT NULL
+  `alamat` text NOT NULL,
+  `nomor_telepon` varchar(255) NOT NULL,
+  `link_whatsapp` varchar(255) NOT NULL,
+  `link_instagram` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `kontak`
+--
+
+INSERT INTO `kontak` (`id`, `nama`, `email`, `alamat`, `nomor_telepon`, `link_whatsapp`, `link_instagram`) VALUES
+(1, 'goldstep', 'goldstep.co.id', 'Taman Kopo Indah 3, Ruko D35\r\nBandung, Indonesia,', '+62 812-2218-8524', '', '');
 
 -- --------------------------------------------------------
 
@@ -99,24 +136,23 @@ INSERT INTO `log_aktivitas` (`id`, `id_ref`, `log_tipe`, `aktivitas`, `alamat_ip
 (14, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-14 00:39:21'),
 (15, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-14 00:48:42'),
 (16, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-14 00:49:02'),
-(17, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-14 00:52:57');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `menus`
---
-
-CREATE TABLE `menus` (
-  `id` int(11) NOT NULL,
-  `id_parent` int(11) DEFAULT NULL,
-  `nama_menu` varchar(100) NOT NULL,
-  `url_menu` varchar(255) NOT NULL,
-  `deskripsi_menu` text NOT NULL,
-  `urutan` int(11) NOT NULL,
-  `tipe_menu` enum('1','2') NOT NULL,
-  `Status` enum('A','I') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(17, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-14 00:52:57'),
+(18, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-15 05:45:46'),
+(19, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-15 05:48:18'),
+(20, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-15 05:50:35'),
+(21, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-15 05:54:56'),
+(22, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-15 05:55:07'),
+(23, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-15 05:55:11'),
+(24, 1, 'ubah', 'mengubah informasi kontak', 0, 1, '2024-05-15 15:02:47'),
+(25, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-15 19:00:27'),
+(26, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-15 19:22:28'),
+(27, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-15 19:22:39'),
+(28, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-15 19:23:01'),
+(29, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-15 19:23:39'),
+(30, 1, 'ubah', 'mengubah informasi kontak', 0, 1, '2024-05-15 19:24:34'),
+(31, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-15 22:38:14'),
+(32, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-15 22:38:21'),
+(33, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-15 22:38:29');
 
 -- --------------------------------------------------------
 
@@ -148,6 +184,14 @@ CREATE TABLE `tiket` (
   `deskripsi` text NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tiket`
+--
+
+INSERT INTO `tiket` (`id`, `nama_kontak`, `email`, `modul`, `klasifikasi`, `prioritas`, `subjek`, `deskripsi`, `status`) VALUES
+(1, 'adit', 'adit@gmail.com', 'modul', 'klasifikasi', 'priosritas', 'subjek', 'deskripsi ', ''),
+(2, 'raihan', 'raihan@gmail.com', 'raihan', 'raihan', 'raihan', 'raihan', 'Siapa yang tidak mengenal kata “raihan”? Kata yang terdengar sederhana, namun sarat dengan makna dan simbolisme. Dalam bahasa Indonesia, kata “raihan” memiliki arti keberhasilan yang diraih setelah melalui perjuangan yang penuh keringat dan kerja keras. Bukankah itu menggambarkan betapa indahnya hidup ini, saat kita benar-benar berusaha dan kemudian kita mencapai apa yang kita inginkan?\r\n\r\nRaihan bisa menjadi kata yang memberikan semangat dan inspirasi bagi banyak orang. Tidak hanya bagi mereka yang tengah berjuang keras mengejar impiannya, tetapi juga bagi mereka yang merasa putus asa dan perlu dorongan untuk tetap bergerak maju. Kata “raihan” memberikan makna bahwa kita semua bisa meraih apa yang kita inginkan jika kita mau berjuang dengan tekad yang kuat.', '');
 
 -- --------------------------------------------------------
 
@@ -185,6 +229,12 @@ ALTER TABLE `artikel`
   ADD KEY `artikel_id_kategori_foreign` (`id_kategori`);
 
 --
+-- Indexes for table `artikel_layout`
+--
+ALTER TABLE `artikel_layout`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
@@ -204,12 +254,6 @@ ALTER TABLE `kontak`
 ALTER TABLE `log_aktivitas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `log_aktivitas_id_user_foreign` (`id_user`);
-
---
--- Indexes for table `menus`
---
-ALTER TABLE `menus`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tag`
@@ -244,28 +288,28 @@ ALTER TABLE `artikel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `artikel_layout`
+--
+ALTER TABLE `artikel_layout`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `kontak`
 --
 ALTER TABLE `kontak`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `menus`
---
-ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tag`
@@ -277,7 +321,7 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `tiket`
 --
 ALTER TABLE `tiket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
