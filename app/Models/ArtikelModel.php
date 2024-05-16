@@ -4,28 +4,31 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KategoriModel extends Model
+class ArtikelModel extends Model
 {
-    protected $table            = 'kategori';
+    protected $table            = 'artikel';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_kategori', 'deskripsi_kategori', 'ikon', 'urutan', 'id_parent', 'id_user'];
+    protected $allowedFields    = ['judul_artikel','pembuat','isi','gambar_artikel','gambar_1','gambar_2','tanggal_unggah','id_kategori','id_layout','id_user'];
 
-    public function data_id_parent_null()
-    {
-        return $this->where('id_parent', null)->findAll();
-    }
-    // relasi
     public function user()
     {
         return $this->belongsTo(UserModel::class, 'id_user', 'id');
     }
-    public function artikel()
+    public function tag()
     {
-        return $this->hasMany(ArtikelModel::class, 'id_kategori', 'id');
+        return $this->hasMany(TagModel::class, 'id_artikel', 'id');
+    }
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriModel::class, 'id_kategori', 'id');
+    }
+    public function layout()
+    {
+        return $this->belongsTo(LayoutModel::class, 'id_layout', 'id');
     }
 
     protected bool $allowEmptyInserts = false;

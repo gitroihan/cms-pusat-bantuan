@@ -4,28 +4,23 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KategoriModel extends Model
+class TagModel extends Model
 {
-    protected $table            = 'kategori';
+    protected $table            = 'tag';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_kategori', 'deskripsi_kategori', 'ikon', 'urutan', 'id_parent', 'id_user'];
+    protected $allowedFields    = ['nama_tag','id_artikel','id_user'];
 
-    public function data_id_parent_null()
-    {
-        return $this->where('id_parent', null)->findAll();
-    }
-    // relasi
     public function user()
     {
         return $this->belongsTo(UserModel::class, 'id_user', 'id');
     }
     public function artikel()
     {
-        return $this->hasMany(ArtikelModel::class, 'id_kategori', 'id');
+        return $this->belongsTo(ArtikelModel::class, 'id_artikel', 'id');
     }
 
     protected bool $allowEmptyInserts = false;
