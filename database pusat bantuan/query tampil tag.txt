@@ -1,0 +1,4 @@
+SELECT a.*
+FROM artikel a
+JOIN tag2 t ON FIND_IN_SET(a.id, t.id_artikel)
+WHERE t.nama_tag = '';

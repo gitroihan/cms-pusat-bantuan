@@ -18,6 +18,17 @@ class KategoriModel extends Model
     {
         return $this->where('id_parent', null)->findAll();
     }
+    public function getKategoriWithoutParent()
+    {
+        // Mendapatkan semua id_parent yang digunakan
+        $subQuery = $this->db->table($this->table)
+                             ->select('id_parent')
+                             ->where('id_parent IS NOT NULL');
+
+        // Mendapatkan kategori yang tidak termasuk dalam id_parent
+        return $this->where('id NOT IN (' . $subQuery->getCompiledSelect() . ')', null, false)
+                    ->findAll();
+    } 
     // relasi
     public function user()
     {

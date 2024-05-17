@@ -6,13 +6,18 @@ use CodeIgniter\Model;
 
 class TagModel extends Model
 {
-    protected $table            = 'tag';
+    protected $table            = 'tag2';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_tag','id_artikel','id_user'];
+    protected $allowedFields    = ['nama_tag','id_user','id_artikel'];
+
+    public function getAllTags()
+    {
+        return $this->findAll();
+    }
 
     public function user()
     {

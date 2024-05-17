@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 10:43 AM
+-- Generation Time: May 17, 2024 at 10:21 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,10 +35,22 @@ CREATE TABLE `artikel` (
   `gambar_artikel` varchar(255) NOT NULL,
   `gambar_1` varchar(255) NOT NULL,
   `gambar_2` varchar(255) NOT NULL,
-  `tanggal_unggah` date NOT NULL,
+  `tanggal_unggah` datetime NOT NULL,
   `id_kategori` int(11) NOT NULL,
+  `id_layout` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `artikel`
+--
+
+INSERT INTO `artikel` (`id`, `judul_artikel`, `pembuat`, `isi`, `gambar_artikel`, `gambar_1`, `gambar_2`, `tanggal_unggah`, `id_kategori`, `id_layout`, `id_user`) VALUES
+(1, 'Menu Laporan Resep', '1', '<ul><li>ttt</li></ul>', 'dokter.png', 'dokter.png', 'coode layout_3.png', '2024-05-17 00:00:00', 4, 1, 1),
+(2, 'goldstep Clinic', '1', '<ul><li>ttt</li></ul>', 'dokter.png', 'dokter.png', 'coode layout_3.png', '2024-05-17 00:00:00', 4, 1, 1),
+(3, 'goldstep Suite', '1', '<p>rr</p>', 'dokter.png', 'dokter.png', 'dokter.png', '2024-05-17 00:00:00', 13, 1, 1),
+(4, 'goldstep Lab', '1', '<ol><li>bbbb</li><li>rr</li></ol>', 'dokter.png', 'dokter.png', 'dokter.png', '2024-05-17 00:00:00', 13, 1, 1),
+(5, 'goldstep Pharmacy\n', '1', '<p>aevsvsev</p>', 'dokter_8.png', 'dokter.png', 'dokter_7.png', '2024-05-17 00:00:00', 13, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -50,6 +62,13 @@ CREATE TABLE `artikel_layout` (
   `id` int(11) NOT NULL,
   `nama_layout` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `artikel_layout`
+--
+
+INSERT INTO `artikel_layout` (`id`, `nama_layout`) VALUES
+(1, 'a');
 
 -- --------------------------------------------------------
 
@@ -77,7 +96,7 @@ INSERT INTO `kategori` (`id`, `nama_kategori`, `deskripsi_kategori`, `ikon`, `ur
 (4, 'setting', 'Modul setting, digunakan untuk melakukan penyesuaian data-data master yang berkaitan dengan pelayanan saat menggunakan sistem HIS seperti master harga dan data pegawai', '1715763560_c46f81e640a986bbc4a8.png', 1, 1, 1),
 (12, 'produk', 'produk deskripsi oke', '1715824827_97b60de429d2c8faefb9.png', 1, 2, 1),
 (13, 'produk3', '3', '1715765107_cd84f59dd6864c4e6ce7.png', 1, 12, 1),
-(17, 'produk 4', '4', '1715765119_f53b7c57939d83975fde.png', 1, 13, 1),
+(17, 'produk 4', '4', '1715765119_f53b7c57939d83975fde.png', 1, 20, 1),
 (20, 'produkk', '123', '1715766398_5ed60419eda643836b0d.png', 1, 2, 1);
 
 -- --------------------------------------------------------
@@ -163,9 +182,38 @@ INSERT INTO `log_aktivitas` (`id`, `id_ref`, `log_tipe`, `aktivitas`, `alamat_ip
 CREATE TABLE `tag` (
   `id` int(11) NOT NULL,
   `nama_tag` varchar(255) NOT NULL,
-  `id_artikel` int(11) NOT NULL,
+  `id_artikel` int(11) DEFAULT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`id`, `nama_tag`, `id_artikel`, `id_user`) VALUES
+(2, 'tes tag', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tag2`
+--
+
+CREATE TABLE `tag2` (
+  `id` int(11) NOT NULL,
+  `nama_tag` varchar(255) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `id_artikel` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tag2`
+--
+
+INSERT INTO `tag2` (`id`, `nama_tag`, `id_user`, `id_artikel`) VALUES
+(1, 'tag 1', 1, '3,4,5'),
+(2, 'tag 2', 1, '3,5'),
+(3, 'tag 3', 1, '5');
 
 -- --------------------------------------------------------
 
@@ -264,6 +312,13 @@ ALTER TABLE `tag`
   ADD KEY `tag_id_artikel_foreign` (`id_artikel`);
 
 --
+-- Indexes for table `tag2`
+--
+ALTER TABLE `tag2`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indexes for table `tiket`
 --
 ALTER TABLE `tiket`
@@ -285,13 +340,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `artikel`
 --
 ALTER TABLE `artikel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `artikel_layout`
 --
 ALTER TABLE `artikel_layout`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -315,7 +370,13 @@ ALTER TABLE `log_aktivitas`
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tag2`
+--
+ALTER TABLE `tag2`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tiket`
@@ -358,6 +419,12 @@ ALTER TABLE `log_aktivitas`
 ALTER TABLE `tag`
   ADD CONSTRAINT `tag_id_artikel_foreign` FOREIGN KEY (`id_artikel`) REFERENCES `artikel` (`id`),
   ADD CONSTRAINT `tag_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `tag2`
+--
+ALTER TABLE `tag2`
+  ADD CONSTRAINT `tag2_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

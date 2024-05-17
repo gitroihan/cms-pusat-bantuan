@@ -19,7 +19,7 @@ class ArtikelModel extends Model
         return $this->belongsTo(UserModel::class, 'id_user', 'id');
     }
     public function tag()
-    {
+    {   
         return $this->hasMany(TagModel::class, 'id_artikel', 'id');
     }
     public function kategori()
