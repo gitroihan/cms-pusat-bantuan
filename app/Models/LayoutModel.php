@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class LayoutModel extends Model
 {
-    protected $table            = 'layout';
+    protected $table            = 'artikel_layout';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

@@ -17,36 +17,18 @@ Tambah Artikel
                     </label>
                 </div>
                 <div class="col-12 d-flex gap-2">
-                    <div class="p-2 col" style="text-align: left;">
-                        <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
-                            <h4 class="text-middle">Layout A</h4>
+                    <?php foreach ($layouts as $layout) : ?>
+                        <div class="p-2 col" style="text-align: left;">
+                            <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
+                                <h4 class="text-middle"><?= $layout['nama_layout'] ?></h4>
+                            </div>
+                            <br>
+                            <div class="form-check col-12 d-flex justify-content-center">
+                                <input class="form-check-input border-dark" type="radio" name="id_layout" value="<?= $layout['id'] ?>" id="layout<?= $layout['id'] ?>">
+                                <label for="layout<?= $layout['id'] ?>" class="form-label d-flex justify-content-between ml-3"><?= $layout['nama_layout'] ?></label>
+                            </div>
                         </div>
-                        <br>
-                        <div class="form-check col-12 d-flex justify-content-center">
-                            <input class="form-check-input border-dark" type="radio" name="id_layout" value="A" id="layoutA">
-                            <label for="layoutA" class="form-label d-flex justify-content-between ml-3">A</label>
-                        </div>
-                    </div>
-                    <div class="p-2 col" style="text-align: left;">
-                        <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
-                            <h4 class="text-middle">Layout B</h4>
-                        </div>
-                        <br>
-                        <div class="form-check col-12 d-flex justify-content-center">
-                            <input class="form-check-input border-dark" type="radio" name="id_layout" value="B" id="layoutB">
-                            <label for="layoutB" class="form-label d-flex justify-content-between ml-3">B</label>
-                        </div>
-                    </div>
-                    <div class="p-2 col" style="text-align: left;">
-                        <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
-                            <h4 class="text-middle">Layout C</h4>
-                        </div>
-                        <br>
-                        <div class="form-check col-12 d-flex justify-content-center">
-                            <input class="form-check-input border-dark" type="radio" name="id_layout" value="C" id="layoutC">
-                            <label for="layoutC" class="form-label d-flex justify-content-between ml-3">C</label>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">

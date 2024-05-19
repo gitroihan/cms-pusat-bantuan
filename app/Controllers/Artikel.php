@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ArtikelModel;
 use App\Models\KategoriModel;
+use App\Models\LayoutModel;
 use App\Models\TagModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -69,6 +70,9 @@ class Artikel extends BaseController
         $model = new UserModel();
         $data['data'] = $model->getUserById($userId);
 
+        $layoutmodel = new LayoutModel();
+        $data['layouts'] = $layoutmodel->findAll();
+        
         $kategoriModel = new KategoriModel();
         $data['kategori'] = $kategoriModel->getKategoriWithoutParent();
 
@@ -145,13 +149,26 @@ class Artikel extends BaseController
 
         return redirect()->to('/tambah_artikel');
     }
-    public function detail_artikel()
+    public function detail_artikel($id)
     {
         $session = session();
         $userId = $session->get('user_id');
-
         $model = new UserModel();
-        $data = $model->getUserById($userId);
-        return view('CMS/artikel/detail_artikel', ['data' => $data]);
+        $data['data'] = $model->getUserById($userId);
+
+        $layoutmodel = new LayoutModel();
+        $data['layouts'] = $layoutmodel->findAll();
+
+        $kategoriModel = new KategoriModel();
+        $data['kategori'] = $kategoriModel->getKategoriWithoutParent();
+
+        $tagModel = new TagModel();
+        $data['tags'] = $tagModel->getAllTags();
+        
+        $artikelModel = new ArtikelModel();
+        $data['artikel'] = $artikelModel->find($id);
+        $data['artikel_tags'] = $tagModel->where('id_artikel', $id)->findAll();
+
+        return view('CMS/artikel/detail_artikel', $data);
     }
 }

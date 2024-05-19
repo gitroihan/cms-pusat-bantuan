@@ -47,7 +47,7 @@ $routes->post('/artikel/getArtikelData', 'artikel::getArtikelData');
 $routes->get('/cmsartikel', 'Artikel::index');
 $routes->get('/tambah_artikel', 'Artikel::tambah_artikel');
 $routes->post('/aksi_tambah_artikel', 'Artikel::aksi_tambah_artikel');
-$routes->get('/detail_artikel', 'Artikel::detail_artikel');
+$routes->get('/detail_artikel/(:num)', 'Artikel::detail_artikel/$1');
 // =============
 
 //tiket
