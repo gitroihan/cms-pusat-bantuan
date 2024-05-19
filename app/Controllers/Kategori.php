@@ -26,12 +26,11 @@ class Kategori extends BaseController
         $kategoriModel = new KategoriModel();
 
         $image = $this->request->getFile('ikon');
-        $path = 'default.jpg';
+        $path = 'default.png';
 
         if ($image && $image->isValid() && !$image->hasMoved()) {
-            $newName = $image->getRandomName();
-            $image->move(ROOTPATH . 'public/uploads/icons', $newName);
-            $path =  $newName;
+            $image->move(ROOTPATH . 'public/uploads/icons');
+            $path =  $image;
         }
 
         $session = session();
@@ -186,12 +185,11 @@ class Kategori extends BaseController
         $kategoriModel = new KategoriModel();
 
         $image = $this->request->getFile('ikon');
-        $path = 'default.jpg';
+        $path = 'default.png';
 
         if ($image && $image->isValid() && !$image->hasMoved()) {
-            $newName = $image->getRandomName();
-            $image->move(ROOTPATH . 'public/uploads/icons', $newName);
-            $path =  $newName;
+            $image->move(ROOTPATH . 'public/uploads/icons');
+            $path =  $image;
         }
 
         $session = session();
