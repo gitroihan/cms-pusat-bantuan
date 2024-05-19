@@ -17,18 +17,18 @@ Detail Artikel
                     </label>
                 </div>
                 <div class="col-12 d-flex gap-2">
-                <?php foreach ($layouts as $layout): ?>
-                <div class="p-2 col" style="text-align: left;">
-                    <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
-                        <h4 class="text-middle"><?= $layout['nama_layout'] ?></h4>
-                    </div>
-                    <br>
-                    <div class="form-check col-12 d-flex justify-content-center">
-                        <input class="form-check-input border-dark" type="radio" name="id_layout" value="<?= $layout['id'] ?>" id="layout<?= $layout['id'] ?>" <?= $layout['id'] == $artikel['id_layout'] ? 'checked' : '' ?>>
-                        <label for="layout<?= $layout['id'] ?>" class="form-label d-flex justify-content-between ml-3"><?= $layout['nama_layout'] ?></label>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+                    <?php foreach ($layouts as $layout) : ?>
+                        <div class="p-2 col" style="text-align: left;">
+                            <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
+                                <h4 class="text-middle"><?= $layout['nama_layout'] ?></h4>
+                            </div>
+                            <br>
+                            <div class="form-check col-12 d-flex justify-content-center">
+                                <input class="form-check-input border-dark" type="radio" name="id_layout" value="<?= $layout['id'] ?>" id="layout<?= $layout['id'] ?>" <?= $layout['id'] == $artikel['id_layout'] ? 'checked' : '' ?>>
+                                <label for="layout<?= $layout['id'] ?>" class="form-label d-flex justify-content-between ml-3"><?= $layout['nama_layout'] ?></label>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
@@ -73,22 +73,71 @@ Detail Artikel
                 <div class="form-group row col-5 mt-7">
                     <label for="gambar_artikel">Gambar artikel</label>
                     <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="readURL(this);" accept="image/*">
-                    <div class="form-group col-5 mt-3">
-                        <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                            <img id="preaview" src="#" alt="preaview" style="width: 100%; height: 100%; object-fit: cover;">
+                    <?php if (!empty($artikel['gambar_artikel'])) : ?>
+                        <div class="form-group col-5 mt-3">
+                            <div class="image-box border border-dark" style="width: 200px; height: 200px;">
+                                <img id="preaview" src="public/uploads/<?= $artikel['gambar_artikel'] ?>" alt="Preaview" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <p>Gambar saat ini: <?= $artikel['gambar_artikel'] ?></p>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
-            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="submit" class="btn text-light ml-auto" style="background-color: #03C988;">HAPUS</button>
-            </div>
-            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="submit" class="btn text-light ml-auto" style="background-color: #03C988;">SIMPAN</button>
+            <div class="d-sm-flex mb-1 col-md-2 mr-1 mt-2">
+                <div class="d-sm-flex align-items-center justify-content-between form-group col-6  ">
+                    <button type="button" class=" btn text-light shadow-sm mr-3" style="background-color: #03C988;" data-toggle="modal" data-target="#editartikelModal<?= $artikel['id'] ?>">
+                        UBAH
+                    </button>
+                </div>
+        </form>
+        <form method="post">
+            <div class="d-sm-flex align-items-center justify-content-between form-group col-6  ">
+                <button type="button" class="btn btn-danger text-light shadow-sm mr-3" data-toggle="modal" data-target="#deleteartikelModal<?= $artikel['id'] ?>">
+                    HAPUS
+                </button>
             </div>
         </form>
     </div>
+</div>
+</div>
 
+<!-- delete modal -->
+<div class="modal fade" id="deleteartikelModal<?= $artikel['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteartikelModalLabel<?= $artikel['id'] ?>" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteartikelModalLabel<?= $artikel['id'] ?>">Yakin ingin menghapus artikel ini?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <form action="/hapus_artikel/<?= $artikel['id'] ?>" method="post">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-danger">HAPUS</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- edit modal -->
+<div class="modal fade" id="editartikelModal<?= $artikel['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="editartikelModalLabel<?= $artikel['id'] ?>" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editartikelModalLabel<?= $artikel['id'] ?>">Yakin ingin mengubah artikel ini?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <form action="/ubah_artikel/<?= $artikel['id'] ?>" method="post">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn" style="background-color: #03C988; color: white;">UBAH</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 
