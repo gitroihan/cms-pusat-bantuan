@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ArtikelModel;
 use App\Models\KategoriModel;
 use App\Models\LogAktivitasModel;
 use App\Models\UserModel;
@@ -26,12 +27,14 @@ class Kategori extends BaseController
         $kategoriModel = new KategoriModel();
 
         $image = $this->request->getFile('ikon');
-        $path = 'default.png';
+        $path = 'default.jpg';
 
         if ($image && $image->isValid() && !$image->hasMoved()) {
-            $image->move(ROOTPATH . 'public/uploads/icons');
-            $path =  $image;
+            $newName = $image->getRandomName();
+            $image->move(ROOTPATH . 'public/uploads/icons', $newName);
+            $path =  $newName;
         }
+
 
         $session = session();
         $userId = $session->get('user_id');
@@ -156,6 +159,7 @@ class Kategori extends BaseController
 
         $model = new UserModel();
         $kategoriModel = new KategoriModel();
+        $artikelModel = new ArtikelModel();
 
         $data['data'] = $model->getUserById($userId);
         $data['subkategori'] = $kategoriModel->where('id_parent', $id_kategori)->findAll(); // Ambil subkategori yang memiliki parent_id sama dengan id_kategori
@@ -165,21 +169,51 @@ class Kategori extends BaseController
         $data['parent_kategori'] = $kategoriModel->where('id', $id_kategori)->first();
 
 
-        $parent_category = $kategoriModel->find($id_kategori);
-        if ($parent_category) {
-            $data['parent_id'] = $parent_category['id_parent'];
-            if ($data['parent_id']) {
-                $data['parent_name'] = $kategoriModel->where('id', $data['parent_id'])->first()['nama_kategori'];
-            } else {
-                $data['parent_name'] = null;
+        // $parent_category = $kategoriModel->find($id_kategori);
+        // if ($parent_category) {
+        //     $data['parent_id'] = $parent_category['id_parent'];
+        //     if ($data['parent_id']) {
+        //         $data['parent_name'] = $kategoriModel->where('id', $data['parent_id'])->first()['nama_kategori'];
+        //     } else {
+        //         $data['parent_name'] = null;
+        //     }
+        // } else {
+        //     $data['parent_id'] = null;
+        //     $data['parent_name'] = null;
+        // }
+        $data['subkategori_has_articles'] = false;
+        $data['subkategori_articles'] = [];
+        foreach ($data['subkategori'] as $sub) {
+            $articles = $artikelModel->where('id_kategori', $sub['id'])->findAll();
+            $data['subkategori_articles'][$sub['id']] = count($articles) > 0;
+            if (count($articles) > 0) {
+                $data['subkategori_has_articles'] = true;
             }
-        } else {
-            $data['parent_id'] = null;
-            $data['parent_name'] = null;
         }
+
+        $data['breadcrumb'] = $this->getBreadcrumb($id_kategori, $kategoriModel);
+        $depth = 0;
+        $currentCategory = $kategoriModel->find($id_kategori);
+        while ($currentCategory && $currentCategory['id_parent'] !== null) {
+            $depth++;
+            $currentCategory = $kategoriModel->find($currentCategory['id_parent']);
+        }
+        $data['subkategori_depth'] = $depth;
 
         return view('CMS/kategori/subkategori', $data);
     }
+
+    private function getBreadcrumb($id_kategori, $kategoriModel)
+    {
+        $breadcrumb = [];
+        while ($id_kategori != null) {
+            $kategori = $kategoriModel->find($id_kategori);
+            array_unshift($breadcrumb, $kategori);
+            $id_kategori = $kategori['id_parent'];
+        }
+        return $breadcrumb;
+    }
+
     public function tambah_subkategori()
     {
         $kategoriModel = new KategoriModel();
@@ -188,9 +222,11 @@ class Kategori extends BaseController
         $path = 'default.png';
 
         if ($image && $image->isValid() && !$image->hasMoved()) {
-            $image->move(ROOTPATH . 'public/uploads/icons');
-            $path =  $image;
+            $newName = $image->getRandomName();
+            $image->move(ROOTPATH . 'public/uploads/icons', $newName);
+            $path =  $newName;
         }
+
 
         $session = session();
         $userId = $session->get('user_id');

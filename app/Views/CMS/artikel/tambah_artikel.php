@@ -5,6 +5,11 @@ Tambah Artikel
 <?php $this->endSection() ?>
 <?php $this->section('content') ?>
 
+<style>
+    .ck-editor__editable_inline{
+        min-height: 250px !important;
+    }
+</style>
 <div class="container-fluid">
 
     <div class="card px-4 py-3 border-0  mb-4 shadow">
@@ -66,7 +71,7 @@ Tambah Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-7 mt-7">
                     <label for="editor">Isi</label>
-                    <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"></textarea>
+                    <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel" style="height: 300px;"></textarea>
                 </div>
                 <div class="form-group row col-5 mt-7">
                     <label for="gambar_artikel">Gambar artikel</label>
@@ -95,6 +100,7 @@ Tambah Artikel
 <script>
     ClassicEditor
         .create(document.querySelector('#editor'), {})
+        
         .catch(error => {
             console.error(error);
         });

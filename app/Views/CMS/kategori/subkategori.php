@@ -10,11 +10,9 @@ Kategori
     <div class="d-sm-flex align-items-center justify-content-between mb-5">
         <h1 class="h3 mr-auto mb-0 text-gray-800">Sub Kategori</h1>
         <div class="my-1">
-            <?php if ($total_subkategori < 4) : ?>
-                <button type="button" class="btn shadow-sm mr-3 text-light" data-toggle="modal" data-target="#createCategoryModal" style="background-color: #03C988;">
-                    <i class="fa-solid fa-plus"></i> kategori
-                </button>
-            <?php endif; ?>
+            <button type="button" class="btn shadow-sm mr-3 text-light" data-toggle="modal" data-target="#createCategoryModal" style="background-color: #03C988;">
+                <i class="fa-solid fa-plus"></i> kategori
+            </button>
         </div>
         <div class="input-group" style="width: 300px;">
             <form action="/cari_subkategori" method="GET" class="d-flex" role="search">
@@ -29,9 +27,35 @@ Kategori
         </div>
     </div>
 
-    <?php if ($parent_kategori && $parent_kategori['id_parent']) : ?>
-        <a href="<?= base_url('cmssubkategori/' . $parent_kategori['id_parent']); ?>" class="btn btn-secondary mb-3">Kembali ke <?= $parent_name; ?> </a>
-    <?php endif; ?>
+    <!-- Breadcrumb -->
+    <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="/cmskategori">kategori</a>
+            </li>
+            </?php foreach ($breadcrumb as $category) : ?>
+                <li class="breadcrumb-item">
+                    <a href="/cmssubkategori/</?= $category['id_parent'] ?>"></?= esc($category['nama_kategori']) ?></a>
+                </li>
+            </?php endforeach; ?>
+        </ol>
+    </nav>
+    <nav aria-label="breadcrumb"> -->
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <?php foreach ($breadcrumb as $category) : ?>
+                <li class="breadcrumb-item">
+                    <?php if ($category['id_parent'] === null) : ?>
+                        <a href="/cmskategori"><?= esc($category['nama_kategori']) ?></a>
+                    <?php else : ?>
+                        <a href="/cmssubkategori/<?= $category['id_parent'] ?>"><?= esc($category['nama_kategori']) ?></a>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    </nav>
+    </nav>
 
     <div class="basis pengetahuan" style="overflow-y: auto; height: 555px;">
         <?php foreach ($subkategori_limit as $sub) : ?>
@@ -45,10 +69,12 @@ Kategori
                                 </div>
 
                                 <div class="col">
-                                    <a href="/cmssubkategori/<?= $sub['id'] ?>" class="text-decoration-none">
+                                <?php if ($total_subkategori < 3 && !$subkategori_has_articles && $subkategori_depth < 3) : ?>
+                                        <a href="/cmssubkategori/<?= $sub['id'] ?>" class="text-decoration-none">
+                                        <?php endif; ?>
                                         <h5 class="card-title custom-title mb-2" style="color: #13005A;"><?= esc($sub['nama_kategori']) ?></h5>
-                                    </a>
-                                    <p class="card-text mb-0"><?= esc($sub['deskripsi_kategori']) ?></p>
+                                        </a>
+                                        <p class="card-text mb-0"><?= esc($sub['deskripsi_kategori']) ?></p>
                                 </div>
                                 <div class="dropdown no-arrow">
                                     <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,10 +85,12 @@ Kategori
                                             <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
                                             Edit
                                         </a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal<?= $sub['id'] ?>">
-                                            <i class="fa-solid fa-trash mr-2 text-gray-400"></i>
-                                            Hapus
-                                        </a>
+                                        <?php if (!$subkategori_articles[$sub['id']]) : ?>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal<?= $sub['id'] ?>">
+                                                <i class="fa-solid fa-trash mr-2 text-gray-400"></i>
+                                                Hapus
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>

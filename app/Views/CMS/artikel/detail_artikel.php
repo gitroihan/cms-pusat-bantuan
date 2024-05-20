@@ -4,7 +4,11 @@
 Detail Artikel
 <?php $this->endSection() ?>
 <?php $this->section('content') ?>
-
+<style>
+    .ck-editor__editable_inline{
+        min-height: 250px !important;
+    }
+</style>
 <div class="container-fluid">
 
     <div class="card px-4 py-3 border-0  mb-4 shadow">
