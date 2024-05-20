@@ -17,14 +17,12 @@ Artikel
                 </a>
             </div>
         </div>
-        <table id="table_artikel" class="table table-bordered  table-sm" style="width:100%">
+        <table id="table_artikel" class="table table-hover table-md" style="width:100%">
             <thead>
-                <tr>
-                    <th>Judul Artikel</th>
-                    <th>Pembuat</th>
-                    <th>Tanggal Unggah</th>
-                    <th class="text-center">Detail</th>
-                </tr>
+                    <td>Judul Artikel</td>
+                    <td>Pembuat</td>
+                    <td>Tanggal Unggah</td>
+                    <td class="text-center">Detail</td>
             </thead>
             <tbody>
             </tbody>

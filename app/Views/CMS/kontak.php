@@ -6,31 +6,31 @@ Kontak
 <?php $this->section('content') ?>
 
 <div class="container-fluid">
-    <div class="card px-4 py-3 border-0 shadow">
+    <div class="card px-4 py-3 border-0 shadow mb-4">
         <?php foreach ($kontak as $list) : ?>
             <form action="/ubah_kontak" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= $list['id'] ?>">
-                <div class="mb-3">
+                <div class="mb-3 p-1">
                     <label for="nama">nama</label>
                     <input type="text" name="nama" class="form-control" value="<?= $list['nama'] ?>" required>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 p-1">
                     <label for="email">email</label>
                     <input type="text" name="email" class="form-control" value="<?= $list['email'] ?>">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 p-1">
                     <label for="nomor">no telepon</label>
                     <input type="text" name="nomor" class="form-control" value="<?= $list['nomor_telepon'] ?>">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 p-1">
                     <label for="nama">alamat</label>
                     <textarea name="alamat" id="" class="form-control"><?= $list['alamat'] ?></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 p-1">
                     <label for="whatsapp">link whatsapp</label>
                     <input type="text" name="whatsapp" class="form-control" value="<?= $list['link_whatsapp'] ?>">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 p-1">
                     <label for="instagram">link instagram</label>
                     <input type="text" name="instagram" class="form-control" value="<?= $list['link_instagram'] ?>">
                 </div>

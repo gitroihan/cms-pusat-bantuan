@@ -11,7 +11,7 @@ Tiket
             <div class="d-sm-flex align-items-center justify-content-between mb-3">
                 <h1 class="h3 mr-auto mb-0 text-gray-800">Tiket</h1>
             </div>
-        <table id="table_tiket" class="table table-bordered  table-sm" style="text-align: center; ">
+        <table id="table_tiket" class="table table-hover table-md" style="text-align: center; ">
             <thead class="thead-dark">
                 <td style="width: 20%;">nama</td>
                 <td>email</td>

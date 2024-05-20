@@ -11,7 +11,7 @@ Riwayat
         <div class="d-sm-flex align-items-center justify-content-between mb-5">
             <h1 class="h3 mr-auto mb-0 text-gray-800">Riwayat</h1>
         </div>
-        <table id="table_riwayat" class="table table-bordered table-sm" style="text-align: center; ">
+        <table id="table_riwayat" class="table table-bordered table-md" style="text-align: center; ">
             <thead class="thead-dark">
                 <td>id_ref</td>
                 <td>log_tipe</td>
