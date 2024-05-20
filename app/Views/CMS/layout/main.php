@@ -77,6 +77,11 @@
                 <i class="fa-solid fa-address-book"></i>
                 <span>Kontak</span></a>
             </li>
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmstentang_kami') ? 'active' : ''; ?>"">
+                <a class=" nav-link" href="/cmstentang_kami">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>tentang kami</span></a>
+            </li>
             <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmshistori">
                 <i class="fa-solid fa-rectangle-history-circle-user"></i>

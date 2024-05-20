@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\HeadertentangkamiModel;
 use App\Models\KontakModel;
 use App\Models\LogAktivitasModel;
+use App\Models\TentangkamiModel;
 use App\Models\UserModel;
 
 class Home extends BaseController
@@ -82,53 +84,52 @@ class Home extends BaseController
         return view('CMS/histori', $data);
     }
     public function getRiwayatData()
-{
-    $request = \Config\Services::request();
-    $logModel = new LogAktivitasModel();
+    {
+        $request = \Config\Services::request();
+        $logModel = new LogAktivitasModel();
 
-    $draw = $request->getPost('draw');
-    $start = $request->getPost('start');
-    $length = $request->getPost('length');
-    $searchValue = $request->getPost('search')['value'];
+        $draw = $request->getPost('draw');
+        $start = $request->getPost('start');
+        $length = $request->getPost('length');
+        $searchValue = $request->getPost('search')['value'];
 
-    $totalRecords = $logModel->countAll();
-    $totalRecordwithFilter = $logModel->like('id_ref', $searchValue)
-                                      ->orLike('log_tipe', $searchValue)
-                                      ->orLike('aktivitas', $searchValue)
-                                      ->orLike('alamat_ip', $searchValue)
-                                      ->orLike('id_user', $searchValue)
-                                      ->orLike('updated_at', $searchValue)
-                                      ->countAllResults();
+        $totalRecords = $logModel->countAll();
+        $totalRecordwithFilter = $logModel->like('id_ref', $searchValue)
+            ->orLike('log_tipe', $searchValue)
+            ->orLike('aktivitas', $searchValue)
+            ->orLike('alamat_ip', $searchValue)
+            ->orLike('id_user', $searchValue)
+            ->orLike('updated_at', $searchValue)
+            ->countAllResults();
 
-    $records = $logModel->like('id_ref', $searchValue)
-                        ->orLike('log_tipe', $searchValue)
-                        ->orLike('aktivitas', $searchValue)
-                        ->orLike('alamat_ip', $searchValue)
-                        ->orLike('id_user', $searchValue)
-                        ->orLike('updated_at', $searchValue)
-                        ->orderBy('id', 'DESC')
-                        ->findAll($length, $start);
+        $records = $logModel->like('id_ref', $searchValue)
+            ->orLike('log_tipe', $searchValue)
+            ->orLike('aktivitas', $searchValue)
+            ->orLike('alamat_ip', $searchValue)
+            ->orLike('id_user', $searchValue)
+            ->orLike('updated_at', $searchValue)
+            ->orderBy('id', 'DESC')
+            ->findAll($length, $start);
 
-    $data = [];
-    foreach($records as $record) {
-        $data[] = [
-            'id_ref' => $record['id_ref'],
-            'log_tipe' => $record['log_tipe'],
-            'aktivitas' => $record['aktivitas'],
-            'alamat_ip' => $record['alamat_ip'],
-            'id_user' => $record['id_user'],
-            'updated_at' => $record['updated_at']
+        $data = [];
+        foreach ($records as $record) {
+            $data[] = [
+                'id_ref' => $record['id_ref'],
+                'log_tipe' => $record['log_tipe'],
+                'aktivitas' => $record['aktivitas'],
+                'alamat_ip' => $record['alamat_ip'],
+                'id_user' => $record['id_user'],
+                'updated_at' => $record['updated_at']
+            ];
+        }
+
+        $response = [
+            "draw" => intval($draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalRecordwithFilter,
+            "data" => $data
         ];
+
+        return $this->response->setJSON($response);
     }
-
-    $response = [
-        "draw" => intval($draw),
-        "recordsTotal" => $totalRecords,
-        "recordsFiltered" => $totalRecordwithFilter,
-        "data" => $data
-    ];
-
-    return $this->response->setJSON($response);
-}
-
 }

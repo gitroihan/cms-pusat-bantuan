@@ -58,6 +58,14 @@ $routes->get('/cmstiket', 'Tiket::index');
 $routes->get('/detail_tiket/(:num)', 'Tiket::detail_tiket/$1');
 // =============
 
+//tentang kami
+$routes->get('/cmstentang_kami', 'TentangKami::tentang_kami');
+$routes->post('/tambahtentangkami', 'TentangKami::tambahtentangkami');
+$routes->post('/ubahtentangkami', 'TentangKami::ubahtentangkami');
+$routes->post('/ubahbannerinformasi', 'TentangKami::ubahheadtentangkami');
+$routes->post('/hapustentangkami', 'TentangKami::hapustentangkami');
+// =============
+
 //riwayat
 $routes->post('/riwayat/getRiwayatData', 'Home::getRiwayatData');
 $routes->get('/cmshistori', 'Home::histori');
