@@ -134,9 +134,9 @@ class User extends BaseController
 
         // Proses unggahan foto profil
         if ($fotoProfile->isValid() && !$fotoProfile->hasMoved()) {
-            $newName = $fotoProfile->getRandomName(); // Nama file yang unik
+            $newName = $fotoProfile->getClientName(); // Nama file yang unik
             // Pindahkan file ke direktori uploads
-            $fotoProfile->move(FCPATH  . 'uploads', $newName);
+            $fotoProfile->move(ROOTPATH  . 'uploads', $newName);
 
             // Simpan nama file ke basis data
             $model = new UserModel();
