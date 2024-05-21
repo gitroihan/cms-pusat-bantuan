@@ -12,7 +12,7 @@ class KategoriModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_kategori', 'deskripsi_kategori', 'ikon', 'urutan', 'id_parent', 'id_user'];
+    protected $allowedFields    = ['nama_kategori', 'deskripsi_kategori', 'ikon','id_parent', 'id_user'];
 
     public function data_id_parent_null()
     {

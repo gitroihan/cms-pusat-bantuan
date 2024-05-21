@@ -32,9 +32,10 @@ class Kategori extends BaseController
         $path = 'default.png';
 
         if ($image && $image->isValid() && !$image->hasMoved()) {
-            $newName = $image->getRandomName();
-            $image->move(ROOTPATH . 'public/uploads/icons', $newName);
-            $path =  $newName;
+            $originalName = $image->getClientName();
+            $targetDirectory = ROOTPATH . 'public/uploads/icons';
+            $image->move($targetDirectory, $originalName);
+            $path = $originalName;
         }
 
 
@@ -45,7 +46,6 @@ class Kategori extends BaseController
             'nama_kategori' => $this->request->getPost('nama_kategori'),
             'deskripsi_kategori' => $this->request->getPost('deskripsi_kategori'),
             'ikon' => $path,
-            'urutan' => 1,
             'id_parent' => null,
             'id_user' => $userId,
         ];
@@ -80,9 +80,9 @@ class Kategori extends BaseController
 
         $image = $this->request->getFile('ikon');
         if ($image->isValid() && !$image->hasMoved()) {
-            $newName = $image->getRandomName();
-            $image->move(ROOTPATH . 'public/uploads/icons', $newName);
-            $data['ikon'] =  $newName;
+            $originalName = $image->getClientName();
+            $image->move(ROOTPATH . 'public/uploads/icons', $originalName);
+            $data['ikon'] = $originalName;
         }
 
         // Simpan perubahan ke dalam database
@@ -218,9 +218,10 @@ class Kategori extends BaseController
         $path = 'default.png';
 
         if ($image && $image->isValid() && !$image->hasMoved()) {
-            $newName = $image->getRandomName();
-            $image->move(ROOTPATH . 'public/uploads/icons', $newName);
-            $path =  $newName;
+            $originalName = $image->getClientName();
+            $targetDirectory = ROOTPATH . 'public/uploads/icons';
+            $image->move($targetDirectory, $originalName);
+            $path = $originalName;
         }
 
 
@@ -231,7 +232,6 @@ class Kategori extends BaseController
             'nama_kategori' => $this->request->getPost('nama_kategori'),
             'deskripsi_kategori' => $this->request->getPost('deskripsi_kategori'),
             'ikon' => $path,
-            'urutan' => 1,
             'id_parent' => $this->request->getPost('id_parent'),
             'id_user' => $userId,
         ];
@@ -267,9 +267,9 @@ class Kategori extends BaseController
 
         $image = $this->request->getFile('ikon');
         if ($image->isValid() && !$image->hasMoved()) {
-            $newName = $image->getRandomName();
-            $image->move(ROOTPATH . 'public/uploads/icons', $newName);
-            $data['ikon'] =  $newName;
+            $originalName = $image->getClientName();
+            $image->move(ROOTPATH . 'public/uploads/icons', $originalName);
+            $data['ikon'] = $originalName;
         }
 
         // Simpan perubahan ke dalam database
