@@ -69,7 +69,7 @@ Kategori
                                 </div>
 
                                 <div class="col">
-                                <?php if ($total_subkategori < 3 && !$subkategori_has_articles && $subkategori_depth < 3) : ?>
+                                    <?php if ($total_subkategori < 3 && !$subkategori_has_articles && $subkategori_depth < 3) : ?>
                                         <a href="/cmssubkategori/<?= $sub['id'] ?>" class="text-decoration-none">
                                         <?php endif; ?>
                                         <h5 class="card-title custom-title mb-2" style="color: #13005A;"><?= esc($sub['nama_kategori']) ?></h5>
@@ -85,7 +85,7 @@ Kategori
                                             <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
                                             Edit
                                         </a>
-                                        <?php if (!$subkategori_articles[$sub['id']]) : ?>
+                                        <?php if (!in_array($sub['id'], $parentIds) && !$subkategori_articles[$sub['id']]) : ?>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal<?= $sub['id'] ?>">
                                                 <i class="fa-solid fa-trash mr-2 text-gray-400"></i>
                                                 Hapus

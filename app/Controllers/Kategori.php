@@ -19,7 +19,9 @@ class Kategori extends BaseController
         $model = new UserModel();
         $kategoriModel = new KategoriModel();
         $data['data'] = $model->getUserById($userId);
-        $data['kategori'] = $kategoriModel->data_id_parent_null();
+        $kategoriData = $kategoriModel->data_id_parent_null();
+        $data['kategori'] = $kategoriData['kategori'];
+        $data['id_parents'] = $kategoriData['id_parents'];
         return view('CMS/kategori/kategori',  $data);
     }
     public function tambah_kategori()
@@ -27,7 +29,7 @@ class Kategori extends BaseController
         $kategoriModel = new KategoriModel();
 
         $image = $this->request->getFile('ikon');
-        $path = 'default.jpg';
+        $path = 'default.png';
 
         if ($image && $image->isValid() && !$image->hasMoved()) {
             $newName = $image->getRandomName();
@@ -137,16 +139,21 @@ class Kategori extends BaseController
         $session = session();
         $userId = $session->get('user_id');
         $model = new UserModel();
-
         $kategoriModel = new KategoriModel();
-
         $data['data'] = $model->getUserById($userId);
+
         $cari = $this->request->getGet('cari');
+        $kategoriQuery = $kategoriModel->where('id_parent', null);
+
         if ($cari) {
-            $kategoriModel->like('nama_kategori', $cari);
+            $kategoriQuery->like('nama_kategori', $cari);
         }
 
-        $data['kategori'] = $kategoriModel->findAll();
+        $kategori = $kategoriQuery->findAll();
+
+        $data['kategori'] = $kategori;
+        $data['id_parents'] = [];
+
 
         return view('CMS/kategori/kategori',  $data);
     }
@@ -162,25 +169,14 @@ class Kategori extends BaseController
         $artikelModel = new ArtikelModel();
 
         $data['data'] = $model->getUserById($userId);
-        $data['subkategori'] = $kategoriModel->where('id_parent', $id_kategori)->findAll(); // Ambil subkategori yang memiliki parent_id sama dengan id_kategori
+        $subcategoryDetails = $kategoriModel->getSubcategoriesWithDetails($id_kategori);
+        $data['subkategori'] = $subcategoryDetails['subcategories'];
+        $data['parentIds'] = $subcategoryDetails['parentIds'];
         $data['subkategori_limit'] = array_slice($data['subkategori'], 0, 4);
         $data['total_subkategori'] = count($data['subkategori']);
         $data['id_kat'] = $id_kategori;
         $data['parent_kategori'] = $kategoriModel->where('id', $id_kategori)->first();
 
-
-        // $parent_category = $kategoriModel->find($id_kategori);
-        // if ($parent_category) {
-        //     $data['parent_id'] = $parent_category['id_parent'];
-        //     if ($data['parent_id']) {
-        //         $data['parent_name'] = $kategoriModel->where('id', $data['parent_id'])->first()['nama_kategori'];
-        //     } else {
-        //         $data['parent_name'] = null;
-        //     }
-        // } else {
-        //     $data['parent_id'] = null;
-        //     $data['parent_name'] = null;
-        // }
         $data['subkategori_has_articles'] = false;
         $data['subkategori_articles'] = [];
         foreach ($data['subkategori'] as $sub) {
@@ -328,28 +324,58 @@ class Kategori extends BaseController
     }
     public function cari_subkategori()
     {
+        $session = session();
+        $userId = $session->get('user_id');
+        $model = new UserModel();
         $kategoriModel = new KategoriModel();
+        $artikelModel = new ArtikelModel();
 
-        // Ambil nilai 'id_parent' dari query string
-        $id_subkategori = $this->request->getGet('id_parent');
+        $data['data'] = $model->getUserById($userId);
 
-        // Ambil nilai pencarian dari query string
+        // Ambil nilai 'id_parent' dan kata kunci pencarian dari query string
+        $id_parent = $this->request->getGet('id_parent');
         $cari = $this->request->getGet('cari');
-        $data['subkategori'] = $kategoriModel->where('id_parent', $id_subkategori)->findAll();
-        $data['subkategori_limit'] = array_slice($data['subkategori'], 0, 4);
-        $data['total_subkategori'] = count($data['subkategori']);
 
-        // Lakukan pencarian jika ada kata kunci pencarian
+        // Dapatkan subkategori berdasarkan id_parent
+        $subkategoriQuery = $kategoriModel->where('id_parent', $id_parent);
+
+        // Jika ada kata kunci pencarian, tambahkan kondisi LIKE
         if ($cari) {
-            $kategoriModel->like('nama_kategori', $cari);
-            // Tetapkan URL baru dengan id_subkategori dan parameter pencarian
-            $newUrl = base_url("/cmssubkategori/{$id_subkategori}?cari={$cari}");
-        } else {
-            // Tetapkan URL baru tanpa parameter pencarian
-            $newUrl = base_url("/cmssubkategori/{$id_subkategori}");
+            $subkategoriQuery->like('nama_kategori', $cari);
         }
 
-        // Redirect ke URL baru
-        return redirect()->to($newUrl);
+        $subkategori = $subkategoriQuery->findAll();
+
+        $data['subkategori'] = $subkategori;
+        $data['subkategori_limit'] = array_slice($subkategori, 0, 4);
+        $data['total_subkategori'] = count($subkategori);
+        $data['id_kat'] = $id_parent;
+        $data['parent_kategori'] = $kategoriModel->where('id', $id_parent)->first();
+
+        $data['subkategori_has_articles'] = false;
+        $data['subkategori_articles'] = [];
+        $parentIds = [];
+        foreach ($subkategori as $sub) {
+            $articles = $artikelModel->where('id_kategori', $sub['id'])->findAll();
+            $data['subkategori_articles'][$sub['id']] = count($articles) > 0;
+            if (count($articles) > 0) {
+                $data['subkategori_has_articles'] = true;
+            }
+            if ($sub['id_parent']) {
+                $parentIds[] = $sub['id_parent'];
+            }
+        }
+        $data['parentIds'] = $parentIds;
+
+        $data['breadcrumb'] = $this->getBreadcrumb($id_parent, $kategoriModel);
+        $depth = 0;
+        $currentCategory = $kategoriModel->find($id_parent);
+        while ($currentCategory && $currentCategory['id_parent'] !== null) {
+            $depth++;
+            $currentCategory = $kategoriModel->find($currentCategory['id_parent']);
+        }
+        $data['subkategori_depth'] = $depth;
+
+        return view('CMS/kategori/subkategori', $data);
     }
 }

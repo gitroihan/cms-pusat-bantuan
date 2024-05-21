@@ -16,19 +16,45 @@ class KategoriModel extends Model
 
     public function data_id_parent_null()
     {
-        return $this->where('id_parent', null)->findAll();
+        $builder = $this->db->table('kategori');
+        $builder->select('*');
+        $builder->where('id_parent IS NULL');
+        $query = $builder->get();
+        $data['kategori'] = $query->getResultArray();
+
+        // Get categories with id_parent
+        $builder = $this->db->table('kategori');
+        $builder->select('id_parent');
+        $builder->where('id_parent IS NOT NULL');
+        $query = $builder->get();
+        $data['id_parents'] = array_column($query->getResultArray(), 'id_parent');
+
+        return $data;
     }
+    public function getSubcategoriesWithDetails($id_kategori)
+    {
+        $subcategories = $this->where('id_parent', $id_kategori)->findAll();
+        $allCategories = $this->findAll();
+
+        $data = [
+            'subcategories' => $subcategories,
+            'parentIds' => array_column($allCategories, 'id_parent')
+        ];
+
+        return $data;
+    }
+
     public function getKategoriWithoutParent()
     {
         // Mendapatkan semua id_parent yang digunakan
         $subQuery = $this->db->table($this->table)
-                             ->select('id_parent')
-                             ->where('id_parent IS NOT NULL');
+            ->select('id_parent')
+            ->where('id_parent IS NOT NULL');
 
         // Mendapatkan kategori yang tidak termasuk dalam id_parent
         return $this->where('id NOT IN (' . $subQuery->getCompiledSelect() . ')', null, false)
-                    ->findAll();
-    } 
+            ->findAll();
+    }
     // relasi
     public function user()
     {
