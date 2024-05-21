@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2024 at 12:05 PM
+-- Generation Time: May 21, 2024 at 03:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -114,7 +114,7 @@ INSERT INTO `kategori` (`id`, `nama_kategori`, `deskripsi_kategori`, `ikon`, `ur
 (1, 'Feature', 'Tata cara penggunaan sistem Goldstep', '1715776609_9d0864ddf91aba5764bd.png', 1, NULL, 1),
 (2, 'produk', 'Goldstep Product', '1715765051_8f03b4d5f1deb940d59f.png', 1, NULL, 1),
 (12, 'goldstep clinic', 'goldstep clinic', '1715824827_97b60de429d2c8faefb9.png', 1, 2, 1),
-(20, 'goldstep lab', 'goldstep lab', '1715766398_5ed60419eda643836b0d.png', 1, 2, 1),
+(20, 'goldstep lab', 'goldstep lab', '1716254581_55e13ba7a3462e6f50a3.png', 1, 2, 1),
 (36, 'setting', 'Modul setting, digunakan untuk melakukan penyesuaian data-data master yang berkaitan dengan pelayanan saat menggunakan sistem HIS seperti master harga dan data pegawai', '1716184525_f06718b646f6d637dc3a.png', 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -179,7 +179,30 @@ INSERT INTO `log_aktivitas` (`id`, `id_ref`, `log_tipe`, `aktivitas`, `alamat_ip
 (112, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:49:10'),
 (113, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:49:17'),
 (114, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:49:23'),
-(115, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-19 22:55:25');
+(115, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-19 22:55:25'),
+(116, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:02:52'),
+(117, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-20 17:04:03'),
+(118, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:04:07'),
+(119, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:04:13'),
+(120, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 17:06:04'),
+(121, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 17:06:09'),
+(122, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:07:17'),
+(123, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:07:21'),
+(124, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:08:39'),
+(125, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:08:43'),
+(126, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:08:47'),
+(127, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:26:02'),
+(128, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:26:07'),
+(129, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 17:26:58'),
+(130, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 17:32:53'),
+(131, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 17:32:57'),
+(132, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 17:33:04'),
+(133, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 17:33:19'),
+(134, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 17:33:25'),
+(135, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 18:00:25'),
+(136, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 18:00:41'),
+(137, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-20 18:22:51'),
+(138, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-20 18:23:01');
 
 -- --------------------------------------------------------
 
@@ -254,9 +277,6 @@ CREATE TABLE `tiket` (
   `id` int(11) NOT NULL,
   `nama_kontak` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `modul` varchar(255) NOT NULL,
-  `klasifikasi` varchar(255) NOT NULL,
-  `prioritas` varchar(255) NOT NULL,
   `subjek` varchar(255) NOT NULL,
   `deskripsi` text NOT NULL,
   `status` varchar(255) NOT NULL
@@ -266,10 +286,10 @@ CREATE TABLE `tiket` (
 -- Dumping data for table `tiket`
 --
 
-INSERT INTO `tiket` (`id`, `nama_kontak`, `email`, `modul`, `klasifikasi`, `prioritas`, `subjek`, `deskripsi`, `status`) VALUES
-(1, 'adit', 'adit@gmail.com', 'modul', 'klasifikasi', 'priosritas', 'subjek', 'deskripsi ', ''),
-(2, 'raihan', 'raihan@gmail.com', 'raihan', 'raihan', 'raihan', 'raihan', 'Siapa yang tidak mengenal kata “raihan”? Kata yang terdengar sederhana, namun sarat dengan makna dan simbolisme. Dalam bahasa Indonesia, kata “raihan” memiliki arti keberhasilan yang diraih setelah melalui perjuangan yang penuh keringat dan kerja keras. Bukankah itu menggambarkan betapa indahnya hidup ini, saat kita benar-benar berusaha dan kemudian kita mencapai apa yang kita inginkan?\r\n\r\nRaihan bisa menjadi kata yang memberikan semangat dan inspirasi bagi banyak orang. Tidak hanya bagi mereka yang tengah berjuang keras mengejar impiannya, tetapi juga bagi mereka yang merasa putus asa dan perlu dorongan untuk tetap bergerak maju. Kata “raihan” memberikan makna bahwa kita semua bisa meraih apa yang kita inginkan jika kita mau berjuang dengan tekad yang kuat.', ''),
-(3, 'p', 'p@gmail.com', 'p', 'p', 'p', 'p', 'p', '');
+INSERT INTO `tiket` (`id`, `nama_kontak`, `email`, `subjek`, `deskripsi`, `status`) VALUES
+(1, 'adit', 'adit@gmail.com', 'subjek', 'deskripsi ', ''),
+(2, 'raihan', 'raihan@gmail.com', 'raihan', 'Siapa yang tidak mengenal kata “raihan”? Kata yang terdengar sederhana, namun sarat dengan makna dan simbolisme. Dalam bahasa Indonesia, kata “raihan” memiliki arti keberhasilan yang diraih setelah melalui perjuangan yang penuh keringat dan kerja keras. Bukankah itu menggambarkan betapa indahnya hidup ini, saat kita benar-benar berusaha dan kemudian kita mencapai apa yang kita inginkan?\r\n\r\nRaihan bisa menjadi kata yang memberikan semangat dan inspirasi bagi banyak orang. Tidak hanya bagi mereka yang tengah berjuang keras mengejar impiannya, tetapi juga bagi mereka yang merasa putus asa dan perlu dorongan untuk tetap bergerak maju. Kata “raihan” memberikan makna bahwa kita semua bisa meraih apa yang kita inginkan jika kita mau berjuang dengan tekad yang kuat.', ''),
+(3, 'p', 'p@gmail.com', 'tes', 'Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.Mengirim pesan dalam jumlah kata yang begitu banyak, bisa membuat HP teman ngeblank, error, dan membuat aplikasi WhatsApp tertutup tiba-tiba. Tenang saja, ini tak akan membuat HP korban rusak. Sistem mereka hanya kaget saja. Tapi biasanya sebelum HP mereka yang ngeblank, HP Anda bakal ngeblank duluan karena terlalu banyak mengirim pesan.', '');
 
 -- --------------------------------------------------------
 
@@ -400,7 +420,7 @@ ALTER TABLE `header_tentang_kami`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `kontak`
@@ -412,7 +432,7 @@ ALTER TABLE `kontak`
 -- AUTO_INCREMENT for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT for table `tag`
