@@ -47,6 +47,7 @@ $routes->post('/artikel/getArtikelData', 'artikel::getArtikelData');
 $routes->get('/cmsartikel', 'Artikel::index');
 $routes->get('/tambah_artikel', 'Artikel::tambah_artikel');
 $routes->post('/aksi_tambah_artikel', 'Artikel::aksi_tambah_artikel');
+$routes->post('/aksi_tambah_artikel_publish', 'Artikel::aksi_tambah_artikel_publish');
 $routes->get('/detail_artikel/(:num)', 'Artikel::detail_artikel/$1');
 $routes->post('/hapus_artikel/(:num)', 'Artikel::hapus_artikel/$1');
 $routes->post('/ubah_artikel/(:num)', 'Artikel::ubah_artikel/$1');

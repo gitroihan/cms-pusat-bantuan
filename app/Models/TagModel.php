@@ -6,18 +6,49 @@ use CodeIgniter\Model;
 
 class TagModel extends Model
 {
-    protected $table            = 'tag2';
+    protected $table            = 'tag';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_tag','id_user','id_artikel'];
+    protected $allowedFields    = ['nama_tag', 'id_artikel', 'id_user'];
+    // protected $allowedFields    = ['nama_tag','id_user','id_artikel'];
 
     public function getAllTags()
     {
-        return $this->findAll();
+        return $this->db->table($this->table)
+            ->select('nama_tag')
+            ->groupBy('nama_tag')
+            ->get()
+            ->getResultArray();
     }
+    public function addArtikelTagRelation($artikelId, $userId, $tagName)
+    {
+        // Cek apakah tag sudah ada, jika belum tambahkan ke database
+        $existingTag = $this->where('nama_tag', $tagName)->first();
+        if (!$existingTag) {
+            $tagId = $this->insert(['nama_tag' => $tagName]);
+        } else {
+            $tagId = $existingTag['id'];
+        }
+
+        // Simpan relasi antara artikel dan tag ke database
+        $tagArtikelData = [
+            'id_artikel' => $artikelId,
+            'id_user' => $userId
+        ];
+        $this->db->table('tag')->insert($tagArtikelData);
+    }
+    public function addTag($tagName)
+    {
+        $existingTag = $this->where('nama_tag', $tagName)->first();
+        if (!$existingTag) {
+            $this->insert(['nama_tag' => $tagName]);
+        }
+    }
+
+
 
     public function user()
     {

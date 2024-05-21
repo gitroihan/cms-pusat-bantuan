@@ -4,16 +4,34 @@
 Detail Artikel
 <?php $this->endSection() ?>
 <?php $this->section('content') ?>
+
 <style>
-    .ck-editor__editable_inline{
+    .editor-wrapper {
+        border: 1px #000 solid !important;
+    }
+
+    .ck-editor__editable_inline {
         min-height: 250px !important;
+        max-height: 250px !important;
+        overflow-y: auto !important;
+        border-top: 1px solid #000 !important;
+    }
+
+    .select2-container--default .select2-selection--multiple {
+        border: 1px solid #000;
+        height: 38px !important
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #000;
+        height: 38px !important
     }
 </style>
 <div class="container-fluid">
 
     <div class="card px-4 py-3 border-0  mb-4 shadow">
         <h1 class="h3 mr-auto mb-0 text-gray-800">Detail artikel</h1>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form id="formUbahArtikel" action="/ubah_artikel/<?= $artikel['id'] ?>" method="post" enctype="multipart/form-data">
             <div class="col-12 mt-3">
                 <div class="ps-2" style="text-align: left;">
                     <label for="exampleFormControlInput1" class="form-label d-flex justify-content-between">
@@ -23,8 +41,8 @@ Detail Artikel
                 <div class="col-12 d-flex gap-2">
                     <?php foreach ($layouts as $layout) : ?>
                         <div class="p-2 col" style="text-align: left;">
-                            <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
-                                <h4 class="text-middle"><?= $layout['nama_layout'] ?></h4>
+                            <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 200px; width: 150px;">
+                                <img src="<?= base_url('uploads/icons/' . esc($layout['gambar_layout'])); ?>" alt="gambar" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                             </div>
                             <br>
                             <div class="form-check col-12 d-flex justify-content-center">
@@ -72,25 +90,41 @@ Detail Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-7 mt-7">
                     <label for="editor">Isi</label>
-                    <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"><?= $artikel['isi'] ?></textarea>
+                    <div class="editor-wrapper">
+                        <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"><?= $artikel['isi'] ?></textarea>
+                    </div>
                 </div>
-                <div class="form-group row col-5 mt-7">
+                <div class="form-group row col-5 mt-7 d-flex">
                     <label for="gambar_artikel">Gambar artikel</label>
                     <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="readURL(this);" accept="image/*">
                     <?php if (!empty($artikel['gambar_artikel'])) : ?>
-                        <div class="form-group col-5 mt-3">
-                            <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                                <img id="preaview" src="public/uploads/<?= $artikel['gambar_artikel'] ?>" alt="Preaview" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div class="col-6">
+                            <div class="form-group mt-3">
+                                <div class="image-box border border-dark" style="width: 200px; height: 200px;">
+                                    <img id="preaview" src="public/uploads/<?= $artikel['gambar_artikel'] ?>" alt="Preaview" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <p>Gambar saat ini: <?= $artikel['gambar_artikel'] ?></p>
                             </div>
-                            <p>Gambar saat ini: <?= $artikel['gambar_artikel'] ?></p>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <p>Deskripsi:</p>
+                            <ul>
+                                <li>Max file size 2MB</li>
+                                <li>File hanya JPG | PNG</li>
+                            </ul>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-2 mr-1 mt-2">
                 <div class="d-sm-flex align-items-center justify-content-between form-group col-6  ">
+                    <button type="button" class=" btn btn-warning text-light shadow-sm mr-3" data-toggle="modal" data-target="#editartikelModal<?= $artikel['id'] ?>">
+                        DRAFT
+                    </button>
+                </div>
+                <div class="d-sm-flex align-items-center justify-content-between form-group col-6  ">
                     <button type="button" class=" btn text-light shadow-sm mr-3" style="background-color: #03C988;" data-toggle="modal" data-target="#editartikelModal<?= $artikel['id'] ?>">
-                        UBAH
+                        SIMPAN & PUBLISH
                     </button>
                 </div>
         </form>
@@ -135,14 +169,23 @@ Detail Artikel
                 </button>
             </div>
             <div class="modal-body text-center">
-                <form action="/ubah_artikel/<?= $artikel['id'] ?>" method="post">
+                <form id="formModal">
                     <?= csrf_field() ?>
-                    <button type="submit" class="btn" style="background-color: #03C988; color: white;">UBAH</button>
+                    <button type="button" class="btn" style="background-color: #03C988; color: white;" onclick="submitFormUbahArtikel()">
+                        UBAH
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function submitFormUbahArtikel() {
+        document.getElementById('formUbahArtikel').submit();
+    }
+</script>
+
 
 
 <!-- preaview photo -->

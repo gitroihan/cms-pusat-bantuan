@@ -6,15 +6,32 @@ Tambah Artikel
 <?php $this->section('content') ?>
 
 <style>
-    .ck-editor__editable_inline{
+    .editor-wrapper {
+        border: 1px #000 solid !important;
+    }
+
+    .ck-editor__editable_inline {
         min-height: 250px !important;
+        max-height: 250px !important;
+        overflow-y: auto !important;
+        border-top: 1px solid #000 !important;
+    }
+
+    .select2-container--default .select2-selection--multiple {
+        border: 1px solid #000;
+        height: 38px !important
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #000;
+        height: 38px !important
     }
 </style>
 <div class="container-fluid">
 
     <div class="card px-4 py-3 border-0  mb-4 shadow">
         <h1 class="h3 mr-auto mb-0 text-gray-800">Tambah artikel</h1>
-        <form action="<?= base_url('/aksi_tambah_artikel') ?>" method="post" enctype="multipart/form-data">
+        <form id="artikelForm" action="<?= base_url('/aksi_tambah_artikel') ?>" method="post" enctype="multipart/form-data">
             <div class="col-12 mt-3">
                 <div class="ps-2" style="text-align: left;">
                     <label for="exampleFormControlInput1" class="form-label d-flex justify-content-between">
@@ -24,8 +41,8 @@ Tambah Artikel
                 <div class="col-12 d-flex gap-2">
                     <?php foreach ($layouts as $layout) : ?>
                         <div class="p-2 col" style="text-align: left;">
-                            <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 150px;">
-                                <h4 class="text-middle"><?= $layout['nama_layout'] ?></h4>
+                            <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 200px; width: 150px;">
+                                <img src="<?= base_url('uploads/icons/' . esc($layout['gambar_layout'])); ?>" alt="gambar" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                             </div>
                             <br>
                             <div class="form-check col-12 d-flex justify-content-center">
@@ -53,7 +70,7 @@ Tambah Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-6">
                     <label for="kategori">Kategori</label>
-                    <select class="js-example-basic-single form-control border border-dark" name="id_kategori" id="kategori">
+                    <select class="js-example-basic-single form-control" name="id_kategori" id="kategori">
                         <?php foreach ($kategori as $kat) : ?>
                             <option value="<?= $kat['id'] ?>"><?= $kat['nama_kategori'] ?></option>
                         <?php endforeach; ?>
@@ -61,7 +78,7 @@ Tambah Artikel
                 </div>
                 <div class="form-group col-6">
                     <label for="tag">Tag</label>
-                    <select class="js-example-basic-multiple form-control border border-dark" name="tags[]" multiple="multiple">
+                    <select class="js-example-basic-multiple form-control" name="tags[]" multiple="multiple">
                         <?php foreach ($tags as $tag) : ?>
                             <option value="<?= $tag['nama_tag'] ?>"><?= $tag['nama_tag'] ?></option>
                         <?php endforeach; ?>
@@ -71,26 +88,48 @@ Tambah Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-7 mt-7">
                     <label for="editor">Isi</label>
-                    <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel" style="height: 300px;"></textarea>
-                </div>
-                <div class="form-group row col-5 mt-7">
-                    <label for="gambar_artikel">Gambar artikel</label>
-                    <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="readURL(this);" accept="image/*">
-                    <div class="form-group col-5 mt-3">
-                        <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                            <img id="preaview" src="#" alt="preaview" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
+                    <div class="editor-wrapper">
+                        <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"></textarea>
                     </div>
                 </div>
+                <div class="form-group row col-5 mt-7 d-flex">
+                    <label for="gambar_artikel">Gambar artikel</label>
+                    <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="readURL(this);" accept="image/*">
+                    <div class="col-6">
+                        <div class="form-group mt-3">
+                            <div class="image-box border border-dark" style="width: 200px; height: 200px;">
+                                <img id="preaview" src="#" alt="preaview" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-3">
+                        <p>Deskripsi:</p>
+                        <ul>
+                            <li>Max file size 2MB</li>
+                            <li>File hanya JPG | PNG</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
             <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="submit" class="btn text-light ml-auto" style="background-color: #03C988;">DRAFT</button>
+                <button type="button" class="btn btn-warning text-light ml-auto" onclick="submitForm('<?= base_url('/aksi_tambah_artikel') ?>')">DRAFT</button>
+            </div>
+            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
+                <button type="button" class="btn text-light ml-auto" style="background-color: #03C988;" onclick="submitForm('<?= base_url('/aksi_tambah_artikel_publish') ?>')">SIMPAN & PUBLISH</button>
             </div>
         </form>
 
     </div>
 
 </div>
+<script>
+function submitForm(actionUrl) {
+    var form = document.getElementById('artikelForm');
+    form.action = actionUrl;
+    form.submit();
+}
+</script>
 
 <!-- preaview photo -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -100,7 +139,7 @@ Tambah Artikel
 <script>
     ClassicEditor
         .create(document.querySelector('#editor'), {})
-        
+
         .catch(error => {
             console.error(error);
         });
