@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2024 at 03:39 AM
+-- Generation Time: May 21, 2024 at 04:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,17 +38,18 @@ CREATE TABLE `artikel` (
   `tanggal_unggah` datetime NOT NULL,
   `id_kategori` int(11) NOT NULL,
   `id_layout` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `artikel`
 --
 
-INSERT INTO `artikel` (`id`, `judul_artikel`, `pembuat`, `isi`, `gambar_artikel`, `gambar_1`, `gambar_2`, `tanggal_unggah`, `id_kategori`, `id_layout`, `id_user`) VALUES
-(1, 'Menu Laporan Resep', '1', '<ul><li>ttt</li></ul>', 'dokter.png', 'dokter.png', 'coode layout_3.png', '2024-05-17 00:00:00', 20, 1, 1),
-(2, 'goldstep Clinic', '1', '<ul><li>ttt</li></ul>', 'dokter.png', 'dokter.png', 'coode layout_3.png', '2024-05-17 00:00:00', 20, 2, 1),
-(9, 'tes tag', '1', '<p>tag baru</p>', 'dokter.png', 'dokter.png', 'dokter.png', '2024-05-17 09:55:17', 12, 1, 1);
+INSERT INTO `artikel` (`id`, `judul_artikel`, `pembuat`, `isi`, `gambar_artikel`, `gambar_1`, `gambar_2`, `tanggal_unggah`, `id_kategori`, `id_layout`, `id_user`, `status`) VALUES
+(45, 'tag', '1', '<p>111</p>', 'default.png', '', '', '2024-05-21 04:44:14', 12, 1, 1, 'draft'),
+(46, 'tag2', '1', '<p>11</p>', '', '', '', '2024-05-21 04:44:40', 12, 3, 1, 'draft'),
+(50, 'tag', '1', '<p>isi</p>', 'icon_trushmedis.png', '', '', '2024-05-21 07:52:08', 36, 3, 1, 'draft');
 
 -- --------------------------------------------------------
 
@@ -58,17 +59,18 @@ INSERT INTO `artikel` (`id`, `judul_artikel`, `pembuat`, `isi`, `gambar_artikel`
 
 CREATE TABLE `artikel_layout` (
   `id` int(11) NOT NULL,
-  `nama_layout` varchar(255) NOT NULL
+  `nama_layout` varchar(255) NOT NULL,
+  `gambar_layout` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `artikel_layout`
 --
 
-INSERT INTO `artikel_layout` (`id`, `nama_layout`) VALUES
-(1, 'A'),
-(2, 'B'),
-(3, 'C');
+INSERT INTO `artikel_layout` (`id`, `nama_layout`, `gambar_layout`) VALUES
+(1, 'A', ''),
+(2, 'B', ''),
+(3, 'C', '');
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,6 @@ CREATE TABLE `kategori` (
   `nama_kategori` varchar(255) NOT NULL,
   `deskripsi_kategori` text DEFAULT NULL,
   `ikon` varchar(255) NOT NULL,
-  `urutan` int(11) DEFAULT NULL,
   `id_parent` int(11) DEFAULT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -110,12 +111,12 @@ CREATE TABLE `kategori` (
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id`, `nama_kategori`, `deskripsi_kategori`, `ikon`, `urutan`, `id_parent`, `id_user`) VALUES
-(1, 'Feature', 'Tata cara penggunaan sistem Goldstep', '1715776609_9d0864ddf91aba5764bd.png', 1, NULL, 1),
-(2, 'produk', 'Goldstep Product', '1715765051_8f03b4d5f1deb940d59f.png', 1, NULL, 1),
-(12, 'goldstep clinic', 'goldstep clinic', '1715824827_97b60de429d2c8faefb9.png', 1, 2, 1),
-(20, 'goldstep lab', 'goldstep lab', '1716254581_55e13ba7a3462e6f50a3.png', 1, 2, 1),
-(36, 'setting', 'Modul setting, digunakan untuk melakukan penyesuaian data-data master yang berkaitan dengan pelayanan saat menggunakan sistem HIS seperti master harga dan data pegawai', '1716184525_f06718b646f6d637dc3a.png', 1, 1, 1);
+INSERT INTO `kategori` (`id`, `nama_kategori`, `deskripsi_kategori`, `ikon`, `id_parent`, `id_user`) VALUES
+(1, 'Feature', 'Tata cara penggunaan sistem Goldstep', 'logo_goldstep.png', NULL, 1),
+(2, 'produk', 'Goldstep Product', 'icon_trushmedis.png', NULL, 1),
+(12, 'goldstep clinic', 'goldstep clinic', 'icon_trushmedis.png', 2, 1),
+(20, 'goldstep lab', 'goldstep lab', 'dokter.png', 2, 1),
+(36, 'setting', 'Modul setting, digunakan untuk melakukan penyesuaian data-data master yang berkaitan dengan pelayanan saat menggunakan sistem HIS seperti master harga dan data pegawai', 'logo_goldstep.png', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -161,48 +162,29 @@ CREATE TABLE `log_aktivitas` (
 --
 
 INSERT INTO `log_aktivitas` (`id`, `id_ref`, `log_tipe`, `aktivitas`, `alamat_ip`, `id_user`, `updated_at`) VALUES
-(97, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-19 20:09:50'),
-(98, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-19 22:32:40'),
-(99, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-19 22:33:44'),
-(100, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:45:41'),
-(101, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-19 22:45:54'),
-(102, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-19 22:46:02'),
-(103, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-19 22:46:11'),
-(104, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-19 22:46:24'),
-(105, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:47:03'),
-(106, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:47:10'),
-(107, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:47:17'),
-(108, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:47:26'),
-(109, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-19 22:48:40'),
-(110, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-19 22:48:49'),
-(111, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-19 22:49:00'),
-(112, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:49:10'),
-(113, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:49:17'),
-(114, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-19 22:49:23'),
-(115, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-19 22:55:25'),
-(116, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:02:52'),
-(117, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-20 17:04:03'),
-(118, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:04:07'),
-(119, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:04:13'),
-(120, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 17:06:04'),
-(121, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 17:06:09'),
-(122, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:07:17'),
-(123, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:07:21'),
-(124, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:08:39'),
-(125, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:08:43'),
-(126, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:08:47'),
-(127, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-20 17:26:02'),
-(128, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-20 17:26:07'),
-(129, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 17:26:58'),
-(130, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 17:32:53'),
-(131, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 17:32:57'),
-(132, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 17:33:04'),
-(133, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 17:33:19'),
-(134, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 17:33:25'),
-(135, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-20 18:00:25'),
-(136, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-20 18:00:41'),
-(137, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-20 18:22:51'),
-(138, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-20 18:23:01');
+(1, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-21 06:32:02'),
+(2, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-21 06:32:29'),
+(3, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-21 06:32:47'),
+(4, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-21 06:32:53'),
+(5, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-21 06:35:23'),
+(6, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-21 06:40:25'),
+(7, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-21 06:40:36'),
+(8, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-21 06:40:58'),
+(9, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-21 06:41:11'),
+(10, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-21 06:41:23'),
+(11, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-21 06:46:37'),
+(12, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-21 06:46:49'),
+(13, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-21 06:47:07'),
+(14, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-21 06:47:52'),
+(15, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-21 06:48:07'),
+(16, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-21 06:53:03'),
+(17, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-21 06:53:22'),
+(18, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-21 06:53:41'),
+(19, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-21 06:54:05'),
+(20, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-21 06:54:38'),
+(21, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-21 06:54:54'),
+(22, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-21 06:55:16'),
+(23, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-21 07:17:46');
 
 -- --------------------------------------------------------
 
@@ -222,31 +204,12 @@ CREATE TABLE `tag` (
 --
 
 INSERT INTO `tag` (`id`, `nama_tag`, `id_artikel`, `id_user`) VALUES
-(2, 'tes tag', 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tag2`
---
-
-CREATE TABLE `tag2` (
-  `id` int(11) NOT NULL,
-  `nama_tag` varchar(255) NOT NULL,
-  `id_user` int(11) DEFAULT NULL,
-  `id_artikel` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tag2`
---
-
-INSERT INTO `tag2` (`id`, `nama_tag`, `id_user`, `id_artikel`) VALUES
-(1, 'tag 1', 1, '3,4,5,6,8,10,11,13,14,16,17,18,19'),
-(2, 'tag 2', 1, '3,5,7,9,10'),
-(3, 'tag 3', 1, '5,1,9'),
-(4, 'tag_baru', 1, '9,1'),
-(5, 'taggg', 1, '19');
+(25, 'tag1', 45, 1),
+(26, 'tag1', 46, 1),
+(27, 'tag2', 46, 1),
+(29, 'tag2', 50, 1),
+(30, 'tag3', 50, 1),
+(31, 'baru', 50, 1);
 
 -- --------------------------------------------------------
 
@@ -265,7 +228,7 @@ CREATE TABLE `tentang_kami` (
 --
 
 INSERT INTO `tentang_kami` (`id`, `judul`, `deskripsi`) VALUES
-(1, 'goldstep inggris', 'For more than 15 years in the software development industry, we have provided software development in various types of businesses ranging from retail, manufacturing, e-commerce, health care to edutech on various business scales. Our developers have implemented customized software according to the business requirements of each client.');
+(1, 'goldstep indonesia', 'For more than 15 years in the software development industry, we have provided software development in various types of businesses ranging from retail, manufacturing, e-commerce, health care to edutech on various business scales. Our developers have implemented customized software according to the business requirements of each client.');
 
 -- --------------------------------------------------------
 
@@ -312,7 +275,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `status`, `role`, `foto_profile`) VALUES
-(1, 'aditha', 'adit@gmail.com', '$2y$10$OFgQpOnn9agbFLh1bO3tA.JJJqaIu.r1RpPdPKc/ZG5zQq55DMe4a', 'a', 'admin', '1715672347_9bd5c5a38bf3fe167a1e.jpg');
+(1, 'aditha', 'adit@gmail.com', '$2y$10$OFgQpOnn9agbFLh1bO3tA.JJJqaIu.r1RpPdPKc/ZG5zQq55DMe4a', 'a', 'admin', 'dokter.png');
 
 --
 -- Indexes for dumped tables
@@ -365,14 +328,7 @@ ALTER TABLE `log_aktivitas`
 ALTER TABLE `tag`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tag_id_user_foreign` (`id_user`),
-  ADD KEY `tag_id_artikel_foreign` (`id_artikel`);
-
---
--- Indexes for table `tag2`
---
-ALTER TABLE `tag2`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_artikel` (`id_artikel`);
 
 --
 -- Indexes for table `tentang_kami`
@@ -402,13 +358,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `artikel`
 --
 ALTER TABLE `artikel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `artikel_layout`
 --
 ALTER TABLE `artikel_layout`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `header_tentang_kami`
@@ -420,7 +376,7 @@ ALTER TABLE `header_tentang_kami`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `kontak`
@@ -432,19 +388,13 @@ ALTER TABLE `kontak`
 -- AUTO_INCREMENT for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tag2`
---
-ALTER TABLE `tag2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tentang_kami`
@@ -491,14 +441,8 @@ ALTER TABLE `log_aktivitas`
 -- Constraints for table `tag`
 --
 ALTER TABLE `tag`
-  ADD CONSTRAINT `tag_id_artikel_foreign` FOREIGN KEY (`id_artikel`) REFERENCES `artikel` (`id`),
+  ADD CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`id_artikel`) REFERENCES `artikel` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `tag_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `tag2`
---
-ALTER TABLE `tag2`
-  ADD CONSTRAINT `tag2_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
