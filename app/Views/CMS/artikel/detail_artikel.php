@@ -40,9 +40,9 @@ Detail Artikel
                 </div>
                 <div class="col-12 d-flex gap-2">
                     <?php foreach ($layouts as $layout) : ?>
-                        <div class="p-2 col" style="text-align: left;">
-                            <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 200px; width: 150px;">
-                                <img src="<?= base_url('uploads/icons/' . esc($layout['gambar_layout'])); ?>" alt="gambar" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        <div class="p-2 col-4" style="text-align: left;">
+                            <div class="col-12 d-flex justify-content-center align-items-center" >
+                                <img class="img-thumbnail" src="<?= base_url('uploads/icons/' . esc($layout['gambar_layout'])); ?>" alt="gambar" style="height: 228px; width: 150px; object-fit: cover;">
                             </div>
                             <br>
                             <div class="form-check col-12 d-flex justify-content-center">
@@ -102,9 +102,8 @@ Detail Artikel
                         <div class="col-6">
                             <div class="form-group mt-3">
                                 <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                                    <img id="preaview" src="<?= base_url('public/uploads/' . esc($artikel['gambar_artikel'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img id="preaview" src="<?= base_url('uploads/' . esc($artikel['gambar_artikel'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
-                                <p>Gambar saat ini: <?= $artikel['gambar_artikel'] ?></p>
                             </div>
                         </div>
                         <div class="col-6 mt-3">

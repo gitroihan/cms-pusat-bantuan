@@ -41,8 +41,8 @@ Tambah Artikel
                 <div class="col-12 d-flex gap-2">
                     <?php foreach ($layouts as $layout) : ?>
                         <div class="p-2 col" style="text-align: left;">
-                            <div class="col-12 border border-dark d-flex justify-content-center align-items-center" style="height: 200px; width: 150px;">
-                                <img src="<?= base_url('uploads/icons/' . esc($layout['gambar_layout'])); ?>" alt="gambar" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <img class="img-thumbnail" src="<?= base_url('uploads/icons/' . esc($layout['gambar_layout'])); ?>" alt="gambar" style="height: 228px; width: 150px; object-fit: cover;">
                             </div>
                             <br>
                             <div class="form-check col-12 d-flex justify-content-center">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2024 at 09:23 AM
+-- Generation Time: May 22, 2024 at 11:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -68,9 +68,28 @@ CREATE TABLE `artikel_layout` (
 --
 
 INSERT INTO `artikel_layout` (`id`, `nama_layout`, `gambar_layout`) VALUES
-(1, 'A', ''),
-(2, 'B', ''),
-(3, 'C', '');
+(1, 'A', 'laayout_A.png'),
+(2, 'B', 'laayout_A.png'),
+(3, 'C', 'laayout_A.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banner`
+--
+
+CREATE TABLE `banner` (
+  `id` int(11) NOT NULL,
+  `gambar` varchar(255) NOT NULL,
+  `teks` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `banner`
+--
+
+INSERT INTO `banner` (`id`, `gambar`, `teks`) VALUES
+(1, 'banner_beranda.jpg', 'PT GOLDSTEP INDONESIA');
 
 -- --------------------------------------------------------
 
@@ -296,6 +315,12 @@ ALTER TABLE `artikel_layout`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `banner`
+--
+ALTER TABLE `banner`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `header_tentang_kami`
 --
 ALTER TABLE `header_tentang_kami`
@@ -365,6 +390,12 @@ ALTER TABLE `artikel`
 --
 ALTER TABLE `artikel_layout`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `banner`
+--
+ALTER TABLE `banner`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `header_tentang_kami`

@@ -70,6 +70,8 @@ $routes->post('/hapustentangkami', 'TentangKami::hapustentangkami');
 
 //banner
 $routes->get('/cmscontent', 'Home::content');
+$routes->post('/ubah_content/(:num)', 'Home::ubah_content/$1');
+
 // =============
 
 //riwayat

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\BannerModel;
 use App\Models\HeadertentangkamiModel;
 use App\Models\KontakModel;
 use App\Models\LogAktivitasModel;
@@ -77,11 +78,32 @@ class Home extends BaseController
         $userId = $session->get('user_id');
 
         $model = new UserModel();
-        $kontakmodel = new KontakModel();
+        $bannermodel = new BannerModel();
         $data['data'] = $model->getUserById($userId);
-        $data['kontak'] = $kontakmodel->findAll();
+        $data['banner'] = $bannermodel->findAll();
+        // dd($data);
 
         return view('CMS/content', $data);
+    }
+    public function ubah_content($id)
+    {
+        $bannermodel = new BannerModel();
+
+        $data = [
+            'teks' => $this->request->getPost('teks'),
+        ];
+
+        $image = $this->request->getFile('gambar');
+        if ($image->isValid() && !$image->hasMoved()) {
+            $originalName = $image->getClientName();
+            $image->move(ROOTPATH . 'public/uploads/', $originalName);
+            $data['gambar'] = $originalName;
+        }
+
+        // Simpan perubahan ke dalam database
+        $bannermodel->update($id, $data);
+        
+        return redirect()->to("/cmscontent");
     }
     public function histori()
     {

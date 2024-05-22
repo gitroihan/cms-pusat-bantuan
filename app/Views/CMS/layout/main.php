@@ -84,8 +84,8 @@
             </li>
             <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmscontent') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmscontent">
-                <i class="fa-solid fa-circle-info"></i>
-                <span>Content</span></a>
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Beranda</span></a>
             </li>
             <!-- <li class="nav-item </?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmshistori">
