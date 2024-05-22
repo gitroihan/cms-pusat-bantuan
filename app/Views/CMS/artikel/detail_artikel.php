@@ -102,7 +102,7 @@ Detail Artikel
                         <div class="col-6">
                             <div class="form-group mt-3">
                                 <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                                    <img id="preaview" src="public/uploads/<?= $artikel['gambar_artikel'] ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img id="preaview" src="<?= base_url('public/uploads/' . esc($artikel['gambar_artikel'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                                 <p>Gambar saat ini: <?= $artikel['gambar_artikel'] ?></p>
                             </div>
