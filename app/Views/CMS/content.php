@@ -24,7 +24,7 @@ content
                 </div>
                 <div class="col text-center">
                     <h3 class="h3-0 m-0 fs-5-vw mt-3">PT GOLDSTEP INDONESIA
-                        THAT ALL YOU NEED</h3>
+                       </h3>
                 </div>
             </div>
         </div>
