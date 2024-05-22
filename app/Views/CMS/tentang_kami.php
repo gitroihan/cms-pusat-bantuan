@@ -7,8 +7,6 @@ tentang kami
 <link rel="stylesheet" href="cms/css2/style-konten.css">
 <div class="bungkus">
     <div class="konten-banner">
-        <!-- <div class="area-banner">
-    </div> -->
         <div class="col-12 d-flex justify-content-between">
             <h1 class="h3 mr-auto mb-0 text-gray-800">Tentang Kami</h1>
             <div class="col-5 d-flex gap-2 justify-content-end">

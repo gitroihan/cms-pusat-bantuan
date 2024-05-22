@@ -80,13 +80,18 @@
             <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmstentang_kami') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmstentang_kami">
                 <i class="fa-solid fa-circle-info"></i>
-                <span>tentang kami</span></a>
+                <span>Tentang Kami</span></a>
             </li>
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmscontent') ? 'active' : ''; ?>"">
+                <a class=" nav-link" href="/cmscontent">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Content</span></a>
+            </li>
+            <!-- <li class="nav-item </?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmshistori">
                 <i class="fa-solid fa-rectangle-history-circle-user"></i>
                 <span>Riwayat</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -121,7 +126,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top border">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

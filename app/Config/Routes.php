@@ -68,6 +68,10 @@ $routes->post('/ubahbannerinformasi', 'TentangKami::ubahheadtentangkami');
 $routes->post('/hapustentangkami', 'TentangKami::hapustentangkami');
 // =============
 
+//banner
+$routes->get('/cmscontent', 'Home::content');
+// =============
+
 //riwayat
 $routes->post('/riwayat/getRiwayatData', 'Home::getRiwayatData');
 $routes->get('/cmshistori', 'Home::histori');

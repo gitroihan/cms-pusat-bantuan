@@ -71,6 +71,18 @@ class Home extends BaseController
 
         return redirect()->to('/cmskontak');
     }
+    public function content()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $kontakmodel = new KontakModel();
+        $data['data'] = $model->getUserById($userId);
+        $data['kontak'] = $kontakmodel->findAll();
+
+        return view('CMS/content', $data);
+    }
     public function histori()
     {
         $session = session();
@@ -132,4 +144,5 @@ class Home extends BaseController
 
         return $this->response->setJSON($response);
     }
+
 }
