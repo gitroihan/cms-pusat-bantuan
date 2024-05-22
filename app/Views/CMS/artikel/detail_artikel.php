@@ -31,7 +31,7 @@ Detail Artikel
 
     <div class="card px-4 py-3 border-0  mb-4 shadow">
         <h1 class="h3 mr-auto mb-0 text-gray-800">Detail artikel</h1>
-        <form id="formUbahArtikel" action="/ubah_artikel/<?= $artikel['id'] ?>" method="post" enctype="multipart/form-data">
+        <form id="artikelForm" action="/ubah_artikel/<?= $artikel['id'] ?>" method="post" enctype="multipart/form-data">
             <div class="col-12 mt-3">
                 <div class="ps-2" style="text-align: left;">
                     <label for="exampleFormControlInput1" class="form-label d-flex justify-content-between">
@@ -56,7 +56,8 @@ Detail Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-6">
                     <label for="judul">Judul</label>
-                    <input type="text" class="form-control border-dark" id="judul" value="<?= $artikel['judul_artikel'] ?>" name="judul_artikel">
+                    <input type="text" class="form-control border-dark" id="judul" value="<?= $artikel['judul_artikel'] ?>" name="judul_artikel" maxlength="255" oninput="updateCharCounter()">
+                    <div id="charCounter" class="char-counter">255 karakter</div>
                 </div>
                 <div class="form-group col-3">
                     <label for="gambar_1">Gambar 1</label>
@@ -109,24 +110,19 @@ Detail Artikel
                         <div class="col-6 mt-3">
                             <p>Deskripsi:</p>
                             <ul>
-                                <li>Max file size 2MB</li>
-                                <li>File hanya JPG | PNG</li>
+                                <li>Ukuran file maksimum 2MB</li>
+                                <li>Extensi file .jpg | .png</li>
                             </ul>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="d-sm-flex mb-1 col-md-2 mr-1 mt-2">
-                <div class="d-sm-flex align-items-center justify-content-between form-group col-6  ">
-                    <button type="button" class=" btn btn-warning text-light shadow-sm mr-3" data-toggle="modal" data-target="#editartikelModal<?= $artikel['id'] ?>">
-                        DRAFT
-                    </button>
-                </div>
-                <div class="d-sm-flex align-items-center justify-content-between form-group col-6  ">
-                    <button type="button" class=" btn text-light shadow-sm mr-3" style="background-color: #03C988;" data-toggle="modal" data-target="#editartikelModal<?= $artikel['id'] ?>">
-                        SIMPAN & PUBLISH
-                    </button>
-                </div>
+            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
+                <button type="button" class="btn btn-warning text-light ml-auto" onclick="submitForm('<?= base_url('/ubah_artikel/' . $artikel['id']) ?>')"><i class="fa-solid fa-file mr-2"></i>DRAFT</button>
+            </div>
+            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
+                <button type="button" class="btn text-light ml-auto" style="background-color: #03C988;" onclick="submitForm('<?= base_url('/ubah_artikel_publish/' . $artikel['id']) ?>')"><i class="fa-solid fa-file-arrow-up mr-2"></i>SIMPAN & PUBLISH</button>
+            </div>
         </form>
         <form method="post">
             <div class="d-sm-flex align-items-center justify-content-between form-group col-6  ">
@@ -158,35 +154,29 @@ Detail Artikel
         </div>
     </div>
 </div>
-<!-- edit modal -->
-<div class="modal fade" id="editartikelModal<?= $artikel['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="editartikelModalLabel<?= $artikel['id'] ?>" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editartikelModalLabel<?= $artikel['id'] ?>">Yakin ingin mengubah artikel ini?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center">
-                <form id="formModal">
-                    <?= csrf_field() ?>
-                    <button type="button" class="btn" style="background-color: #03C988; color: white;" onclick="submitFormUbahArtikel()">
-                        UBAH
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
-    function submitFormUbahArtikel() {
-        document.getElementById('formUbahArtikel').submit();
+    function updateCharCounter() {
+        const input = document.getElementById('judul');
+        const counter = document.getElementById('charCounter');
+        const maxLength = input.getAttribute('maxlength');
+        const currentLength = input.value.length;
+
+        counter.textContent = `${maxLength - currentLength} characters remaining`;
     }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        updateCharCounter(); 
+    });
 </script>
 
-
+<script>
+    function submitForm(actionUrl) {
+        var form = document.getElementById('artikelForm');
+        form.action = actionUrl;
+        form.submit();
+    }
+</script>
 
 <!-- preaview photo -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

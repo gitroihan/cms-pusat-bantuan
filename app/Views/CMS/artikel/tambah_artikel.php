@@ -55,21 +55,21 @@ Tambah Artikel
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-6">
-                    <label for="judul">Judul</label>
+                    <label for="judul">Judul :</label>
                     <input type="text" class="form-control border-dark" id="judul" name="judul_artikel">
                 </div>
                 <div class="form-group col-3">
-                    <label for="gambar_1">Gambar 1</label>
+                    <label for="gambar_1">Gambar 1 :</label>
                     <input type="file" class="form-control border-dark" id="gambar_1" name="gambar_1">
                 </div>
                 <div class="form-group col-3">
-                    <label for="gambar_2">Gambar 2</label>
+                    <label for="gambar_2">Gambar 2 :</label>
                     <input type="file" class="form-control border-dark" id="gambar_2" name="gambar_2">
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-6">
-                    <label for="kategori">Kategori</label>
+                    <label for="kategori">Kategori :</label>
                     <select class="js-example-basic-single form-control" name="id_kategori" id="kategori">
                         <?php foreach ($kategori as $kat) : ?>
                             <option value="<?= $kat['id'] ?>"><?= $kat['nama_kategori'] ?></option>
@@ -77,7 +77,7 @@ Tambah Artikel
                     </select>
                 </div>
                 <div class="form-group col-6">
-                    <label for="tag">Tag</label>
+                    <label for="tag">Tag :</label>
                     <select class="js-example-basic-multiple form-control" name="tags[]" multiple="multiple">
                         <?php foreach ($tags as $tag) : ?>
                             <option value="<?= $tag['nama_tag'] ?>"><?= $tag['nama_tag'] ?></option>
@@ -87,13 +87,13 @@ Tambah Artikel
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-7 mt-7">
-                    <label for="editor">Isi</label>
+                    <label for="editor">Isi :</label>
                     <div class="editor-wrapper">
                         <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"></textarea>
                     </div>
                 </div>
                 <div class="form-group row col-5 mt-7 d-flex">
-                    <label for="gambar_artikel">Gambar artikel</label>
+                    <label for="gambar_artikel">Gambar artikel :</label>
                     <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="readURL(this);" accept="image/*">
                     <div class="col-6">
                         <div class="form-group mt-3">
@@ -103,20 +103,20 @@ Tambah Artikel
                         </div>
                     </div>
                     <div class="col-6 mt-3">
-                        <p>Deskripsi:</p>
+                        <p>Deskripsi :</p>
                         <ul>
-                            <li>Max file size 2MB</li>
-                            <li>File hanya JPG | PNG</li>
+                            <li>Ukuran file maksimum 2MB</li>
+                            <li>Extensi file .jpg | .png</li>
                         </ul>
                     </div>
                 </div>
 
             </div>
             <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="button" class="btn btn-warning text-light ml-auto" onclick="submitForm('<?= base_url('/aksi_tambah_artikel') ?>')">DRAFT</button>
+                <button type="button" class="btn btn-warning text-light ml-auto" onclick="submitForm('<?= base_url('/aksi_tambah_artikel') ?>')"><i class="fa-solid fa-file mr-2"></i>DRAFT</button>
             </div>
             <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="button" class="btn text-light ml-auto" style="background-color: #03C988;" onclick="submitForm('<?= base_url('/aksi_tambah_artikel_publish') ?>')">SIMPAN & PUBLISH</button>
+                <button type="button" class="btn text-light ml-auto" style="background-color: #03C988;" onclick="submitForm('<?= base_url('/aksi_tambah_artikel_publish') ?>')"><i class="fa-solid fa-file-arrow-up mr-2"></i>SIMPAN & PUBLISH</button>
             </div>
         </form>
 

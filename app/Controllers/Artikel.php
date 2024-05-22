@@ -283,6 +283,75 @@ class Artikel extends BaseController
             'tanggal_unggah' => date('Y-m-d H:i:s'),
             'id_kategori' => $this->request->getPost('id_kategori'),
             'id_layout' => $this->request->getPost('id_layout'),
+            'status' => 'draft',
+        ];
+        // dd($data);
+
+        // Memeriksa apakah ada file gambar yang diunggah dan memperbarui datanya
+        $gambarArtikel = $this->request->getFile('gambar_artikel');
+        if ($gambarArtikel && $gambarArtikel->isValid()) {
+            $data['gambar_artikel'] = $gambarArtikel->getName();
+            $gambarArtikel->move(ROOTPATH . 'public/uploads');
+        }
+        $gambar1 = $this->request->getFile('gambar_1');
+        if ($gambar1 && $gambar1->isValid()) {
+            $data['gambar_1'] = $gambar1->getName();
+            $gambar1->move(ROOTPATH . 'public/uploads');
+        }
+        $gambar2 = $this->request->getFile('gambar_2');
+        if ($gambar2 && $gambar2->isValid()) {
+            $data['gambar_2'] = $gambar2->getName();
+            $gambar2->move(ROOTPATH . 'public/uploads');
+        }
+
+        // Memperbarui artikel di database
+        $artikelModel->update($id, $data);
+
+        // Mengelola tag
+        $selectedTags = $this->request->getPost('tags')?? [];
+        $existingTags = $tagModel->where('id_artikel', $id)->findAll();
+
+        // Menghapus tag yang tidak lagi terkait
+        foreach ($existingTags as $existingTag) {
+            if (!in_array($existingTag['nama_tag'], $selectedTags)) {
+                $tagModel->delete($existingTag['id']);
+            }
+        }
+
+        // Menambah tag baru
+        foreach ($selectedTags as $selectedTag) {
+            $tagExists = $tagModel->where('nama_tag', $selectedTag)->where('id_artikel', $id)->first();
+            if (!$tagExists) {
+                $tagData = [
+                    'nama_tag' => $selectedTag,
+                    'id_artikel' => $id,
+                    'id_user' => $userId
+                ];
+                $tagModel->insert($tagData);
+            }
+        }
+
+        return redirect()->to('/detail_artikel/' . $id);
+    }
+    public function ubah_artikel_publish($id)
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $artikelModel = new ArtikelModel();
+        $tagModel = new TagModel();
+
+        // Mendapatkan data artikel berdasarkan ID
+        $artikel = $artikelModel->find($id);
+
+        // Memperbarui data artikel berdasarkan input dari formulir
+        $data = [
+            'judul_artikel' => $this->request->getPost('judul_artikel'),
+            'isi' => $this->request->getPost('isi'),
+            'tanggal_unggah' => date('Y-m-d H:i:s'),
+            'id_kategori' => $this->request->getPost('id_kategori'),
+            'id_layout' => $this->request->getPost('id_layout'),
+            'status' => 'publish',
         ];
         // dd($data);
 

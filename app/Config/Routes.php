@@ -51,6 +51,7 @@ $routes->post('/aksi_tambah_artikel_publish', 'Artikel::aksi_tambah_artikel_publ
 $routes->get('/detail_artikel/(:num)', 'Artikel::detail_artikel/$1');
 $routes->post('/hapus_artikel/(:num)', 'Artikel::hapus_artikel/$1');
 $routes->post('/ubah_artikel/(:num)', 'Artikel::ubah_artikel/$1');
+$routes->post('/ubah_artikel_publish/(:num)', 'Artikel::ubah_artikel_publish/$1');
 // =============
 
 //tiket
