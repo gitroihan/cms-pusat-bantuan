@@ -55,22 +55,22 @@ Detail Artikel
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-6">
-                    <label for="judul">Judul</label>
+                    <label for="judul">Judul :</label>
                     <input type="text" class="form-control border-dark" id="judul" value="<?= $artikel['judul_artikel'] ?>" name="judul_artikel" maxlength="255" oninput="updateCharCounter()">
                     <div id="charCounter" class="char-counter">255 karakter</div>
                 </div>
                 <div class="form-group col-3">
-                    <label for="gambar_1">Gambar 1</label>
+                    <label for="gambar_1">Gambar 1 :</label>
                     <input type="file" class="form-control border-dark" id="gambar_1" name="gambar_1">
                 </div>
                 <div class="form-group col-3">
-                    <label for="gambar_2">Gambar 2</label>
+                    <label for="gambar_2">Gambar 2 :</label>
                     <input type="file" class="form-control border-dark" id="gambar_2" name="gambar_2">
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-6">
-                    <label for="kategori">Kategori</label>
+                    <label for="kategori">Kategori :</label>
                     <select class="js-example-basic-single form-control border border-dark" name="id_kategori" id="kategori">
                         <?php foreach ($kategori as $kat) : ?>
                             <option value="<?= $kat['id'] ?>" <?= $kat['id'] == $artikel['id_kategori'] ? 'selected' : '' ?>><?= $kat['nama_kategori'] ?></option>
@@ -78,7 +78,7 @@ Detail Artikel
                     </select>
                 </div>
                 <div class="form-group col-6">
-                    <label for="tag">Tag</label>
+                    <label for="tag">Tag :</label>
                     <select class="js-example-basic-multiple form-control border border-dark" name="tags[]" multiple="multiple">
                         <?php
                         $artikelTags = array_column($artikel_tags, 'nama_tag');
@@ -90,19 +90,19 @@ Detail Artikel
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-7 mt-7">
-                    <label for="editor">Isi</label>
+                    <label for="editor">Isi :</label>
                     <div class="editor-wrapper">
                         <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"><?= $artikel['isi'] ?></textarea>
                     </div>
                 </div>
                 <div class="form-group row col-5 mt-7 d-flex">
-                    <label for="gambar_artikel">Gambar artikel</label>
+                    <label for="gambar_artikel">Gambar artikel :</label>
                     <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="readURL(this);" accept="image/*">
                     <?php if (!empty($artikel['gambar_artikel'])) : ?>
                         <div class="col-6">
                             <div class="form-group mt-3">
                                 <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                                    <img id="preaview" src="public/uploads/<?= $artikel['gambar_artikel'] ?>" alt="Preaview" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img id="preaview" src="public/uploads/<?= $artikel['gambar_artikel'] ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                                 <p>Gambar saat ini: <?= $artikel['gambar_artikel'] ?></p>
                             </div>
@@ -117,19 +117,13 @@ Detail Artikel
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="button" class="btn btn-warning text-light ml-auto" onclick="submitForm('<?= base_url('/ubah_artikel/' . $artikel['id']) ?>')"><i class="fa-solid fa-file mr-2"></i>DRAFT</button>
-            </div>
-            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="button" class="btn text-light ml-auto" style="background-color: #03C988;" onclick="submitForm('<?= base_url('/ubah_artikel_publish/' . $artikel['id']) ?>')"><i class="fa-solid fa-file-arrow-up mr-2"></i>SIMPAN & PUBLISH</button>
-            </div>
-        </form>
-        <form method="post">
-            <div class="d-sm-flex align-items-center justify-content-between form-group col-6  ">
-                <button type="button" class="btn btn-danger text-light shadow-sm mr-3" data-toggle="modal" data-target="#deleteartikelModal<?= $artikel['id'] ?>">
-                    HAPUS
+            <div class="d-sm-flex align-items-center justify-content-end mb-1 col-md-12 mx-auto mt-2">
+                <button type="button" class="btn text-light mr-2" style="background-color: #03C988;" onclick="submitForm('<?= base_url('/ubah_artikel_publish/' . $artikel['id']) ?>')"><i class="fa-solid fa-file-arrow-up mr-2"></i>SIMPAN & PUBLISH</button>
+                <button type="button" class="btn btn-warning text-light mr-2" onclick="submitForm('<?= base_url('/ubah_artikel/' . $artikel['id']) ?>')"><i class="fa-solid fa-file mr-2"></i>DRAFT</button>
+
+                <button type="button" class="btn btn-danger text-light" data-toggle="modal" data-target="#deleteartikelModal<?= $artikel['id'] ?>">
+                <i class="fa-solid fa-trash mr-2"></i>HAPUS
                 </button>
-            </div>
         </form>
     </div>
 </div>
@@ -162,11 +156,11 @@ Detail Artikel
         const maxLength = input.getAttribute('maxlength');
         const currentLength = input.value.length;
 
-        counter.textContent = `${maxLength - currentLength} characters remaining`;
+        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {
-        updateCharCounter(); 
+        updateCharCounter();
     });
 </script>
 

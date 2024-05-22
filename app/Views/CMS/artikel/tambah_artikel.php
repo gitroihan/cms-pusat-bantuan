@@ -56,7 +56,8 @@ Tambah Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-6">
                     <label for="judul">Judul :</label>
-                    <input type="text" class="form-control border-dark" id="judul" name="judul_artikel">
+                    <input type="text" class="form-control border-dark" id="judul" name="judul_artikel" maxlength="255" oninput="updateCharCounter()">
+                    <div id="charCounter" class="char-counter">255 karakter</div>
                 </div>
                 <div class="form-group col-3">
                     <label for="gambar_1">Gambar 1 :</label>
@@ -98,7 +99,7 @@ Tambah Artikel
                     <div class="col-6">
                         <div class="form-group mt-3">
                             <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                                <img id="preaview" src="#" alt="preaview" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img id="preaview" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                         </div>
                     </div>
@@ -112,11 +113,9 @@ Tambah Artikel
                 </div>
 
             </div>
-            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="button" class="btn btn-warning text-light ml-auto" onclick="submitForm('<?= base_url('/aksi_tambah_artikel') ?>')"><i class="fa-solid fa-file mr-2"></i>DRAFT</button>
-            </div>
-            <div class="d-sm-flex align-items-center justify-content-between mb-1 col-md-12 mx-auto mt-2">
-                <button type="button" class="btn text-light ml-auto" style="background-color: #03C988;" onclick="submitForm('<?= base_url('/aksi_tambah_artikel_publish') ?>')"><i class="fa-solid fa-file-arrow-up mr-2"></i>SIMPAN & PUBLISH</button>
+            <div class="d-sm-flex align-items-center justify-content-end mb-1 col-md-12 mx-auto mt-2">
+                <button type="button" class="btn text-light mr-2" style="background-color: #03C988;" onclick="submitForm('<?= base_url('/aksi_tambah_artikel_publish') ?>')"><i class="fa-solid fa-file-arrow-up mr-2"></i>SIMPAN & PUBLISH</button>
+                <button type="button" class="btn btn-warning text-light mr-2" onclick="submitForm('<?= base_url('/aksi_tambah_artikel') ?>')"><i class="fa-solid fa-file mr-2"></i>DRAFT</button>
             </div>
         </form>
 
@@ -124,11 +123,25 @@ Tambah Artikel
 
 </div>
 <script>
-function submitForm(actionUrl) {
-    var form = document.getElementById('artikelForm');
-    form.action = actionUrl;
-    form.submit();
-}
+    function updateCharCounter() {
+        const input = document.getElementById('judul');
+        const counter = document.getElementById('charCounter');
+        const maxLength = input.getAttribute('maxlength');
+        const currentLength = input.value.length;
+
+        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        updateCharCounter();
+    });
+</script>
+<script>
+    function submitForm(actionUrl) {
+        var form = document.getElementById('artikelForm');
+        form.action = actionUrl;
+        form.submit();
+    }
 </script>
 
 <!-- preaview photo -->

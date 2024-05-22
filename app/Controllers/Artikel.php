@@ -331,7 +331,8 @@ class Artikel extends BaseController
             }
         }
 
-        return redirect()->to('/detail_artikel/' . $id);
+        // return redirect()->to('/detail_artikel/' . $id);
+        return redirect()->to('/cmsartikel');
     }
     public function ubah_artikel_publish($id)
     {
@@ -376,7 +377,7 @@ class Artikel extends BaseController
         $artikelModel->update($id, $data);
 
         // Mengelola tag
-        $selectedTags = $this->request->getPost('tags');
+        $selectedTags = $this->request->getPost('tags')?? [];
         $existingTags = $tagModel->where('id_artikel', $id)->findAll();
 
         // Menghapus tag yang tidak lagi terkait
@@ -399,7 +400,8 @@ class Artikel extends BaseController
             }
         }
 
-        return redirect()->to('/detail_artikel/' . $id);
+        // return redirect()->to('/detail_artikel/' . $id);
+        return redirect()->to('/cmsartikel');
     }
 
     public function hapus_artikel($id)
