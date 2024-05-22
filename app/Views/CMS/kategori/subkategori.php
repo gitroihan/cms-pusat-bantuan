@@ -31,11 +31,11 @@ Kategori
     <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">
-                <a href="/cmskategori">kategori</a>
+                <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmskategori">kategori</a>
             </li>
             </?php foreach ($breadcrumb as $category) : ?>
                 <li class="breadcrumb-item">
-                    <a href="/cmssubkategori/</?= $category['id_parent'] ?>"></?= esc($category['nama_kategori']) ?></a>
+                    <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmssubkategori/</?= $category['id_parent'] ?>"></?= esc($category['nama_kategori']) ?></a>
                 </li>
             </?php endforeach; ?>
         </ol>
@@ -47,14 +47,13 @@ Kategori
             <?php foreach ($breadcrumb as $category) : ?>
                 <li class="breadcrumb-item">
                     <?php if ($category['id_parent'] === null) : ?>
-                        <a href="/cmskategori"><?= esc($category['nama_kategori']) ?></a>
+                        <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmskategori"><?= esc($category['nama_kategori']) ?></a>
                     <?php else : ?>
-                        <a href="/cmssubkategori/<?= $category['id_parent'] ?>"><?= esc($category['nama_kategori']) ?></a>
+                        <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmssubkategori/<?= $category['id_parent'] ?>"><?= esc($category['nama_kategori']) ?></a>
                     <?php endif; ?>
                 </li>
             <?php endforeach; ?>
         </ol>
-    </nav>
     </nav>
 
     <div class="basis pengetahuan" style="overflow-y: auto; height: 555px;">
