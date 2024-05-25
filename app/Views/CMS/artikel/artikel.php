@@ -22,6 +22,7 @@ Artikel
                     <td>Judul Artikel</td>
                     <td>Pembuat</td>
                     <td>Tanggal Unggah</td>
+                    <td>Status</td>
                     <td class="text-center">Detail</td>
             </thead>
             <tbody>

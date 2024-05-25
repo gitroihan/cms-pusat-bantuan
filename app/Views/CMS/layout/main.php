@@ -248,10 +248,27 @@
                     "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
                 }
             },
-            columns: [
-                { data: 'judul_artikel' },
-                { data: 'pembuat' },
-                { data: 'tanggal_unggah' },
+            columns: [{
+                    data: 'judul_artikel'
+                },
+                {
+                    data: 'pembuat'
+                },
+                {
+                    data: 'tanggal_unggah'
+                },
+                {
+                    data: 'status',
+                    render: function(data, type, row) {
+                        if (data === 'publish') {
+                            return '<div style="background-color: green; color: white;  border-radius: 3px;">Publish</div>';
+                        } else if (data === 'draft') {
+                            return '<div style="background-color: yellow; color: black; border-radius: 3px;">Draft</div>';
+                        } else {
+                            return data;
+                        }
+                    }
+                },
                 {
                     data: 'id',
                     render: function(data, type, row) {
