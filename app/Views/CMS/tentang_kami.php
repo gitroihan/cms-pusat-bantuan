@@ -11,10 +11,10 @@ tentang kami
             <h1 class="h3 mr-auto mb-0 text-gray-800">Tentang Kami</h1>
             <div class="col-5 d-flex gap-2 justify-content-end">
                 <button class="btn d-flex text-light" type="button" data-bs-toggle="modal" data-bs-target="#exampleModaltambahbannerinformasi" style="background-color: #03C988;">
-                    <span class="m-0 p-1 ">Ubah banner</span>
+                    <span class="m-0 p-1 "><i class="fa-regular fa-pen-to-square mr-2"></i>Ubah banner</span>
                 </button>
                 <button class="btn d-flex text-light" type="button" data-bs-toggle="modal" data-bs-target="#exampleModaltambahinformasi" style="background-color: #03C988;">
-                    <span class="m-0 p-1 ">Tambah Informasi</span>
+                    <span class="m-0 p-1 "><i class="fa-solid fa-plus mr-2"></i>Tambah Informasi</span>
                 </button>
             </div>
             <div class="modal fade" id="exampleModaltambahbannerinformasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -22,7 +22,7 @@ tentang kami
                     <form action="/ubahbannerinformasi" method="post" id="form-data-solusi" enctype="multipart/form-data">
                         <div class="modal-content">
                             <div class="modal-header border-bottom">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Banner</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Banner</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -41,8 +41,8 @@ tentang kami
                                 </div>
                             </div>
                             <div class="modal-footer border-top pe-4">
-                                <button class="btn d-flex" type="submit" style="background-color: #03C988; color:white;" id="btn-simpan"><i class="ti ti-download pe-2 fs-6 align-middle p-1 "></i>
-                                    <p class="m-0 p-1 align-middle">Simpan</p>
+                                <button class="btn d-flex" type="submit" style="background-color: #03C988; color:white;" id="btn-simpan"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
+                                    <p class="m-0 p-1 align-middle">SIMPAN PERUBAHAN</p>
                                 </button>
                             </div>
                         </div>
@@ -55,13 +55,13 @@ tentang kami
                     <form action="/tambahtentangkami" method="post" id="form-data-solusi" enctype="multipart/form-data">
                         <div class="modal-content">
                             <div class="modal-header border-bottom">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Artikel</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Informasi</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3 p-2 pt-0" style="text-align: left;">
                                     <label for="exampleFormControlInput1" class="form-label">Judul :</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Masukan Nama Artikel" name="judul">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Judul Informasi" name="judul">
                                 </div>
                                 <div class="col-12 mb-3 p-2 pt-0" style="text-align: left;">
                                     <label for="exampleFormControlTextarea1" class="form-label">Deskripsi :</label>
@@ -69,8 +69,8 @@ tentang kami
                                 </div>
                             </div>
                             <div class="modal-footer border-top pe-4">
-                                <button class="btn d-flex" type="submit" style="background-color: #03C988; color:white;" id="btn-simpan"><i class="ti ti-download pe-2 fs-6 align-middle p-1 "></i>
-                                    <p class="m-0 p-1 align-middle">Simpan</p>
+                                <button class="btn d-flex" type="submit" style="background-color: #03C988; color:white;" id="btn-simpan"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
+                                    <p class="m-0 p-1 align-middle">SIMPAN</p>
                                 </button>
                             </div>
                         </div>
@@ -129,8 +129,8 @@ tentang kami
                                             </div>
                                         </div>
                                         <div class="modal-footer border-top pe-4">
-                                            <button class="btn d-flex" type="submit" style="background-color: #03C988; color:white;"><i class="ti ti-edit pe-2 fs-6 align-middle p-1 "></i>
-                                                <p class="m-0 p-1 align-middle">Simpan perubahan</p>
+                                            <button class="btn d-flex" type="submit" style="background-color: #03C988; color:white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
+                                                <p class="m-0 p-1 align-middle">SIMPAN PERUBAHAN</p>
                                             </button>
                                         </div>
                                     </div>
