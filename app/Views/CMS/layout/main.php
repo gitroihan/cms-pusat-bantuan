@@ -87,11 +87,11 @@
                 <i class="fa-solid fa-newspaper"></i>
                 <span>Beranda</span></a>
             </li>
-            <!-- <li class="nav-item </?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
+            <li class="nav-item </?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmshistori">
                 <i class="fa-solid fa-rectangle-history-circle-user"></i>
                 <span>Riwayat</span></a>
-            </li> -->
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

@@ -2,11 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\ArtikelModel;
 use App\Models\BannerModel;
 use App\Models\HeadertentangkamiModel;
+use App\Models\KategoriModel;
 use App\Models\KontakModel;
 use App\Models\LogAktivitasModel;
 use App\Models\TentangkamiModel;
+use App\Models\TiketModel;
 use App\Models\UserModel;
 
 class Home extends BaseController
@@ -21,9 +24,16 @@ class Home extends BaseController
         $userId = $session->get('user_id');
 
         $model = new UserModel();
-        $data = $model->getUserById($userId);
+        $modelkategori = new KategoriModel();
+        $modelartikel = new ArtikelModel();
+        $modeltiket = new TiketModel();
+        $data['data'] = $model->getUserById($userId);
+        $data['kategori'] = $modelkategori->countAllResults(); ;
+        $data['artikel'] = $modelartikel->countAllResults();
+        $data['tiket'] = $modeltiket->countAllResults();
 
-        return view('CMS/dashboard', ['data' => $data]);
+
+        return view('CMS/dashboard',  $data);
     }
     public function kontak()
     {
