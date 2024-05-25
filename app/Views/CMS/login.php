@@ -7,15 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="CMS/css2/login_style.css">
+    <style>
+        .error-message {
+            color: red;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                setTimeout(function() {
+                    errorMessage.style.display = 'none';
+                }, 2000);
+            }
+        });
+    </script>
 </head>
 
 <body>
     <div class="container">
         <div class="login">
-            <form method="POST"  action="<?= base_url('/aksilogin') ?>">
+            <form action="<?= base_url('/aksilogin') ?>" method="POST">
                 <h1>login</h1>
                 <hr>
                 <p>Goldstep indonesia</p>
+                <?php if (session()->getFlashdata('error')) : ?>
+                    <div id="error-message" class="error-message">
+                        <?= session()->getFlashdata('error') ?>
+                    </div>
+                <?php endif; ?>
                 <label for="username">username</label>
                 <input type="text" name="username" id="username" placeholder="username" required>
 

@@ -33,7 +33,8 @@ class User extends BaseController
 
             return redirect()->to('/cmshome');
         } else {
-            return redirect()->back()->withInput()->with('error', 'Login failed! Please check your username and password.');
+            session()->setFlashdata('error', 'username atau password salah.');
+            return redirect()->back()->withInput();
         }
     }
 
