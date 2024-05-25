@@ -38,9 +38,7 @@ Beranda
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ubahbannerLabel<?= $list['id'] ?>">Ubah Banner</h5>
-                    <button type=" button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="/ubah_content/<?= $list['id'] ?>" method="post" enctype="multipart/form-data">
@@ -53,7 +51,9 @@ Beranda
                             <label for="newProfilePicture">Pilih Gambar :</label>
                             <input type="file" name="gambar" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                         </div>
-                        <button type="submit" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                        <div class="mb-3 p-2 pt-0">
+                            <button type="submit" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2"></i>SIMPAN</button>
+                        </div>
                     </form>
                 </div>
             </div>
