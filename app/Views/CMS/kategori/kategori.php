@@ -99,7 +99,9 @@ Kategori
                         <label for="newProfilePicture">Pilih ikon:</label>
                         <input type="file" name="ikon" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                     </div>
-                    <button type="button" id="btn-save" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                    <div class="mb-3 p-2 pt-0 text-right">
+                        <button type="button" id="btn-save" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -112,7 +114,7 @@ Kategori
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateCategoryModalLabel<?= $kat['id'] ?>">Edit Kategori</h5>
+                    <h5 class="modal-title" id="updateCategoryModalLabel<?= $kat['id'] ?>">Ubah Kategori</h5>
                     <button type=" button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,7 +135,9 @@ Kategori
                             <label for="newProfilePicture">Pilih ikon:</label>
                             <input type="file" name="ikon" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                         </div>
-                        <button type="submit" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                        <div class="mb-3 p-2 pt-0 text-right">
+                            <button type="submit" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
+                        </div>
                     </form>
                     <!-- </div> -->
                 </div>
