@@ -135,12 +135,28 @@ Tambah Artikel
     document.addEventListener('DOMContentLoaded', (event) => {
         updateCharCounter();
     });
-</script>
-<script>
+
     function submitForm(actionUrl) {
         var form = document.getElementById('artikelForm');
+        var layoutChecked = document.querySelector('input[name="id_layout"]:checked');
+
+        if (!layoutChecked) {
+            alert("Silakan pilih layout.");
+            return;
+        }
+
         form.action = actionUrl;
         form.submit();
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 </script>
 
