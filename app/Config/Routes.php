@@ -23,6 +23,7 @@ $routes->post('/ubah_foto', 'User::ubah_foto');
 
 // kontak
 $routes->get('/cmskontak', 'Home::kontak');
+$routes->get('/cmsubah_kontak', 'Home::cmsubah_kontak');
 $routes->post('/ubah_kontak', 'Home::ubah_kontak');
 // =============
 

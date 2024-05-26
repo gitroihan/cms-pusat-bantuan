@@ -47,6 +47,18 @@ class Home extends BaseController
 
         return view('CMS/kontak', $data);
     }
+    public function cmsubah_kontak()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $kontakmodel = new KontakModel();
+        $data['data'] = $model->getUserById($userId);
+        $data['kontak'] = $kontakmodel->findAll();
+
+        return view('CMS/ubah_kontak', $data);
+    }
     public function ubah_kontak()
     {
         $kontakmodel = new kontakmodel();
