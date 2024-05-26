@@ -7,7 +7,7 @@ Artikel
 
 <div class="container-fluid">
 
-    <div class="card px-4 py-3 border-0 shadow mb-3">
+    <div class="card px-4 py-3 border-2 mb-5">
         <div class="d-sm-flex align-items-center justify-content-between mb-3">
             <h1 class="h3 mr-auto mb-0 text-gray-800">Artikel</h1>
             <div class="my-1">
