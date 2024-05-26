@@ -51,7 +51,7 @@ Beranda
                             <label for="newProfilePicture">Pilih Gambar :</label>
                             <input type="file" name="gambar" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                         </div>
-                        <div class="mb-3 p-2 pt-0">
+                        <div class="mb-3 p-2 pt-0 text-right">
                             <button type="submit" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2"></i>SIMPAN</button>
                         </div>
                     </form>
