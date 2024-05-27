@@ -12,6 +12,7 @@ $routes->get('/cmshome', 'Home::dashboard');
 $routes->get('/login', 'User::index');
 $routes->post('/aksilogin', 'User::login');
 $routes->post('/logout', 'User::logout');
+$routes->post('/logout', 'User::logout');
 // =============
 
 // profile
@@ -19,6 +20,8 @@ $routes->get('/lihat_profile', 'User::lihat_profile');
 $routes->get('/ubah_profile', 'User::ubah_profile');
 $routes->post('/simpan_profile', 'User::simpan_profile');
 $routes->post('/ubah_foto', 'User::ubah_foto');
+$routes->post('/ubahpassword', 'User::editpassword');
+
 // =============
 
 // kontak

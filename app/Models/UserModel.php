@@ -12,7 +12,29 @@ class UserModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['nama', 'email', 'password', 'status', 'role','foto_profile'];
+    protected $allowedFields = ['nama', 'email', 'password', 'status', 'role', 'foto_profile'];
+
+    // cek password lama
+    public function cekpassword($id, $password)
+    {
+        $user = $this->where('id', $id)->first();
+
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                return $user;
+            }
+        }
+
+        return false;
+    }
+
+    // ubah password dengan hash
+    public function ubahpassword($passwordBaru)
+    {
+        $pw = password_hash($passwordBaru, PASSWORD_DEFAULT);
+        return $pw;
+    }
+
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

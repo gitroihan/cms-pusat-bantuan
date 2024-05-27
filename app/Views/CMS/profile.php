@@ -9,7 +9,7 @@ User
     <div class="card px-4 py-4 border-0 shadow w-50 mx-auto">
         <div>
             <div class="d-flex position-relative justify-content-center align-items-center mb-3 bordered ">
-                <img id="profilePicture" class="rounded-circle border " src="<?= base_url('uploads/' . esc($data['foto_profile'])); ?>"  width="150" height="150">
+                <img id="profilePicture" class="rounded-circle border " src="<?= base_url('uploads/' . esc($data['foto_profile'])); ?>" width="150" height="150">
             </div>
             <div class="mb-3">
                 <label for="nama">Nama</label>
@@ -35,21 +35,37 @@ User
     <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header border bottom">
-                    <h5 class="modal-title" id="passwordModalLabel">Ubah password</h5>
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title" id="passwordModalLabel">Ubah Password</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <?php
+                    $modal = session()->getFlashdata('modal');
+                    if ($modal && $modal['name'] == 'exampleModaleditpassword') : ?>
+                        <?php if ($modal['type'] === 'error') : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?php echo $modal['message']; ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php elseif ($modal['type'] === 'success') : ?>
+                            <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                                <?php echo $modal['message']; ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <form action="/ubahpassword" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= session()->get('id') ?>">
                         <div class="mb-3 p-2 pt-0">
-                            <label for="password">password lama</label>
-                            <input type="password" class="form-control" required>
+                            <label for="password">Password Lama</label>
+                            <input type="password" name="password" class="form-control" required>
                         </div>
                         <div class="mb-3 p-2 pt-0">
-                            <label for="password">password baru</label>
-                            <input type="password" class="form-control" required>
+                            <label for="password-baru">Password Baru</label>
+                            <input type="password" name="password-baru" class="form-control" required>
                         </div>
                         <button type="submit" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
                     </form>
@@ -57,5 +73,6 @@ User
             </div>
         </div>
     </div>
+
 </div>
 <?php $this->endSection() ?>

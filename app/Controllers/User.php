@@ -156,4 +156,38 @@ class User extends BaseController
             return redirect()->to('/ubah_profile')->with('error', 'Unggahan foto profil tidak valid.');
         }
     }
+    public function editpassword()
+    {
+        $users = new UserModel();
+        $id = $this->request->getPost('id');
+        $password = $this->request->getPost('password');
+        $passwordBaru = $this->request->getPost('password-baru');
+
+        $user = $users->cekpassword($id, $password);
+
+        if ($user) {
+            $pwbaru = $users->ubahpassword($passwordBaru);
+
+            $users->save([
+                'id' => $id,
+                'password' => $pwbaru
+            ]);
+
+            session()->setFlashdata('modal', [
+                'name' => 'exampleModaleditpassword',
+                'type' => 'success',
+                'message' => 'Password berhasil di ubah'
+            ]);
+
+            return redirect()->back()->withInput();
+        } else {
+            session()->setFlashdata('modal', [
+                'name' => 'exampleModaleditpassword',
+                'type' => 'error',
+                'message' => 'Password lama tidak cocok'
+            ]);
+
+            return redirect()->back()->withInput();
+        }
+    }
 }
