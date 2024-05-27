@@ -93,6 +93,7 @@ class Artikel extends BaseController
                 'judul_artikel' => $this->request->getPost('judul_artikel'),
                 'pembuat' => $userId,
                 'isi' => $this->request->getPost('isi'),
+                'isi2' => $this->request->getPost('isi2'),
                 'gambar_artikel' => $this->request->getFile('gambar_artikel')->getName(),
                 'gambar_1' => $this->request->getFile('gambar_1')->getName(),
                 'gambar_2' => $this->request->getFile('gambar_2')->getName(),
@@ -170,6 +171,7 @@ class Artikel extends BaseController
                 'judul_artikel' => $this->request->getPost('judul_artikel'),
                 'pembuat' => $userId,
                 'isi' => $this->request->getPost('isi'),
+                'isi2' => $this->request->getPost('isi2'),
                 'gambar_artikel' => $this->request->getFile('gambar_artikel')->getClientName(),
                 'gambar_1' => $this->request->getFile('gambar_1')->getClientName(),
                 'gambar_2' => $this->request->getFile('gambar_2')->getClientName(),
@@ -280,6 +282,7 @@ class Artikel extends BaseController
         $data = [
             'judul_artikel' => $this->request->getPost('judul_artikel'),
             'isi' => $this->request->getPost('isi'),
+            'isi2' => $this->request->getPost('isi2'),
             'tanggal_unggah' => date('Y-m-d H:i:s'),
             'id_kategori' => $this->request->getPost('id_kategori'),
             'id_layout' => $this->request->getPost('id_layout'),
@@ -349,6 +352,7 @@ class Artikel extends BaseController
         $data = [
             'judul_artikel' => $this->request->getPost('judul_artikel'),
             'isi' => $this->request->getPost('isi'),
+            'isi2' => $this->request->getPost('isi2'),
             'tanggal_unggah' => date('Y-m-d H:i:s'),
             'id_kategori' => $this->request->getPost('id_kategori'),
             'id_layout' => $this->request->getPost('id_layout'),

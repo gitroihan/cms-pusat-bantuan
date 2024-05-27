@@ -41,8 +41,8 @@ Detail Artikel
                 <div class="col-12 d-flex gap-2">
                     <?php foreach ($layouts as $layout) : ?>
                         <div class="p-2 col-4" style="text-align: left;">
-                            <div class="col-12 d-flex justify-content-center align-items-center" >
-                                <img class="img-thumbnail" src="<?= base_url('uploads/icons/' . esc($layout['gambar_layout'])); ?>" alt="gambar" style="height: 228px; width: 150px; object-fit: cover;">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <img class="img-thumbnail" src="<?= base_url('uploads/layout/' . esc($layout['gambar_layout'])); ?>" alt="gambar" style="height: 228px; width: 150px; object-fit: cover;">
                             </div>
                             <br>
                             <div class="form-check col-12 d-flex justify-content-center">
@@ -54,18 +54,32 @@ Detail Artikel
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
-                <div class="form-group col-6">
+                <div class="form-group col-12">
                     <label for="judul">Judul :</label>
-                    <input type="text" class="form-control border-dark" id="judul" value="<?= $artikel['judul_artikel'] ?>" name="judul_artikel" maxlength="255" oninput="updateCharCounter()">
-                    <div id="charCounter" class="char-counter">255 karakter</div>
+                    <input type="text" class="form-control border-dark" id="judul" value="<?= $artikel['judul_artikel'] ?>" name="judul_artikel" maxlength="100" oninput="updateCharCounter()">
+                    <div id="charCounter" class="char-counter">100 karakter</div>
                 </div>
-                <div class="form-group col-3">
+            </div>
+            <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
+                <div class="form-group col-6">
                     <label for="gambar_1">Gambar 1 :</label>
-                    <input type="file" class="form-control border-dark" id="gambar_1" name="gambar_1">
+                    <input type="file" class="form-control border-dark" id="gambar_1" name="gambar_1" onchange="updatePreview(this, 'preaview2');">
                 </div>
-                <div class="form-group col-3">
+                <div class="form-group col-6">
                     <label for="gambar_2">Gambar 2 :</label>
-                    <input type="file" class="form-control border-dark" id="gambar_2" name="gambar_2">
+                    <input type="file" class="form-control border-dark" id="gambar_2" name="gambar_2" onchange="updatePreview(this, 'preaview3');">
+                </div>
+            </div>
+            <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
+                <div class="form-group col-6">
+                    <div class="image-box border border-dark" style="height: 250px;">
+                        <img id="preaview2" src="<?= base_url('uploads/' . esc($artikel['gambar_1'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <div class="image-box border border-dark" style="height: 250px;">
+                        <img id="preaview3" src="<?= base_url('uploads/' . esc($artikel['gambar_2'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
@@ -89,20 +103,31 @@ Detail Artikel
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
-                <div class="form-group col-7 mt-7">
-                    <label for="editor">Isi :</label>
+                <div class="form-group col-12 mt-7">
+                    <label for="editor">paragraf 1 :</label>
                     <div class="editor-wrapper">
                         <textarea id="editor" name="isi" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"><?= $artikel['isi'] ?></textarea>
                     </div>
                 </div>
+            </div>
+            <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
+                <div class="form-group col-12 mt-7">
+                    <label for="editor">paragraf 2 :</label>
+                    <div class="editor-wrapper">
+                        <textarea id="editor2" name="isi2" class="form-control border-dark" cols="80" rows="10" placeholder="isi artikel"><?= $artikel['isi2'] ?></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group row col-5 mt-7 d-flex">
                     <label for="gambar_artikel">Gambar artikel :</label>
-                    <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="readURL(this);" accept="image/*">
+                    <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="updatePreview(this, 'preaview');" accept="image/*">
+                    <small id="fileError" class="text-danger"></small>
                     <?php if (!empty($artikel['gambar_artikel'])) : ?>
                         <div class="col-6">
                             <div class="form-group mt-3">
                                 <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                                    <img id="preaview" src="<?= base_url('uploads/' . esc($artikel['gambar_artikel'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img id="preaviewArtikel" src="<?= base_url('uploads/' . esc($artikel['gambar_artikel'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </div>
                         </div>
@@ -110,7 +135,7 @@ Detail Artikel
                             <p>Deskripsi:</p>
                             <ul>
                                 <li>Ukuran file maksimum 2MB</li>
-                                <li>Extensi file .jpg | .png</li>
+                                <li>Extensi file .jpeg|.jpg|.png</li>
                             </ul>
                         </div>
                     <?php endif; ?>
@@ -121,7 +146,7 @@ Detail Artikel
                 <button type="button" class="btn btn-warning text-light mr-2" onclick="submitForm('<?= base_url('/ubah_artikel/' . $artikel['id']) ?>')"><i class="fa-solid fa-file mr-2"></i>DRAFT</button>
 
                 <button type="button" class="btn btn-danger text-light" data-toggle="modal" data-target="#deleteartikelModal<?= $artikel['id'] ?>">
-                <i class="fa-solid fa-trash mr-2"></i>HAPUS
+                    <i class="fa-solid fa-trash mr-2"></i>HAPUS
                 </button>
         </form>
     </div>
@@ -176,11 +201,62 @@ Detail Artikel
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="preaviewgambar.js"></script>
-<script>
+<!-- <script>
     ClassicEditor
         .create(document.querySelector('#editor'), {})
+        .then(editor => {
+            editor.model.document.on('change:data', () => {
+                const data = editor.getData();
+                const lines = data.split('<p>').length - 1;
+
+                if (lines > 10) {
+                    const trimmedData = data.split('<p>').slice(0, 21).join('<p>');
+                    editor.setData(trimmedData);
+                    alert('Batas maksimal 10 baris telah tercapai.');
+                }
+            });
+        })
         .catch(error => {
             console.error(error);
         });
+</script> -->
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor2'), {})
+        .then(editor => {
+            editor.model.document.on('change:data', () => {
+                const data = editor.getData();
+                const lines = data.split('<p>').length - 1;
+
+                if (lines > 10) {
+                    const trimmedData = data.split('<p>').slice(0, 21).join('<p>');
+                    editor.setData(trimmedData);
+                    alert('Batas maksimal 10 baris telah tercapai.');
+                }
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+function updatePreview(input, previewId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            document.getElementById(previewId).src = e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 <?php $this->endSection() ?>
