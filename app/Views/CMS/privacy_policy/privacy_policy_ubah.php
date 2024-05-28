@@ -21,7 +21,9 @@ privacy policy
 
     <div class="card px-4 py-3 border-2 mb-5">
         <div class="d-sm-flex align-items-center justify-content-between mb-3">
-            <h1 class="h3 mr-auto mb-0 text-gray-800">privacy policy</h1>
+            <h1 class="h3 mr-auto mb-0 text-gray-800"><a href="/cmsprivacy"><i class="fa-solid fa-arrow-left text-gray-800 mr-2"></i></a>
+            privacy policy
+        </h1>
         </div>
         <?php foreach ($privacy as $list) : ?>
             <form action="/ubah_privacy" method="post" enctype="multipart/form-data">
