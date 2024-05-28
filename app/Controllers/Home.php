@@ -10,6 +10,7 @@ use App\Models\KontakModel;
 use App\Models\LogAktivitasModel;
 use App\Models\PrivacyPolicyModel;
 use App\Models\TentangkamiModel;
+use App\Models\TermsAndConditionModel;
 use App\Models\TiketModel;
 use App\Models\UserModel;
 
@@ -173,6 +174,46 @@ class Home extends BaseController
         return redirect()->to('/cmsprivacy');
     }
 
+    //terms_and_condition
+    public function terms_and_condition()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $termsmodel = new TermsAndConditionModel();
+        $data['data'] = $model->getUserById($userId);
+        $data['terms'] = $termsmodel->findAll();
+
+        return view('CMS/terms_and_condition/terms_and_condition', $data);
+    }
+    public function cmsubah_terms_and_condition()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $termsmodel = new TermsAndConditionModel();
+        $data['data'] = $model->getUserById($userId);
+        $data['terms'] = $termsmodel->findAll();
+
+        return view('CMS/terms_and_condition/terms_and_condition_ubah', $data);
+    }
+    public function ubah_terms_and_condition()
+    {
+        $termsmodel = new TermsAndConditionModel();
+
+        $id = $this->request->getPost('id');
+        $data = [
+            'isi' => $this->request->getPost('isi')
+        ];
+
+        // Simpan perubahan ke dalam database
+        $termsmodel->update($id, $data);
+
+        return redirect()->to('/cmsterms_and_condition');
+    }
+
 
 
 
@@ -192,41 +233,39 @@ class Home extends BaseController
     {
         $request = \Config\Services::request();
         $logModel = new LogAktivitasModel();
+        $db = \Config\Database::connect();
+        $builder = $db->table('log_aktivitas');
 
         $draw = $request->getPost('draw');
         $start = $request->getPost('start');
         $length = $request->getPost('length');
         $searchValue = $request->getPost('search')['value'];
 
-        $totalRecords = $logModel->countAll();
-        $totalRecordwithFilter = $logModel->like('id_ref', $searchValue)
-            ->orLike('log_tipe', $searchValue)
-            ->orLike('aktivitas', $searchValue)
-            ->orLike('alamat_ip', $searchValue)
-            ->orLike('id_user', $searchValue)
-            ->orLike('updated_at', $searchValue)
-            ->countAllResults();
+        // Join dengan tabel users untuk mendapatkan nama pengguna
+        $builder->select('log_aktivitas.*, users.nama as nama_user')
+            ->join('users', 'users.id = log_aktivitas.id_user', 'left');
 
-        $records = $logModel->like('id_ref', $searchValue)
-            ->orLike('log_tipe', $searchValue)
-            ->orLike('aktivitas', $searchValue)
-            ->orLike('alamat_ip', $searchValue)
-            ->orLike('id_user', $searchValue)
-            ->orLike('updated_at', $searchValue)
-            ->orderBy('id', 'DESC')
-            ->findAll($length, $start);
+        // Total records
+        $totalRecords = $builder->countAllResults(false);
 
-        $data = [];
-        foreach ($records as $record) {
-            $data[] = [
-                'id_ref' => $record['id_ref'],
-                'log_tipe' => $record['log_tipe'],
-                'aktivitas' => $record['aktivitas'],
-                'alamat_ip' => $record['alamat_ip'],
-                'id_user' => $record['id_user'],
-                'updated_at' => $record['updated_at']
-            ];
+        // Filtered records
+        if ($searchValue) {
+            $builder->groupStart()
+                ->like('log_aktivitas.id_ref', $searchValue)
+                ->orLike('log_aktivitas.log_tipe', $searchValue)
+                ->orLike('log_aktivitas.aktivitas', $searchValue)
+                ->orLike('log_aktivitas.alamat_ip', $searchValue)
+                ->orLike('users.nama', $searchValue)  // search by user name
+                ->orLike('log_aktivitas.updated_at', $searchValue)
+                ->groupEnd();
         }
+        $totalRecordwithFilter = $builder->countAllResults(false);
+
+        // Limit and order
+        $builder->orderBy('log_aktivitas.id', 'DESC')
+            ->limit($length, $start);
+
+        $data = $builder->get()->getResultArray();
 
         $response = [
             "draw" => intval($draw),

@@ -87,18 +87,18 @@
                 <i class="fa-solid fa-newspaper"></i>
                 <span>Beranda</span></a>
             </li>
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsprivacy') ? 'active' : ''; ?>">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsprivacy' || $_SERVER['REQUEST_URI'] === '/cmsubah_privacy' ) ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmsprivacy" >
                 <i class="fa-solid fa-newspaper"></i>
                 <span>Privacy Policy</span></a>
             </li>
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '') ? 'active' : ''; ?>">
-                <a class=" nav-link" href="/cmscontent">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsterms_and_condition' || $_SERVER['REQUEST_URI'] === '/cmsubah_terms_and_condition') ? 'active' : ''; ?>">
+                <a class=" nav-link" href="/cmsterms_and_condition">
                 <i class="fa-solid fa-newspaper"></i>
                 <span>Terms and Conditions</span></a>
             </li>
 
-            <li class="nav-item </?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmshistori">
                 <i class="fa-solid fa-rectangle-history-circle-user"></i>
                 <span>Riwayat</span></a>
