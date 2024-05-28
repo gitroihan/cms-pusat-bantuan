@@ -47,6 +47,7 @@ User
                         <form action="/ubah_foto" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <input class="form-control border-dark" type='file' onchange="readURL(this);" accept="image/*" name="foto_profile" />
+                                <small id="fileError" class="text-danger"></small>
                                 <div class="d-flex position-relative justify-content-center align-items-center mb-3 mt-3 bordered ">
                                     <img id="preaview" class="rounded-circle border" alt="preview" src="" width="150" height="150">
                                 </div>

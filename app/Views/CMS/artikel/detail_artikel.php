@@ -30,7 +30,10 @@ Detail Artikel
 <div class="container-fluid">
 
     <div class="card px-4 py-3 border-0  mb-4 shadow">
-        <h1 class="h3 mr-auto mb-0 text-gray-800">Detail artikel</h1>
+        <h1 class="h3 mr-auto mb-0 text-gray-800">
+            <a href="/cmsartikel"><i class="fa-solid fa-arrow-left text-gray-800 mr-2"></i></a>
+            Detail artikel
+        </h1>
         <form id="artikelForm" action="/ubah_artikel/<?= $artikel['id'] ?>" method="post" enctype="multipart/form-data">
             <div class="col-12 mt-3">
                 <div class="ps-2" style="text-align: left;">
@@ -63,22 +66,24 @@ Detail Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-6">
                     <label for="gambar_1">Gambar 1 :</label>
-                    <input type="file" class="form-control border-dark" id="gambar_1" name="gambar_1" onchange="updatePreview(this, 'preaview2');">
+                    <input type="file" class="form-control border-dark" id="gambar_1" name="gambar_1" onchange="updatePreview(this, 'preview2', 'fileErrorGambar1');" accept="image/jpeg, image/png">
+                    <small id="fileErrorGambar1" class="text-danger"></small>
                 </div>
                 <div class="form-group col-6">
                     <label for="gambar_2">Gambar 2 :</label>
-                    <input type="file" class="form-control border-dark" id="gambar_2" name="gambar_2" onchange="updatePreview(this, 'preaview3');">
+                    <input type="file" class="form-control border-dark" id="gambar_2" name="gambar_2" onchange="updatePreview(this, 'preview3', 'fileErrorGambar2');" accept="image/jpeg, image/png">
+                    <small id="fileErrorGambar2" class="text-danger"></small>
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-6">
                     <div class="image-box border border-dark" style="height: 250px;">
-                        <img id="preaview2" src="<?= base_url('uploads/' . esc($artikel['gambar_1'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img id="preview2" src="<?= base_url('uploads/' . esc($artikel['gambar_1'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
                 <div class="form-group col-6">
                     <div class="image-box border border-dark" style="height: 250px;">
-                        <img id="preaview3" src="<?= base_url('uploads/' . esc($artikel['gambar_2'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img id="preview3" src="<?= base_url('uploads/' . esc($artikel['gambar_2'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -120,14 +125,14 @@ Detail Artikel
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group row col-5 mt-7 d-flex">
-                    <label for="gambar_artikel">Gambar artikel :</label>
-                    <input type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="updatePreview(this, 'preaview');" accept="image/*">
-                    <small id="fileError" class="text-danger"></small>
+                    <label for="gambar_artikel_ubah">Gambar artikel :</label>
+                    <input type="file" class="form-control border-dark" id="gambar_artikel_ubah" name="gambar_artikel" onchange="validateAndPreviewUbah(this);" accept="image/jpeg, image/png">
+                    <small id="fileErrorUbah" class="text-danger"></small>
                     <?php if (!empty($artikel['gambar_artikel'])) : ?>
                         <div class="col-6">
                             <div class="form-group mt-3">
                                 <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                                    <img id="preaviewArtikel" src="<?= base_url('uploads/' . esc($artikel['gambar_artikel'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img id="previewUbah" src="<?= base_url('uploads/' . esc($artikel['gambar_artikel'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </div>
                         </div>
@@ -247,16 +252,37 @@ Detail Artikel
         });
 </script>
 <script>
-function updatePreview(input, previewId) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+    function updatePreview(input, previewId, errorId) {
+        const file = input.files[0];
+        const preview = document.getElementById(previewId);
+        const error = document.getElementById(errorId);
+        const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
-        reader.onload = function(e) {
-            document.getElementById(previewId).src = e.target.result;
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                error.textContent = 'Ukuran file maksimum adalah 2MB';
+                input.value = '';
+                preview.src = '';
+            } else if (!fileTypes.includes(file.type)) {
+                error.textContent = 'Format file tidak valid. Harus .jpeg, .jpg, atau .png';
+                input.value = '';
+                preview.src = '';
+            } else {
+                error.textContent = '';
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        } else {
+            preview.src = '';
+            error.textContent = '';
         }
-
-        reader.readAsDataURL(input.files[0]);
     }
-}
+
+    function validateAndPreviewUbah(input) {
+        updatePreview(input, 'previewUbah', 'fileErrorUbah');
+    }
 </script>
 <?php $this->endSection() ?>

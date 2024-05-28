@@ -30,7 +30,10 @@ Tambah Artikel
 <div class="container-fluid">
 
     <div class="card px-4 py-3 border-0  mb-4 shadow">
-        <h1 class="h3 mr-auto mb-0 text-gray-800">Tambah artikel</h1>
+        <h1 class="h3 mr-auto mb-0 text-gray-800">
+            <a href="cmsartikel"><i class="fa-solid fa-arrow-left text-gray-800 mr-2"></i></a>
+            Tambah artikel
+        </h1>
         <form id="artikelForm" action="<?= base_url('/aksi_tambah_artikel') ?>" method="post" enctype="multipart/form-data">
             <div class="col-12 mt-3">
                 <div class="ps-2" style="text-align: left;">
@@ -63,25 +66,28 @@ Tambah Artikel
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-6">
                     <label for="gambar_1">Gambar 1 :</label>
-                    <input type="file" class="form-control border-dark" id="gambar_1" name="gambar_1" onchange="readURL1(this);">
+                    <input type="file" class="form-control border-dark" id="gambar_1" name="gambar_1" onchange="validateAndPreviewGambar1(this);" accept="image/*">
+                    <small id="fileErrorGambar1" class="text-danger"></small>
                 </div>
                 <div class="form-group col-6">
                     <label for="gambar_2">Gambar 2 :</label>
-                    <input type="file" class="form-control border-dark" id="gambar_2" name="gambar_2" onchange="readURL2(this);">
+                    <input type="file" class="form-control border-dark" id="gambar_2" name="gambar_2" onchange="validateAndPreviewGambar2(this);" accept="image/*">
+                    <small id="fileErrorGambar2" class="text-danger"></small>
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
                 <div class="form-group col-6">
                     <div class="image-box border border-dark" style="height: 250px;">
-                        <img id="preaview2" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img id="previewGambar1" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
                 <div class="form-group col-6">
                     <div class="image-box border border-dark" style="height: 250px;">
-                        <img id="preaview3" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img id="previewGambar2" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
+
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group col-6">
                     <label for="kategori">Kategori :</label>
@@ -118,16 +124,17 @@ Tambah Artikel
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-4">
                 <div class="form-group row col-5 mt-7 d-flex">
-                    <label for="gambar_artikel">Gambar artikel :</label>
-                    <input id="preaview" type="file" class="form-control border-dark" id="gambar_artikel" name="gambar_artikel" onchange="readURLArtikel(this);" accept="image/*">
-                    <small id="fileError" class="text-danger"></small>
+                    <label for="gambar_artikel_tambah">Gambar artikel :</label>
+                    <input type="file" class="form-control border-dark" id="gambar_artikel_tambah" name="gambar_artikel" onchange="validateAndPreviewTambah(this);" accept="image/*">
+                    <small id="fileErrorTambah" class="text-danger"></small>
                     <div class="col-6">
                         <div class="form-group mt-3">
                             <div class="image-box border border-dark" style="width: 200px; height: 200px;">
-                                <img id="preaview" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img id="previewTambah" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                         </div>
                     </div>
+
                     <div class="col-6 mt-3">
                         <p>Deskripsi :</p>
                         <ul>
