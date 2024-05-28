@@ -21,13 +21,6 @@ $routes->get('/ubah_profile', 'User::ubah_profile');
 $routes->post('/simpan_profile', 'User::simpan_profile');
 $routes->post('/ubah_foto', 'User::ubah_foto');
 $routes->post('/ubahpassword', 'User::editpassword');
-
-// =============
-
-// kontak
-$routes->get('/cmskontak', 'Home::kontak');
-$routes->get('/cmsubah_kontak', 'Home::cmsubah_kontak');
-$routes->post('/ubah_kontak', 'Home::ubah_kontak');
 // =============
 
 // kategori
@@ -64,6 +57,12 @@ $routes->get('/cmstiket', 'Tiket::index');
 $routes->get('/detail_tiket/(:num)', 'Tiket::detail_tiket/$1');
 // =============
 
+// kontak
+$routes->get('/cmskontak', 'Home::kontak');
+$routes->get('/cmsubah_kontak', 'Home::cmsubah_kontak');
+$routes->post('/ubah_kontak', 'Home::ubah_kontak');
+// =============
+
 //tentang kami
 $routes->get('/cmstentang_kami', 'TentangKami::tentang_kami');
 $routes->post('/tambahtentangkami', 'TentangKami::tambahtentangkami');
@@ -75,7 +74,12 @@ $routes->post('/hapustentangkami', 'TentangKami::hapustentangkami');
 //banner
 $routes->get('/cmscontent', 'Home::content');
 $routes->post('/ubah_content/(:num)', 'Home::ubah_content/$1');
+// =============
 
+//privacy policy
+$routes->get('/cmsprivacy', 'Home::privacy');
+$routes->get('/cmsubah_privacy', 'Home::cmsubah_privacy');
+$routes->post('/ubah_privacy', 'Home::ubah_privacy');
 // =============
 
 //riwayat

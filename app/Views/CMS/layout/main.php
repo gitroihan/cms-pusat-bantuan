@@ -55,38 +55,49 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmskategori' || $_SERVER['REQUEST_URI'] === '/cmskategori2') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmskategori' || $_SERVER['REQUEST_URI'] === '/cmskategori2') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmskategori">
                 <i class="fa-solid fa-folder-open"></i>
                 <span>Kategori</span></a>
             </li>
 
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsartikel' || $_SERVER['REQUEST_URI'] === '/tambah_artikel' || $_SERVER['REQUEST_URI'] === '/detail_artikel') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsartikel' || $_SERVER['REQUEST_URI'] === '/tambah_artikel' || $_SERVER['REQUEST_URI'] === '/detail_artikel') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmsartikel">
                 <i class="fa-solid fa-newspaper"></i>
                 <span>Artikel</span></a>
             </li>
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmstiket' || $_SERVER['REQUEST_URI'] === '/detail_tiket') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmstiket' || $_SERVER['REQUEST_URI'] === '/detail_tiket') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmstiket">
                 <i class="fa-solid fa-ticket-simple"></i>
                 <span>Tiket</span></a>
             </li>
 
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmskontak') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmskontak') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmskontak">
                 <i class="fa-solid fa-address-book"></i>
                 <span>Kontak</span></a>
             </li>
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmstentang_kami') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmstentang_kami') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmstentang_kami">
                 <i class="fa-solid fa-circle-info"></i>
                 <span>Tentang Kami</span></a>
             </li>
-            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmscontent') ? 'active' : ''; ?>"">
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmscontent') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmscontent">
                 <i class="fa-solid fa-newspaper"></i>
                 <span>Beranda</span></a>
             </li>
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsprivacy') ? 'active' : ''; ?>">
+                <a class=" nav-link" href="/cmsprivacy" >
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Privacy Policy</span></a>
+            </li>
+            <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '') ? 'active' : ''; ?>">
+                <a class=" nav-link" href="/cmscontent">
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Terms and Conditions</span></a>
+            </li>
+
             <li class="nav-item </?php echo ($_SERVER['REQUEST_URI'] === '/cmshistori') ? 'active' : ''; ?>"">
                 <a class=" nav-link" href="/cmshistori">
                 <i class="fa-solid fa-rectangle-history-circle-user"></i>

@@ -8,6 +8,7 @@ use App\Models\HeadertentangkamiModel;
 use App\Models\KategoriModel;
 use App\Models\KontakModel;
 use App\Models\LogAktivitasModel;
+use App\Models\PrivacyPolicyModel;
 use App\Models\TentangkamiModel;
 use App\Models\TiketModel;
 use App\Models\UserModel;
@@ -28,13 +29,15 @@ class Home extends BaseController
         $modelartikel = new ArtikelModel();
         $modeltiket = new TiketModel();
         $data['data'] = $model->getUserById($userId);
-        $data['kategori'] = $modelkategori->countAllResults(); ;
+        $data['kategori'] = $modelkategori->countAllResults();;
         $data['artikel'] = $modelartikel->countAllResults();
         $data['tiket'] = $modeltiket->countAllResults();
 
 
         return view('CMS/dashboard',  $data);
     }
+
+    //kontak
     public function kontak()
     {
         $session = session();
@@ -94,6 +97,8 @@ class Home extends BaseController
 
         return redirect()->to('/cmskontak');
     }
+
+    //banner
     public function content()
     {
         $session = session();
@@ -124,9 +129,53 @@ class Home extends BaseController
 
         // Simpan perubahan ke dalam database
         $bannermodel->update($id, $data);
-        
+
         return redirect()->to("/cmscontent");
     }
+
+    //privacy
+    public function privacy()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $privacymodel = new PrivacyPolicyModel();
+        $data['data'] = $model->getUserById($userId);
+        $data['privacy'] = $privacymodel->findAll();
+
+        return view('CMS/privacy_policy/privacy_policy', $data);
+    }
+    public function cmsubah_privacy()
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+
+        $model = new UserModel();
+        $privacymodel = new PrivacyPolicyModel();
+        $data['data'] = $model->getUserById($userId);
+        $data['privacy'] = $privacymodel->findAll();
+
+        return view('CMS/privacy_policy/privacy_policy_ubah', $data);
+    }
+    public function ubah_privacy()
+    {
+        $privacymodel = new PrivacyPolicyModel();
+
+        $id = $this->request->getPost('id');
+        $data = [
+            'isi' => $this->request->getPost('isi')
+        ];
+
+        // Simpan perubahan ke dalam database
+        $privacymodel->update($id, $data);
+
+        return redirect()->to('/cmsprivacy');
+    }
+
+
+
+
     public function histori()
     {
         $session = session();
@@ -188,5 +237,4 @@ class Home extends BaseController
 
         return $this->response->setJSON($response);
     }
-
 }
