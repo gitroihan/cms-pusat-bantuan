@@ -154,9 +154,10 @@ class Artikel extends BaseController
                     }
                 }
             }
+            return redirect()->to('/cmsartikel');
         }
 
-        return redirect()->to('/tambah_artikel');
+        
     }
     public function aksi_tambah_artikel_publish()
     { {

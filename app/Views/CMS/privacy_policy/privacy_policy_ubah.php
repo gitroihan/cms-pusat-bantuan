@@ -27,7 +27,7 @@ privacy policy
         </div>
         <?php foreach ($privacy as $list) : ?>
             <form action="/ubah_privacy" method="post" enctype="multipart/form-data">
-                <div class="col-12 mt-3">
+                <div class="col-12 mt-2">
                     <div class="d-sm-flex mb-1 col-md-12 mx-auto">
                         <div class="form-group col-12">
                             <div class="editor-wrapper">

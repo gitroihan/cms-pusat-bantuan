@@ -26,7 +26,7 @@ User
             <a href="/ubah_profile" class="btn text-light mt-3" style="background-color: #03C988;">
                 UBAH
             </a>
-            <button type="button" class=" btn text-light shadow-sm mt-3" data-toggle="modal" data-target="#passwordModal" style="background-color: #03C988;">
+            <button type="button" class="btn text-light shadow-sm mt-3" data-toggle="modal" data-target="#passwordModal" style="background-color: #03C988;">
                 UBAH PASSWORD
             </button>
         </div>
@@ -57,8 +57,8 @@ User
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <form action="/ubahpassword" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="<?= session()->get('id') ?>">
+                    <form id="form-ubah-password" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= esc($data['id']); ?>">
                         <div class="mb-3 p-2 pt-0">
                             <label for="password">Password Lama</label>
                             <input type="password" name="password" class="form-control" required>
@@ -67,7 +67,7 @@ User
                             <label for="password-baru">Password Baru</label>
                             <input type="password" name="password-baru" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                        <button type="button" id="btn-ubah" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
                     </form>
                 </div>
             </div>
@@ -75,4 +75,44 @@ User
     </div>
 
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+        $(document).ready(function() {
+            $('#btn-ubah').click(function() {
+                const formdata = new FormData($("#form-ubah-password")[0]);
+                console.log(formdata);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ubahpassword',
+                    data: formdata,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        // Optional: Show overlay or loading spinner
+                    },
+                    success: function(res) {
+                        if (res.status == true) {
+                            alert('Anda berhasil menyimpan data');
+                        } else {
+                            alert('Anda gagal menyimpan data');
+                        }
+                    },
+                    complete: function() {
+                        // Optional: Hide overlay or loading spinner
+                    },
+                    error: function(res) {
+                        alert('Terjadi kesalahan dalam pengiriman data');
+                    }
+                });
+            });
+
+            var modalData = <?php echo json_encode(session()->getFlashdata('modal')); ?>;
+            if (modalData) {
+                $('#' + modalData.name).modal('show');
+            }
+        });
+    </script>
+
 <?php $this->endSection() ?>
