@@ -82,7 +82,7 @@ $routes->get('/cmsubah_privacy', 'Home::cmsubah_privacy');
 $routes->post('/ubah_privacy', 'Home::ubah_privacy');
 // =============
 
-//privacy policy
+//terms_and_condition
 $routes->get('/cmsterms_and_condition', 'Home::terms_and_condition');
 $routes->get('/cmsubah_terms_and_condition', 'Home::cmsubah_terms_and_condition');
 $routes->post('/ubah_terms_and_condition', 'Home::ubah_terms_and_condition');

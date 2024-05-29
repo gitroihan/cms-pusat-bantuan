@@ -8,25 +8,29 @@ Tiket
 <div class="container-fluid">
     <?php foreach ($tiket as $tiket) : ?>
         <div class="card px-4 py-3 border-0 shadow">
-            <div class="p-2 pt-0 row">
+            <h1 class="h3 mr-auto mb-3 text-gray-800">
+                <a href="/cmstiket"><i class="fa-solid fa-arrow-left text-gray-800 mr-2"></i></a>
+                Detail tiket
+            </h1>
+            <div class="p-1 pt-0 row">
                 <label for="nama" class="col-sm-1 col-form-label">Judul</label>
                 <div class="col-sm-11">
                     <p class="form-control-plaintext">: <?= $tiket['nama_kontak'] ?></p>
                 </div>
             </div>
-            <div class="p-2 pt-0 row">
+            <div class="p-1 pt-0 row">
                 <label for="email" class="col-sm-1 col-form-label">Email</label>
                 <div class="col-sm-11">
                     <p class="form-control-plaintext">: <?= $tiket['email'] ?></p>
                 </div>
             </div>
-            <div class="p-2 pt-0 row">
+            <div class="p-1 pt-0 row">
                 <label for="subjek" class="col-sm-1 col-form-label">Subjek</label>
                 <div class="col-sm-11">
                     <p class="form-control-plaintext">: <?= $tiket['subjek'] ?></p>
                 </div>
             </div>
-            <div class="p-2 pt-0 row">
+            <div class="p-1 pt-0 row">
                 <label for="deskripsi" class="col-sm-1 col-form-label">Deskripsi</label>
                 <div class="col-sm-11">
                     <p class="form-control-plaintext">: </p>

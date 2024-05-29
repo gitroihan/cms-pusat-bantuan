@@ -29,7 +29,9 @@ User
                 <label for="nama">Role</label>
                 <input type="text" class="form-control" value="<?= esc($data['role']); ?>" readonly>
             </div>
-            <button type="submit" id="editProfileButton" class="btn text-light mt-3" style="background-color: #03C988;">SIMPAN</button>
+            <div class="text-right">
+                <button type="submit" id="editProfileButton" class="btn text-light mt-3" style="background-color: #03C988;">SIMPAN</button>
+            </div>
         </form>
     </div>
 

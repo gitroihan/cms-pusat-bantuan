@@ -37,7 +37,7 @@ terms_and_condition
                         </div>
                     </div>
                     <div class="d-sm-flex align-items-center justify-content-end mb-1 col-md-12 mx-auto mt-2">
-                        <button type="submit" class="btn text-light mr-2" style="background-color: #03C988;"><i class="fa-solid fa-file-arrow-up mr-2"></i>SIMPAN</button>
+                        <button type="submit" class="btn text-light mr-2" style="background-color: #03C988;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
                     </div>
             </form>
         <?php endforeach; ?>

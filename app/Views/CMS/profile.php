@@ -4,6 +4,26 @@
 User
 <?php $this->endSection() ?>
 <?php $this->section('content') ?>
+<!-- <style>
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .spinner-border {
+        width: 3rem;
+        height: 3rem;
+        border-width: .3rem;
+    }
+</style> -->
 
 <div class="container-fluid">
     <div class="card px-4 py-4 border-0 shadow w-50 mx-auto">
@@ -23,12 +43,14 @@ User
                 <label for="nama">Role</label>
                 <input type="text" class="form-control" value="<?= esc($data['role']); ?>" readonly>
             </div>
-            <a href="/ubah_profile" class="btn text-light mt-3" style="background-color: #03C988;">
-                UBAH
-            </a>
-            <button type="button" class="btn text-light shadow-sm mt-3" data-toggle="modal" data-target="#passwordModal" style="background-color: #03C988;">
-                UBAH PASSWORD
-            </button>
+            <div class="text-right">
+                <a href="/ubah_profile" class="btn text-light mt-3" style="background-color: #03C988;">
+                    UBAH
+                </a>
+                <button type="button" class="btn text-light shadow-sm mt-3" data-toggle="modal" data-target="#passwordModal" style="background-color: #03C988;">
+                    UBAH PASSWORD
+                </button>
+            </div>
         </div>
     </div>
 
@@ -42,21 +64,6 @@ User
                     </button>
                 </div>
                 <div class="modal-body">
-                    <?php
-                    $modal = session()->getFlashdata('modal');
-                    if ($modal && $modal['name'] == 'exampleModaleditpassword') : ?>
-                        <?php if ($modal['type'] === 'error') : ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <?php echo $modal['message']; ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php elseif ($modal['type'] === 'success') : ?>
-                            <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-                                <?php echo $modal['message']; ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
                     <form id="form-ubah-password" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?= esc($data['id']); ?>">
                         <div class="mb-3 p-2 pt-0">
@@ -67,52 +74,69 @@ User
                             <label for="password-baru">Password Baru</label>
                             <input type="password" name="password-baru" class="form-control" required>
                         </div>
-                        <button type="button" id="btn-ubah" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                        <div class="text-right">
+                            <button type="button" id="btn-ubah" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:1000;">
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:white;">
+            Loading...
+        </div>
+    </div>
+
+
+
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-        $(document).ready(function() {
-            $('#btn-ubah').click(function() {
-                const formdata = new FormData($("#form-ubah-password")[0]);
-                console.log(formdata);
+    $(document).ready(function() {
+        $('#btn-ubah').click(function() {
+            const formdata = new FormData($("#form-ubah-password")[0]);
+            console.log(formdata);
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/ubahpassword',
-                    data: formdata,
-                    dataType: "json",
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function() {
-                        // Optional: Show overlay or loading spinner
-                    },
-                    success: function(res) {
-                        if (res.status == true) {
-                            alert('Anda berhasil menyimpan data');
-                        } else {
-                            alert('Anda gagal menyimpan data');
-                        }
-                    },
-                    complete: function() {
-                        // Optional: Hide overlay or loading spinner
-                    },
-                    error: function(res) {
-                        alert('Terjadi kesalahan dalam pengiriman data');
+            $.ajax({
+                type: 'POST',
+                url: '/ubahpassword',
+                data: formdata,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.overlay').show();
+                },
+                success: function(res) {
+                    if (res.status == true) {
+                        $('.overlay').hide();
+                        alert('Anda berhasil menyimpan data');
+                        $('#form-ubah-password')[0].reset();
+                        $('#passwordModal').modal('hide');
+                    } else {
+                        $('.overlay').hide();
+                        alert('Anda gagal menyimpan data');
+                        $('#passwordModal').modal('hide');
+                        $('#form-ubah-password')[0].reset();
                     }
-                });
+                },
+                complete: function() {
+                    $('.overlay').hide();
+                },
+                error: function(res) {
+                    $('.overlay').hide();
+                    alert('Terjadi kesalahan dalam pengiriman data');
+                }
             });
-
-            var modalData = <?php echo json_encode(session()->getFlashdata('modal')); ?>;
-            if (modalData) {
-                $('#' + modalData.name).modal('show');
-            }
         });
-    </script>
+
+        var modalData = <?php echo json_encode(session()->getFlashdata('modal')); ?>;
+        if (modalData) {
+            $('#' + modalData.name).modal('show');
+        }
+    });
+</script>
 
 <?php $this->endSection() ?>

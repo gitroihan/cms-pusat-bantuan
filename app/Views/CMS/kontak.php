@@ -6,7 +6,12 @@ Kontak
 <?php $this->section('content') ?>
 
 <div class="container-fluid">
-    <div class="card px-4 py-3 border-0 shadow mb-4">
+    <div class="card px-4 py-3 border-2 mb-4">
+        <div class="d-sm-flex align-items-center justify-content-between mb-3">
+            <h1 class="h3 mr-auto mb-0 text-gray-800">
+                Kontak
+            </h1>
+        </div>
         <?php foreach ($kontak as $list) : ?>
             <div class="mb-3 p-1">
                 <label for="nama">nama</label>

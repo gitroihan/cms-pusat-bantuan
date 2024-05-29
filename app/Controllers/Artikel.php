@@ -89,14 +89,22 @@ class Artikel extends BaseController
             $tagModel = new TagModel();
 
             // Menyimpan data artikel
+            $defaultGambarArtikel = 'artikeldefault.jpg';
+            $defaultGambar1 = 'artikeldefault.jpg';
+            $defaultGambar2 = 'artikeldefault.jpg';
+
+            $gambarArtikel = $this->request->getFile('gambar_artikel');
+            $gambar1 = $this->request->getFile('gambar_1');
+            $gambar2 = $this->request->getFile('gambar_2');
+
             $data = [
                 'judul_artikel' => $this->request->getPost('judul_artikel'),
                 'pembuat' => $userId,
                 'isi' => $this->request->getPost('isi'),
                 'isi2' => $this->request->getPost('isi2'),
-                'gambar_artikel' => $this->request->getFile('gambar_artikel')->getName(),
-                'gambar_1' => $this->request->getFile('gambar_1')->getName(),
-                'gambar_2' => $this->request->getFile('gambar_2')->getName(),
+                'gambar_artikel' => $gambarArtikel->isValid() ? $gambarArtikel->getName() : $defaultGambarArtikel,
+                'gambar_1' => $gambar1->isValid() ? $gambar1->getName() : $defaultGambar1,
+                'gambar_2' => $gambar2->isValid() ? $gambar2->getName() : $defaultGambar2,
                 'tanggal_unggah' => date('Y-m-d H:i:s'),
                 'id_kategori' => $this->request->getPost('id_kategori'),
                 'id_layout' => $this->request->getPost('id_layout'),
@@ -108,14 +116,14 @@ class Artikel extends BaseController
             $artikelId = $artikelModel->insertID();
 
             // Upload gambar artikel jika ada
-            if ($this->request->getFile('gambar_artikel')->isValid()) {
-                $this->request->getFile('gambar_artikel')->move(ROOTPATH . 'public/uploads');
+            if ($gambarArtikel->isValid()) {
+                $gambarArtikel->move(ROOTPATH . 'public/uploads');
             }
-            if ($this->request->getFile('gambar_1')->isValid()) {
-                $this->request->getFile('gambar_1')->move(ROOTPATH . 'public/uploads');
+            if ($gambar1->isValid()) {
+                $gambar1->move(ROOTPATH . 'public/uploads');
             }
-            if ($this->request->getFile('gambar_2')->isValid()) {
-                $this->request->getFile('gambar_2')->move(ROOTPATH . 'public/uploads');
+            if ($gambar2->isValid()) {
+                $gambar2->move(ROOTPATH . 'public/uploads');
             }
 
             // Mendapatkan tag dari formulir
@@ -156,8 +164,6 @@ class Artikel extends BaseController
             }
             return redirect()->to('/cmsartikel');
         }
-
-        
     }
     public function aksi_tambah_artikel_publish()
     { {
@@ -312,7 +318,7 @@ class Artikel extends BaseController
         $artikelModel->update($id, $data);
 
         // Mengelola tag
-        $selectedTags = $this->request->getPost('tags')?? [];
+        $selectedTags = $this->request->getPost('tags') ?? [];
         $existingTags = $tagModel->where('id_artikel', $id)->findAll();
 
         // Menghapus tag yang tidak lagi terkait
@@ -382,7 +388,7 @@ class Artikel extends BaseController
         $artikelModel->update($id, $data);
 
         // Mengelola tag
-        $selectedTags = $this->request->getPost('tags')?? [];
+        $selectedTags = $this->request->getPost('tags') ?? [];
         $existingTags = $tagModel->where('id_artikel', $id)->findAll();
 
         // Menghapus tag yang tidak lagi terkait

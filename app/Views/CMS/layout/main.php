@@ -84,17 +84,17 @@
             </li>
             <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmscontent') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmscontent">
-                <i class="fa-solid fa-newspaper"></i>
+                <i class="fas fa-image"></i>
                 <span>Beranda</span></a>
             </li>
             <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsprivacy' || $_SERVER['REQUEST_URI'] === '/cmsubah_privacy' ) ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmsprivacy" >
-                <i class="fa-solid fa-newspaper"></i>
+                <i class="fas fa-shield-alt"></i>
                 <span>Privacy Policy</span></a>
             </li>
             <li class="nav-item <?php echo ($_SERVER['REQUEST_URI'] === '/cmsterms_and_condition' || $_SERVER['REQUEST_URI'] === '/cmsubah_terms_and_condition') ? 'active' : ''; ?>">
                 <a class=" nav-link" href="/cmsterms_and_condition">
-                <i class="fa-solid fa-newspaper"></i>
+                <i class="fas fa-underline"></i>
                 <span>Terms and Conditions</span></a>
             </li>
 

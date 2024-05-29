@@ -6,7 +6,12 @@ Kontak
 <?php $this->section('content') ?>
 
 <div class="container-fluid">
-    <div class="card px-4 py-3 border-0 shadow mb-4">
+    <div class="card px-4 py-3 border-2 mb-4">
+        <div class="d-sm-flex align-items-center justify-content-between mb-3">
+            <h1 class="h3 mr-auto mb-0 text-gray-800"><a href="/cmskontak"><i class="fa-solid fa-arrow-left text-gray-800 mr-2"></i></a>
+            Kontak
+            </h1>
+        </div>
         <?php foreach ($kontak as $list) : ?>
             <form action="/ubah_kontak" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= $list['id'] ?>">

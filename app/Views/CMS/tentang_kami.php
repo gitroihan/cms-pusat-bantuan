@@ -104,7 +104,7 @@ tentang kami
             <?php foreach ($tentang as $key => $value) { ?>
                 <div class="card " style="padding: 24px; height: fit-content; width: 100%; flex: 1 0 500px;">
                     <div class="card-kanan-atas">
-                        <i class="fa-solid fa-pen-to-square mr-3" style="font-size: 30px;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModaleditartikel<?= $value['id'] ?>"></i>
+                        <i class="fa-solid fa-pen-to-square mr-3" style="font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModaleditartikel<?= $value['id'] ?>"></i>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModaleditartikel<?= $value['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg ">
@@ -138,7 +138,10 @@ tentang kami
                             </div>
                         </div>
                         <!-- ikon hapus -->
-                        <i class="fa fa-x" style="font-size: 30px;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalhapusinformasi<?= $value['id'] ?>"></i>
+                        <!-- <button class="btn d-flex text-light" type="button" data-bs-toggle="modal" data-bs-target="#exampleModaltambahbannerinformasi" style="background-color: #03C988;">
+                            <span class="m-0 p-1 "><i class="fa-regular fa-pen-to-square mr-2"></i>Ubah banner</span>
+                        </button> -->
+                        <i class="fa fa-x" style="font-size: 20px;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalhapusinformasi<?= $value['id'] ?>"></i>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalhapusinformasi<?= $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
