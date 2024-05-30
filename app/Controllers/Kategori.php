@@ -24,9 +24,28 @@ class Kategori extends BaseController
         $data['id_parents'] = $kategoriData['id_parents'];
         return view('CMS/kategori/kategori',  $data);
     }
+    private function generateUniqueSlug($title)
+    {
+        $slug = url_title($title, '-', true);
+        $kategoriModel = new KategoriModel();
+
+        // Cek slug unik
+        $count = 0;
+        $newSlug = $slug;
+        while ($kategoriModel->where('slug', $newSlug)->countAllResults() > 0) {
+            $count++;
+            $newSlug = $slug . '-' . $count;
+        }
+
+        return $newSlug;
+    }
     public function tambah_kategori()
     {
         $kategoriModel = new KategoriModel();
+
+        // Membuat slug unik
+        $namakategori = $this->request->getPost('nama_kategori');
+        $slug = $this->generateUniqueSlug($namakategori);
 
         $image = $this->request->getFile('ikon');
         $path = 'default.png';
@@ -48,6 +67,7 @@ class Kategori extends BaseController
             'ikon' => $path,
             'id_parent' => null,
             'id_user' => $userId,
+            'slug' => $slug,
         ];
 
         $kategoriModel->save($data);
@@ -73,9 +93,20 @@ class Kategori extends BaseController
     {
         $kategoriModel = new KategoriModel();
 
+        // Mendapatkan nama kategori di database
+        $kategoriLama = $kategoriModel->find($id);
+        $namaKategoriLama = $kategoriLama['nama_kategori'];
+
+        // Mendapatkan nama kategori baru
+        $namaKategoriBaru = $this->request->getPost('nama_kategori');
+
+        // Membuat slug unik jika nama kategori berubah
+        $slug = $namaKategoriLama === $namaKategoriBaru ? $kategoriLama['slug'] : $this->generateUniqueSlug($namaKategoriBaru);
+
         $data = [
             'nama_kategori' => $this->request->getPost('nama_kategori'),
-            'deskripsi_kategori' => $this->request->getPost('deskripsi_kategori')
+            'deskripsi_kategori' => $this->request->getPost('deskripsi_kategori'),
+            'slug' => $slug
         ];
 
         $image = $this->request->getFile('ikon');
@@ -217,6 +248,10 @@ class Kategori extends BaseController
         $image = $this->request->getFile('ikon');
         $path = 'default.png';
 
+        // Membuat slug unik
+        $namakategori = $this->request->getPost('nama_kategori');
+        $slug = $this->generateUniqueSlug($namakategori);
+
         if ($image && $image->isValid() && !$image->hasMoved()) {
             $originalName = $image->getClientName();
             $targetDirectory = ROOTPATH . 'public/uploads/icons';
@@ -234,6 +269,7 @@ class Kategori extends BaseController
             'ikon' => $path,
             'id_parent' => $this->request->getPost('id_parent'),
             'id_user' => $userId,
+            'slug' => $slug,
         ];
 
         $kategoriModel->save($data);
@@ -260,9 +296,20 @@ class Kategori extends BaseController
         $kategoriModel = new KategoriModel();
         $id_subkategori = $this->request->getPost('id_parent');
 
+        // Mendapatkan nama kategori di database
+        $kategoriLama = $kategoriModel->find($id);
+        $namaKategoriLama = $kategoriLama['nama_kategori'];
+
+        // Mendapatkan nama kategori baru
+        $namaKategoriBaru = $this->request->getPost('nama_kategori');
+
+        // Membuat slug unik jika nama kategori berubah
+        $slug = $namaKategoriLama === $namaKategoriBaru ? $kategoriLama['slug'] : $this->generateUniqueSlug($namaKategoriBaru);
+
         $data = [
             'nama_kategori' => $this->request->getPost('nama_kategori'),
-            'deskripsi_kategori' => $this->request->getPost('deskripsi_kategori')
+            'deskripsi_kategori' => $this->request->getPost('deskripsi_kategori'),
+            'slug' => $slug
         ];
 
         $image = $this->request->getFile('ikon');
