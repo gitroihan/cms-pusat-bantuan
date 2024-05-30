@@ -132,10 +132,6 @@ User
             });
         });
 
-        var modalData = <?php echo json_encode(session()->getFlashdata('modal')); ?>;
-        if (modalData) {
-            $('#' + modalData.name).modal('show');
-        }
     });
 </script>
 

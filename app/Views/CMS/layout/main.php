@@ -218,11 +218,11 @@
 <script src="<?= base_url('cms/js/sb-admin-2.min.js') ?>"></script>
 
 <!-- Page level plugins -->
-<script src="<?= base_url('cms/vendor/chart.js/Chart.min.js') ?>"></script>
+<!-- <script src="</?= base_url('cms/vendor/chart.js/Chart.min.js') ?>"></script> -->
 
 <!-- Page level custom scripts -->
-<script src="<?= base_url('cms/js/demo/chart-area-demo.js') ?>"></script>
-<script src="<?= base_url('cms/js/demo/chart-pie-demo.js') ?>"></script>
+<!-- <script src="</?= base_url('cms/js/demo/chart-area-demo.js') ?>"></script>
+<script src="</?= base_url('cms/js/demo/chart-pie-demo.js') ?>"></script> -->
 <!-- bootstrap -->
 <script src="<?= base_url('bootstrap-5.3.0-dist/js/bootstrap.min.js') ?>"></script>
 <!-- DataTables -->

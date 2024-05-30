@@ -234,6 +234,13 @@ Detail Artikel
 </script>
 <script>
     ClassicEditor
+        .create(document.querySelector('#editor2'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<!-- <script>
+    ClassicEditor
         .create(document.querySelector('#editor2'), {})
         .then(editor => {
             editor.model.document.on('change:data', () => {
@@ -250,7 +257,7 @@ Detail Artikel
         .catch(error => {
             console.error(error);
         });
-</script>
+</script> -->
 <script>
     function updatePreview(input, previewId, errorId) {
         const file = input.files[0];

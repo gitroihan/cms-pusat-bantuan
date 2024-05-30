@@ -224,6 +224,13 @@ Tambah Artikel
 </script>
 <script>
     ClassicEditor
+        .create(document.querySelector('#editor2'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<!-- <script>
+    ClassicEditor
         .create(document.querySelector('#editor2'), {})
         .then(editor => {
             editor.model.document.on('change:data', () => {
@@ -240,5 +247,5 @@ Tambah Artikel
         .catch(error => {
             console.error(error);
         });
-</script>
+</script> -->
 <?php $this->endSection() ?>

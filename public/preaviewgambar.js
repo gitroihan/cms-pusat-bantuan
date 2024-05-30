@@ -130,7 +130,7 @@ function validateAndPreviewTambah(input) {
 
         // Check file type
         if (!validFileExtensions.includes(file.type)) {
-            errorElement.textContent = 'Ekstensi file harus .jpg atau .png';
+            errorElement.textContent = 'Format file tidak valid. Harus .jpeg, .jpg, atau .png';
             input.value = ''; // Clear the input
             return;
         }

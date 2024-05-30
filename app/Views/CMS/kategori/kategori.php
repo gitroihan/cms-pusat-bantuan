@@ -16,9 +16,9 @@ Kategori
         </div>
         <div class="input-group" style="width: 300px;">
             <form action="/cari_kategori" method="GET" class="d-flex" role="search">
-                <input type="text" class="form-control border-2 small" placeholder="Cari..." aria-label="Search" name="cari" aria-describedby="basic-addon2" style="background-color: white;">
+                <input type="text" class="form-control border-2 small" placeholder="Cari..." aria-label="Search" name="cari" aria-describedby="basic-addon2" style="background-color: white; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">
                 <div class="input-group-append">
-                    <button class="btn" type="submit" style="background-color: #03C988;">
+                    <button class="btn" type="submit" style="background-color: #03C988;border-top-left-radius: 0px; border-bottom-left-radius: 0px;">
                         <i class="fas fa-search fa-sm text-light"></i>
                     </button>
                 </div>
