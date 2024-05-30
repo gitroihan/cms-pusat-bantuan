@@ -12,7 +12,7 @@ class ArtikelModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['judul_artikel','pembuat','isi','isi2','gambar_artikel','gambar_1','gambar_2','tanggal_unggah','id_kategori','id_layout','id_user','status'];
+    protected $allowedFields    = ['judul_artikel','pembuat','isi','isi2','gambar_artikel','gambar_1','gambar_2','tanggal_unggah','id_kategori','id_layout','id_user','status','slug'];
 
     public function user()
     {

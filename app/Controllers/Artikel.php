@@ -80,6 +80,22 @@ class Artikel extends BaseController
         $data['tags'] = $tagModel->getAllTags();
         return view('CMS/artikel/tambah_artikel', $data);
     }
+    private function generateUniqueSlug($title)
+    {
+        $slug = url_title($title, '-', true);
+        $artikelModel = new ArtikelModel();
+
+        // Cek uniq slug
+        $count = 0;
+        $newSlug = $slug;
+        while ($artikelModel->where('slug', $newSlug)->countAllResults() > 0) {
+            $count++;
+            $newSlug = $slug . '-' . $count;
+        }
+
+        return $newSlug;
+    }
+
     public function aksi_tambah_artikel()
     { {
             $session = session();
@@ -97,6 +113,12 @@ class Artikel extends BaseController
             $gambar1 = $this->request->getFile('gambar_1');
             $gambar2 = $this->request->getFile('gambar_2');
 
+            // Membuat slug unik
+            $judulArtikel = $this->request->getPost('judul_artikel');
+            $slug = $this->generateUniqueSlug($judulArtikel);
+
+
+
             $data = [
                 'judul_artikel' => $this->request->getPost('judul_artikel'),
                 'pembuat' => $userId,
@@ -110,6 +132,7 @@ class Artikel extends BaseController
                 'id_layout' => $this->request->getPost('id_layout'),
                 'id_user' => $userId,
                 'status' => 'draft',
+                'slug' => $slug,
             ];
             // Simpan artikel ke database
             $artikelModel->insert($data);
@@ -174,33 +197,48 @@ class Artikel extends BaseController
             $tagModel = new TagModel();
 
             // Menyimpan data artikel
+            $defaultGambarArtikel = 'artikeldefault.jpg';
+            $defaultGambar1 = 'artikeldefault.jpg';
+            $defaultGambar2 = 'artikeldefault.jpg';
+
+            $gambarArtikel = $this->request->getFile('gambar_artikel');
+            $gambar1 = $this->request->getFile('gambar_1');
+            $gambar2 = $this->request->getFile('gambar_2');
+
+            // Membuat slug unik
+            $judulArtikel = $this->request->getPost('judul_artikel');
+            $slug = $this->generateUniqueSlug($judulArtikel);
+
+
+            // Menyimpan data artikel
             $data = [
                 'judul_artikel' => $this->request->getPost('judul_artikel'),
                 'pembuat' => $userId,
                 'isi' => $this->request->getPost('isi'),
                 'isi2' => $this->request->getPost('isi2'),
-                'gambar_artikel' => $this->request->getFile('gambar_artikel')->getClientName(),
-                'gambar_1' => $this->request->getFile('gambar_1')->getClientName(),
-                'gambar_2' => $this->request->getFile('gambar_2')->getClientName(),
+                'gambar_artikel' => $gambarArtikel->isValid() ? $gambarArtikel->getName() : $defaultGambarArtikel,
+                'gambar_1' => $gambar1->isValid() ? $gambar1->getName() : $defaultGambar1,
+                'gambar_2' => $gambar2->isValid() ? $gambar2->getName() : $defaultGambar2,
                 'tanggal_unggah' => date('Y-m-d H:i:s'),
                 'id_kategori' => $this->request->getPost('id_kategori'),
                 'id_layout' => $this->request->getPost('id_layout'),
                 'id_user' => $userId,
                 'status' => 'publish',
+                'slug' => $slug,
             ];
             // Simpan artikel ke database
             $artikelModel->insert($data);
             $artikelId = $artikelModel->insertID();
 
             // Upload gambar artikel jika ada
-            if ($this->request->getFile('gambar_artikel')->isValid()) {
-                $this->request->getFile('gambar_artikel')->move(ROOTPATH . 'public/uploads');
+            if ($gambarArtikel->isValid()) {
+                $gambarArtikel->move(ROOTPATH . 'public/uploads');
             }
-            if ($this->request->getFile('gambar_1')->isValid()) {
-                $this->request->getFile('gambar_1')->move(ROOTPATH . 'public/uploads');
+            if ($gambar1->isValid()) {
+                $gambar1->move(ROOTPATH . 'public/uploads');
             }
-            if ($this->request->getFile('gambar_2')->isValid()) {
-                $this->request->getFile('gambar_2')->move(ROOTPATH . 'public/uploads');
+            if ($gambar2->isValid()) {
+                $gambar2->move(ROOTPATH . 'public/uploads');
             }
 
             // Mendapatkan tag dari formulir
@@ -285,6 +323,14 @@ class Artikel extends BaseController
         // Mendapatkan data artikel berdasarkan ID
         $artikel = $artikelModel->find($id);
 
+        // Membuat slug unik jika judul artikel diubah
+        $judulArtikel = $this->request->getPost('judul_artikel');
+        if ($judulArtikel !== $artikel['judul_artikel']) {
+            $slug = $this->generateUniqueSlug($judulArtikel);
+        } else {
+            $slug = $artikel['slug'];
+        }
+
         // Memperbarui data artikel berdasarkan input dari formulir
         $data = [
             'judul_artikel' => $this->request->getPost('judul_artikel'),
@@ -294,6 +340,7 @@ class Artikel extends BaseController
             'id_kategori' => $this->request->getPost('id_kategori'),
             'id_layout' => $this->request->getPost('id_layout'),
             'status' => 'draft',
+            'slug' => $slug,
         ];
         // dd($data);
 
@@ -355,6 +402,14 @@ class Artikel extends BaseController
         // Mendapatkan data artikel berdasarkan ID
         $artikel = $artikelModel->find($id);
 
+        // Membuat slug unik jika judul artikel diubah
+        $judulArtikel = $this->request->getPost('judul_artikel');
+        if ($judulArtikel !== $artikel['judul_artikel']) {
+            $slug = $this->generateUniqueSlug($judulArtikel);
+        } else {
+            $slug = $artikel['slug'];
+        }
+
         // Memperbarui data artikel berdasarkan input dari formulir
         $data = [
             'judul_artikel' => $this->request->getPost('judul_artikel'),
@@ -364,6 +419,7 @@ class Artikel extends BaseController
             'id_kategori' => $this->request->getPost('id_kategori'),
             'id_layout' => $this->request->getPost('id_layout'),
             'status' => 'publish',
+            'slug' => $slug,
         ];
         // dd($data);
 
