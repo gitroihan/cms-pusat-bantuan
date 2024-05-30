@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2024 at 09:09 AM
+-- Generation Time: May 30, 2024 at 11:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -127,21 +127,22 @@ CREATE TABLE `kategori` (
   `deskripsi_kategori` text DEFAULT NULL,
   `ikon` varchar(255) NOT NULL,
   `id_parent` int(11) DEFAULT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id`, `nama_kategori`, `deskripsi_kategori`, `ikon`, `id_parent`, `id_user`) VALUES
-(1, 'Feature', 'Tata cara penggunaan sistem Goldstep', 'logo_goldstep.png', NULL, 1),
-(2, 'produk', 'Goldstep Product', 'icon_trushmedis.png', NULL, 1),
-(12, 'goldstep klinik', 'goldstep klinik', 'icon_trushmedis.png', 2, 1),
-(20, 'goldstep lab', 'goldstep lab', 'dokter.png', 2, 1),
-(36, 'setting', 'Modul setting, digunakan untuk melakukan penyesuaian data-data master yang berkaitan dengan pelayanan saat menggunakan sistem HIS seperti master harga dan data pegawai', 'logo_goldstep.png', 1, 1),
-(77, 'Keuangan', 'Menu untuk mensetting keuangan', 'default.png', 36, 1),
-(78, 'Penggajian', 'Menu untuk mensetting penggajian', 'dokter.png', 77, 1);
+INSERT INTO `kategori` (`id`, `nama_kategori`, `deskripsi_kategori`, `ikon`, `id_parent`, `id_user`, `slug`) VALUES
+(1, 'Feature ', 'Tata cara penggunaan sistem Goldstep', 'logo_goldstep.png', NULL, 1, 'feature'),
+(2, 'produk ', 'Goldstep Product', 'icon_trushmedis.png', NULL, 1, 'produk'),
+(12, 'goldstep klinik ', 'goldstep klinik', 'icon_trushmedis.png', 2, 1, 'goldstep-klinik'),
+(20, 'goldstep lab ', 'goldstep lab', 'dokter.png', 2, 1, 'goldstep-lab-1'),
+(36, 'setting', 'Modul setting, digunakan untuk melakukan penyesuaian data-data master yang berkaitan dengan pelayanan saat menggunakan sistem HIS seperti master harga dan data pegawai', 'logo_goldstep.png', 1, 1, ''),
+(77, 'Keuangan', 'Menu untuk mensetting keuangan', 'default.png', 36, 1, ''),
+(78, 'Penggajian', 'Menu untuk mensetting penggajian', 'dokter.png', 77, 1, '');
 
 -- --------------------------------------------------------
 
@@ -231,7 +232,27 @@ INSERT INTO `log_aktivitas` (`id`, `id_ref`, `log_tipe`, `aktivitas`, `alamat_ip
 (42, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-26 17:19:05'),
 (43, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-26 17:19:16'),
 (44, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-26 19:51:56'),
-(45, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-26 22:25:39');
+(45, 1, 'Update Profile', 'mengubah informasi profile', 0, 1, '2024-05-26 22:25:39'),
+(46, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-30 01:13:08'),
+(47, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-30 01:13:27'),
+(48, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-30 01:14:23'),
+(49, 1, 'tambah', 'menambah kategori', 0, 1, '2024-05-30 01:14:34'),
+(50, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-30 01:14:44'),
+(51, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-30 01:14:54'),
+(52, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-30 01:15:54'),
+(53, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-30 01:16:07'),
+(54, 1, 'hapus', 'menghapus kategori', 0, 1, '2024-05-30 01:16:16'),
+(55, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-30 01:17:50'),
+(56, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-30 01:19:18'),
+(57, 1, 'tambah', 'menambah subkategori', 0, 1, '2024-05-30 01:19:28'),
+(58, 1, 'hapus', 'menghapus subkategori', 0, 1, '2024-05-30 01:19:38'),
+(59, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-30 01:19:52'),
+(60, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-30 01:19:56'),
+(61, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-30 01:20:09'),
+(62, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-30 01:20:19'),
+(63, 1, 'ubah', 'mengubah subkategori', 0, 1, '2024-05-30 01:20:31'),
+(64, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-30 01:20:40'),
+(65, 1, 'ubah', 'mengubah kategori', 0, 1, '2024-05-30 01:20:46');
 
 -- --------------------------------------------------------
 
@@ -459,7 +480,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `artikel`
 --
 ALTER TABLE `artikel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `artikel_layout`
@@ -483,7 +504,7 @@ ALTER TABLE `header_tentang_kami`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `kontak`
@@ -495,7 +516,7 @@ ALTER TABLE `kontak`
 -- AUTO_INCREMENT for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `privacy_policy`
