@@ -47,9 +47,9 @@ User
                 <a href="/ubah_profile" class="btn text-light mt-3" style="background-color: #03C988;">
                     UBAH
                 </a>
-                <button type="button" class="btn text-light shadow-sm mt-3" data-toggle="modal" data-target="#passwordModal" style="background-color: #03C988;">
+                <button type="button" class="btn text-light shadow-sm mt-3" data-bs-toggle="modal" data-bs-target="#passwordModal" style="background-color: #03C988;">
                     UBAH PASSWORD
-                </button>
+                </button>
             </div>
         </div>
     </div>

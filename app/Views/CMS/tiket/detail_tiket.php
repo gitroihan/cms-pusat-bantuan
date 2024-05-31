@@ -35,7 +35,8 @@ Tiket
                 <div class="col-sm-11">
                     <p class="form-control-plaintext">: </p>
                 </div>
-                <textarea id="editor" name="editor" class="form-control" readonly cols="30" rows="10" style="background-color: white; height: 350px; overflow-y: auto;"><?= $tiket['deskripsi'] ?></textarea>
+                <!-- <textarea id="editor" name="editor" class="form-control" readonly cols="30" rows="10" style="background-color: white; height: 350px; overflow-y: auto;"></textarea> -->
+                <p><?= $tiket['deskripsi'] ?></p>
             </div>
         </div>
         <div class="mb-3 p-1 text-right">

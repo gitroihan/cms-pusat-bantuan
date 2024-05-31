@@ -23,7 +23,7 @@ Artikel
                     <td>Pembuat</td>
                     <td>Tanggal Unggah</td>
                     <td>Status</td>
-                    <td class="text-center">Detail</td>
+                    <td class="text-center"></td>
             </thead>
             <tbody>
             </tbody>
@@ -31,4 +31,73 @@ Artikel
     </div>
 
 </div>
+<!-- DataTables -->
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.6/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/r-3.0.2/datatables.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.6/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/r-3.0.2/datatables.min.js"></script>
+
+<!-- table artikel -->
+<script>
+    $(document).ready(function() {
+        $('#table_artikel').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '<?= base_url('/artikel/getArtikelData') ?>', // URL ke controller untuk mendapatkan data
+                type: 'POST'
+            },
+            language: {
+                "sEmptyTable": "Tidak ada data yang tersedia di tabel",
+                "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 hingga 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ total entri)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "Tampilkan _MENU_",
+                "sLoadingRecords": "Memuat...",
+                "sProcessing": "Memproses...",
+                "sSearch": "Cari:",
+                "sZeroRecords": "Tidak ada data yang cocok ditemukan",
+                "oAria": {
+                    "sSortAscending": ": aktifkan untuk mengurutkan kolom secara meningkat",
+                    "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
+                }
+            },
+            columns: [{
+                    data: 'judul_artikel'
+                },
+                {
+                    data: 'pembuat'
+                },
+                {
+                    data: 'tanggal_unggah'
+                },
+                {
+                    data: 'status',
+                    render: function(data, type, row) {
+                        if (data === 'publish') {
+                            return '<div style="background-color: green; color: white;  border-radius: 3px;">Publish</div>';
+                        } else if (data === 'draft') {
+                            return '<div style="background-color: yellow; color: black; border-radius: 3px;">Draft</div>';
+                        } else {
+                            return data;
+                        }
+                    }
+                },
+                {
+                    data: 'id',
+                    render: function(data, type, row) {
+                        return '<a class="btn btn-primary" href="/detail_artikel/' + data + '">detail</a>';
+                    },
+                    orderable: false,
+                    className: 'text-center'
+                }
+            ]
+        });
+    });
+</script>
 <?php $this->endSection() ?>

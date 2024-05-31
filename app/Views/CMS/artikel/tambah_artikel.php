@@ -176,6 +176,22 @@ Tambah Artikel
             return;
         }
 
+        var formData = new FormData($("#artikelForm")[0]);
+
+            var isValid = true;
+            if (!$('input[name="judul_artikel"]').val()) {
+                isValid = false;
+                $('input[name="judul_artikel"]').addClass('is-invalid');
+                alert('isi judul terlenih dahulu')
+            } else {
+                $('input[name="judul_artikel"]').removeClass('is-invalid');
+            }
+
+            if (!isValid) {
+                form.reportValidity();
+                return;
+            }
+
         form.action = actionUrl;
         form.submit();
     }
