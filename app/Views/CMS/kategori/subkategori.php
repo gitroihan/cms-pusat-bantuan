@@ -208,6 +208,19 @@ Kategori
         $('#btn-save-subcategory').click(function() {
             var formData = new FormData($("#create-subcategory-form")[0]);
 
+            var isValid = true;
+            if (!$('input[name="nama_kategori"]').val()) {
+                isValid = false;
+                $('input[name="nama_kategori"]').addClass('is-invalid');
+            } else {
+                $('input[name="nama_kategori"]').removeClass('is-invalid');
+            }
+
+            if (!isValid) {
+                form.reportValidity();
+                return;
+            }
+
             $.ajax({
                 type: 'POST',
                 headers: {

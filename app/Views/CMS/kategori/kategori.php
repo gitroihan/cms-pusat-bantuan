@@ -30,7 +30,7 @@ Kategori
     <div class="basis pengetahuan" style="overflow-y: auto; height: 555px; display: flex; flex-wrap: wrap;">
         <?php foreach ($kategori as $kat) : ?>
             <div class="col-md-4 mb-2">
-                <div class="card px-4 py-3 border-0 shadow" style="height: 250px; width: 370px">
+                <div class="card px-4 py-3 border-0 shadow" style="height: 250px;">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <div class="image-box mr-3" style="width: 45px; height: 45px;">
                             <img src="<?= base_url('uploads/icons/' . esc($kat['ikon'])); ?>" alt="" style="width: 100%; height: 100%; object-fit: fit;">
@@ -97,7 +97,13 @@ Kategori
                     </div>
                     <div class="mb-3 p-2 pt-0">
                         <label for="newProfilePicture">Pilih ikon:</label>
-                        <input type="file" name="ikon" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <input type="file" name="ikon" class="form-control" id="inputGroupFile04" onchange="validateAndPreviewTambah(this);" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <small id="fileErrorTambah" class="text-danger"></small>
+                    </div>
+                    <div class="mb-3 p-2 pt-0">
+                        <div class="image-box border border" style="width: 100px; height: 100px;">
+                            <img id="previewTambah" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
                     </div>
                     <div class="mb-3 p-2 pt-0 text-right">
                         <button type="button" id="btn-save" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
@@ -133,7 +139,13 @@ Kategori
                         </div>
                         <div class="mb-3 p-2 pt-0">
                             <label for="newProfilePicture">Pilih ikon:</label>
-                            <input type="file" name="ikon" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            <input type="file" name="ikon" class="form-control" id="inputGroupFile04"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            <small id="fileErrorUbah" class="text-danger"></small>
+                        </div>
+                        <div class="mb-3 p-2 pt-0">
+                            <div class="image-box border border" style="width: 100px; height: 100px;">
+                                <img id="previewUbah" src="<?= base_url('uploads/icons/' . esc($kat['ikon'])); ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
                         </div>
                         <div class="mb-3 p-2 pt-0 text-right">
                             <button type="submit" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
@@ -169,11 +181,25 @@ Kategori
     </div>
 <?php endforeach; ?>
 
+<script src="preaviewgambar.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#btn-save').click(function() {
             var formData = new FormData($("#create-category-form")[0]);
+
+            var isValid = true;
+            if (!$('input[name="nama_kategori"]').val()) {
+                isValid = false;
+                $('input[name="nama_kategori"]').addClass('is-invalid');
+            } else {
+                $('input[name="nama_kategori"]').removeClass('is-invalid');
+            }
+
+            if (!isValid) {
+                form.reportValidity();
+                return;
+            }
 
             $.ajax({
                 type: 'POST',
@@ -208,6 +234,40 @@ Kategori
             });
         });
     });
+</script>
+<script>
+    function updatePreview(input, previewId, errorId) {
+        const file = input.files[0];
+        const preview = document.getElementById(previewId);
+        const error = document.getElementById(errorId);
+        const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                error.textContent = 'Ukuran file maksimum adalah 2MB';
+                input.value = '';
+                preview.src = '';
+            } else if (!fileTypes.includes(file.type)) {
+                error.textContent = 'Format file tidak valid. Harus .jpeg, .jpg, atau .png';
+                input.value = '';
+                preview.src = '';
+            } else {
+                error.textContent = '';
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        } else {
+            preview.src = '';
+            error.textContent = '';
+        }
+    }
+
+    function validateAndPreviewUbah(input) {
+        updatePreview(input, 'previewUbah', 'fileErrorUbah');
+    }
 </script>
 
 
