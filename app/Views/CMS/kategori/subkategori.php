@@ -129,7 +129,13 @@ Kategori
                     </div>
                     <div class="mb-3 p-2 pt-0">
                         <label for="newProfilePicture">Pilih ikon:</label>
-                        <input type="file" name="ikon" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <input type="file" name="ikon" class="form-control" id="inputGroupFile04" onchange="validateAndPreviewTambah(this);" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <small id="fileErrorTambah" class="text-danger"></small>
+                    </div>
+                    <div class="mb-3 p-2 pt-0">
+                        <div class="image-box border border" style="width: 100px; height: 100px;">
+                            <img id="previewTambah" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: fit;">
+                        </div>
                     </div>
                     <div class="mb-3 p-2 pt-0 text-right">
                         <button type="button" id="btn-save-subcategory" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
@@ -165,7 +171,13 @@ Kategori
                         </div>
                         <div class="mb-3 p-2 pt-0">
                             <label for="newProfilePicture">Pilih ikon:</label>
-                            <input type="file" name="ikon" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            <input type="file" name="ikon" class="form-control" id="inputGroupFile04_<?= $sub['id'] ?>" aria-describedby="inputGroupFileAddon04" aria-label="Upload" onchange="validateAndPreviewUbah(this, <?= $sub['id'] ?>)">
+                            <small id="fileErrorUbah_<?= $sub['id'] ?>" class="text-danger"></small>
+                        </div>
+                        <div class="mb-3 p-2 pt-0">
+                            <div class="image-box border border" style="width: 100px; height: 100px;">
+                                <img id="previewUbah_<?= $sub['id'] ?>" src="<?= base_url('uploads/icons/' . esc($sub['ikon'])); ?>" alt="preview" style="width: 100%; height: 100%; object-fit: fit;">
+                            </div>
                         </div>
                         <div class="mb-3 p-2 pt-0 text-right">
                             <button type="submit" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
@@ -251,4 +263,71 @@ Kategori
         });
     });
 </script>
+<script>
+    function validateAndPreviewTambah(input) {
+        const maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
+        const validFileExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+        const file = input.files[0];
+        const errorElement = document.getElementById('fileErrorTambah');
+
+        if (file) {
+            // Check file size
+            if (file.size > maxFileSize) {
+                errorElement.textContent = 'Ukuran file maksimum 2MB';
+                input.value = ''; // Clear the input
+                return;
+            }
+
+            // Check file type
+            if (!validFileExtensions.includes(file.type)) {
+                errorElement.textContent = 'Format file tidak valid. Harus .jpeg, .jpg, atau .png';
+                input.value = ''; // Clear the input
+                return;
+            }
+
+            errorElement.textContent = ''; // Clear any previous errors
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewTambah').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+<script>
+    function updatePreview(input, previewId, errorId) {
+        const file = input.files[0];
+        const preview = document.getElementById(previewId);
+        const error = document.getElementById(errorId);
+        const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                error.textContent = 'Ukuran file maksimum adalah 2MB';
+                input.value = '';
+                preview.src = '';
+            } else if (!fileTypes.includes(file.type)) {
+                error.textContent = 'Format file tidak valid. Harus .jpeg, .jpg, atau .png';
+                input.value = '';
+                preview.src = '';
+            } else {
+                error.textContent = '';
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        } else {
+            preview.src = '';
+            error.textContent = '';
+        }
+    }
+
+    function validateAndPreviewUbah(input, id) {
+        updatePreview(input, 'previewUbah_' + id, 'fileErrorUbah_' + id);
+    }
+</script>
+
 <?php $this->endSection() ?>

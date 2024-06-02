@@ -102,7 +102,7 @@ Kategori
                     </div>
                     <div class="mb-3 p-2 pt-0">
                         <div class="image-box border border" style="width: 100px; height: 100px;">
-                            <img id="previewTambah" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img id="previewTambah" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: fit;">
                         </div>
                     </div>
                     <div class="mb-3 p-2 pt-0 text-right">
@@ -116,7 +116,7 @@ Kategori
 
 <!-- edit category -->
 <?php foreach ($kategori as $kat) : ?>
-    <div class="modal fade" id="updateCategoryModal<?= $kat['id'] ?>" tabindex=" -1" role="dialog" aria-labelledby="updateCategoryModalLabel<?= $kat['id'] ?>"" aria-hidden=" true">
+    <div class="modal fade" id="updateCategoryModal<?= $kat['id'] ?>" tabindex=" -1" role="dialog" aria-labelledby="updateCategoryModalLabel<?= $kat['id'] ?>" aria-hidden=" true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -139,12 +139,12 @@ Kategori
                         </div>
                         <div class="mb-3 p-2 pt-0">
                             <label for="newProfilePicture">Pilih ikon:</label>
-                            <input type="file" name="ikon" class="form-control" id="inputGroupFile04"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                            <small id="fileErrorUbah" class="text-danger"></small>
+                            <input type="file" name="ikon" class="form-control" id="inputGroupFile04_<?= $kat['id'] ?>" aria-describedby="inputGroupFileAddon04" aria-label="Upload" onchange="validateAndPreviewUbah(this, <?= $kat['id'] ?>)">
+                            <small id="fileErrorUbah_<?= $kat['id'] ?>" class="text-danger"></small>
                         </div>
                         <div class="mb-3 p-2 pt-0">
                             <div class="image-box border border" style="width: 100px; height: 100px;">
-                                <img id="previewUbah" src="<?= base_url('uploads/icons/' . esc($kat['ikon'])); ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img id="previewUbah_<?= $kat['id'] ?>" src="<?= base_url('uploads/icons/' . esc($kat['ikon'])); ?>" alt="preview" style="width: 100%; height: 100%; object-fit: fit;">
                             </div>
                         </div>
                         <div class="mb-3 p-2 pt-0 text-right">
@@ -265,8 +265,8 @@ Kategori
         }
     }
 
-    function validateAndPreviewUbah(input) {
-        updatePreview(input, 'previewUbah', 'fileErrorUbah');
+    function validateAndPreviewUbah(input, id) {
+        updatePreview(input, 'previewUbah_' + id, 'fileErrorUbah_' + id);
     }
 </script>
 
