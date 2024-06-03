@@ -203,7 +203,7 @@ class Kategori extends BaseController
         $subcategoryDetails = $kategoriModel->getSubcategoriesWithDetails($id_kategori);
         $data['subkategori'] = $subcategoryDetails['subcategories'];
         $data['parentIds'] = $subcategoryDetails['parentIds'];
-        $data['subkategori_limit'] = array_slice($data['subkategori'], 0, 4);
+        // $data['subkategori_limit'] = array_slice($data['subkategori'], 0, 4);
         $data['total_subkategori'] = count($data['subkategori']);
         $data['id_kat'] = $id_kategori;
         $data['parent_kategori'] = $kategoriModel->where('id', $id_kategori)->first();

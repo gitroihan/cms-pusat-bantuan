@@ -37,7 +37,7 @@ Kategori
                         </div>
                         <div class="title-category flex-grow-1">
                             <a href="/cmssubkategori/<?= $kat['id'] ?>" style="text-decoration: none;">
-                                <p class="m-0 fw-semibold" style="font-size: 20px; color: #13005A;">
+                                <p class="m-0 fw-semibold"  style="font-size: 20px; color: #13005A; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     <?= esc($kat['nama_kategori']) ?>
                                 </p>
                             </a>
@@ -63,7 +63,9 @@ Kategori
                         </div>
                     </div>
                     <div class="card-body">
-                        <p><?= esc($kat['deskripsi_kategori']) ?></p>
+                        <p class="text-truncate" style="max-height: 4.5em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <?= esc($kat['deskripsi_kategori']) ?>
+                        </p>
                     </div>
                     <div class="card-footer bg-white border-0"></div>
                 </div>

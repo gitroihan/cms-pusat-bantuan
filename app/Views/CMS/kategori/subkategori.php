@@ -56,24 +56,27 @@ Kategori
         </ol>
     </nav>
 
-    <div class="basis pengetahuan" style="overflow-y: auto; height: 500px;">
-        <?php foreach ($subkategori_limit as $sub) : ?>
+    <div class="kategori" style="overflow-y: auto; height: 500px;">
+        <?php foreach ($subkategori as $sub) : ?>
             <div class="row col-12">
                 <div class="col-md-12 mb-2 my-2">
                     <div class="card custom-card">
                         <div class="card-body">
                             <div class="d-flex align-items-start justify-content-between mb-3">
-                                <div class="image-box mr-3" style="width: 5%; height: 5%;">
-                                    <img src="<?= base_url('uploads/icons/' . esc($sub['ikon'])); ?>" alt="" class="img-fluid">
+                                <div class="image-box mr-3" style="flex: 0 0 60px; width: 60px; height: 60px;">
+                                    <img src="<?= base_url('uploads/icons/' . esc($sub['ikon'])); ?>" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
 
-                                <div class="col">
+
+                                <div class="d-flex flex-column flex-grow-1">
                                     <?php if ($total_subkategori < 3 && !$subkategori_has_articles && $subkategori_depth < 3) : ?>
                                         <a href="/cmssubkategori/<?= $sub['id'] ?>" class="text-decoration-none">
                                         <?php endif; ?>
                                         <h5 class="card-title custom-title mb-2" style="color: #13005A;"><?= esc($sub['nama_kategori']) ?></h5>
                                         </a>
-                                        <p class="card-text mb-0"><?= esc($sub['deskripsi_kategori']) ?></p>
+                                        <p class="card-text mb-0 " style="max-width: 700px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            <?= esc($sub['deskripsi_kategori']) ?>
+                                        </p>
                                 </div>
                                 <div class="dropdown no-arrow">
                                     <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -149,7 +152,7 @@ Kategori
 </div>
 
 <!-- edit category -->
-<?php foreach ($subkategori_limit as $sub) : ?>
+<?php foreach ($subkategori as $sub) : ?>
     <div class="modal fade" id="updateCategoryModal<?= $sub['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="updateCategoryModalLabel<?= $sub['id'] ?>" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -192,7 +195,7 @@ Kategori
     </div>
 <?php endforeach; ?>
 <!-- delete category -->
-<?php foreach ($subkategori_limit as $sub) : ?>
+<?php foreach ($subkategori as $sub) : ?>
     <div class="modal fade" id="deleteCategoryModal<?= $sub['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryModalLabel<?= $sub['id'] ?>" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
