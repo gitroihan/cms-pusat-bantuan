@@ -7,7 +7,7 @@ Kategori
 
 <div class="container-fluid">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-5">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mr-auto mb-0 text-gray-800">Sub Kategori</h1>
         <div class="my-1">
             <button type="button" class="btn shadow-sm mr-3 text-light" data-toggle="modal" data-target="#createCategoryModal" style="background-color: #03C988;">
@@ -56,7 +56,7 @@ Kategori
         </ol>
     </nav>
 
-    <div class="basis pengetahuan" style="overflow-y: auto; height: 555px;">
+    <div class="basis pengetahuan" style="overflow-y: auto; height: 500px;">
         <?php foreach ($subkategori_limit as $sub) : ?>
             <div class="row col-12">
                 <div class="col-md-12 mb-2 my-2">
@@ -119,25 +119,27 @@ Kategori
             <div class="modal-body">
                 <form id="create-subcategory-form" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id_parent" value="<?= $id_kat ?>" />
-                    <div class="mb-3 p-2 pt-0">
+                    <div class="mb-2 p-2 pt-0">
                         <label for="nama">Judul</label>
-                        <input type="text" name="nama_kategori" class="form-control" required>
+                        <input type="text" name="nama_kategori" class="form-control" id="judul" maxlength="45" oninput="updateCharCounter()" required>
+                        <div id="charCounter" class="char-counter">45 karakter</div>
                     </div>
-                    <div class="mb-3 p-2 pt-0">
+                    <div class="mb-2 p-2 pt-0">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea name="deskripsi_kategori" class="form-control" rows="5"></textarea>
+                        <textarea name="deskripsi_kategori" class="form-control" rows="5" id="deskripsi" maxlength="100" oninput="updateCharCounterdeskripsi()"></textarea>
+                        <div id="charCounterdeskripsi" class="char-counter">100 karakter</div>
                     </div>
-                    <div class="mb-3 p-2 pt-0">
+                    <div class="mb-2 p-2 pt-0">
                         <label for="newProfilePicture">Pilih ikon:</label>
                         <input type="file" name="ikon" class="form-control" id="inputGroupFile04" onchange="validateAndPreviewTambah(this);" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                         <small id="fileErrorTambah" class="text-danger"></small>
                     </div>
-                    <div class="mb-3 p-2 pt-0">
+                    <div class="p-2 pt-0">
                         <div class="image-box border border" style="width: 100px; height: 100px;">
                             <img id="previewTambah" src="#" alt="preview" style="width: 100%; height: 100%; object-fit: fit;">
                         </div>
                     </div>
-                    <div class="mb-3 p-2 pt-0 text-right">
+                    <div class="p-2 pt-0 text-right">
                         <button type="button" id="btn-save-subcategory" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
                     </div>
                 </form>
@@ -161,25 +163,25 @@ Kategori
                     <!-- <div class="mt-5 col-8 m-auto"> -->
                     <form action="/ubah_subkategori/<?= $sub['id'] ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id_parent" value="<?= $id_kat ?>" />
-                        <div class="mb-3 p-2 pt-0">
+                        <div class="mb-2 p-2 pt-0">
                             <label for="nama">Judul</label>
                             <input type="text" name="nama_kategori" class="form-control" value="<?= $sub['nama_kategori'] ?>" required>
                         </div>
-                        <div class="mb-3 p-2 pt-0">
+                        <div class="mb-2 p-2 pt-0">
                             <label for="username">Deskripsi</label>
                             <textarea name="deskripsi_kategori" class="form-control" rows="5"><?= $sub['deskripsi_kategori'] ?></textarea>
                         </div>
-                        <div class="mb-3 p-2 pt-0">
+                        <div class="mb-2 p-2 pt-0">
                             <label for="newProfilePicture">Pilih ikon:</label>
                             <input type="file" name="ikon" class="form-control" id="inputGroupFile04_<?= $sub['id'] ?>" aria-describedby="inputGroupFileAddon04" aria-label="Upload" onchange="validateAndPreviewUbah(this, <?= $sub['id'] ?>)">
                             <small id="fileErrorUbah_<?= $sub['id'] ?>" class="text-danger"></small>
                         </div>
-                        <div class="mb-3 p-2 pt-0">
+                        <div class="p-2 pt-0">
                             <div class="image-box border border" style="width: 100px; height: 100px;">
                                 <img id="previewUbah_<?= $sub['id'] ?>" src="<?= base_url('uploads/icons/' . esc($sub['ikon'])); ?>" alt="preview" style="width: 100%; height: 100%; object-fit: fit;">
                             </div>
                         </div>
-                        <div class="mb-3 p-2 pt-0 text-right">
+                        <div class="p-2 pt-0 text-right">
                             <button type="submit" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>SIMPAN</button>
                         </div>
                     </form>
@@ -328,6 +330,36 @@ Kategori
     function validateAndPreviewUbah(input, id) {
         updatePreview(input, 'previewUbah_' + id, 'fileErrorUbah_' + id);
     }
+</script>
+<!-- validasi judul -->
+<script>
+    function updateCharCounter() {
+        const input = document.getElementById('judul');
+        const counter = document.getElementById('charCounter');
+        const maxLength = input.getAttribute('maxlength');
+        const currentLength = input.value.length;
+
+        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        updateCharCounter();
+    });
+</script>
+<!-- validasi deskripsi -->
+<script>
+    function updateCharCounterdeskripsi() {
+        const input = document.getElementById('deskripsi');
+        const counter = document.getElementById('charCounterdeskripsi');
+        const maxLength = input.getAttribute('maxlength');
+        const currentLength = input.value.length;
+
+        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        updateCharCounter();
+    });
 </script>
 
 <?php $this->endSection() ?>

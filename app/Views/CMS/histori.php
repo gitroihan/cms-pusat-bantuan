@@ -76,7 +76,7 @@ Riwayat
                     data: 'alamat_ip'
                 },
                 {
-                    data: 'id_user'
+                    data: 'nama_user'
                 },
                 {
                     data: 'updated_at'
