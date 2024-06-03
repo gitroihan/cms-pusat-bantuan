@@ -91,13 +91,13 @@ Kategori
                 <form id="create-category-form" method="post" enctype="multipart/form-data">
                     <div class="mb-2 p-2 pt-0">
                         <label for="nama">Judul</label>
-                        <input type="text" id="judul" name="nama_kategori" class="form-control" maxlength="45" oninput="updateCharCounter()" required>
-                        <div id="charCounter" class="char-counter">45 karakter</div>
+                        <input type="text" id="judul" name="nama_kategori" class="form-control" maxlength="45" oninput="updateCharCounter('judul', 'charCounter')" required>
+                        <div id="charCounter" class="char-counter">0/45 karakter</div>
                     </div>
                     <div class="mb-2 p-2 pt-0">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea name="deskripsi_kategori" class="form-control" rows="5" id="deskripsi" maxlength="100" oninput="updateCharCounterdeskripsi()"></textarea>
-                        <div id="charCounterdeskripsi" class="char-counter">100 karakter</div>
+                        <textarea name="deskripsi_kategori" class="form-control" rows="5" id="deskripsi" maxlength="100" oninput="updateCharCounter('deskripsi', 'charCounterdeskripsi')"></textarea>
+                        <div id="charCounterdeskripsi" class="char-counter">0/100 karakter</div>
                     </div>
                     <div class="p-2 pt-0">
                         <label for="newProfilePicture">Pilih ikon:</label>
@@ -135,13 +135,13 @@ Kategori
                         <?= csrf_field() ?>
                         <div class="mb-2 p-2 pt-0">
                             <label for="nama">Judul</label>
-                            <input type="text" id="judulubah" name="nama_kategori" class="form-control" value="<?= $kat['nama_kategori'] ?>" maxlength="45" oninput="updateCharCounterubah()" required>
-                            <div id="charCounterubah" class="char-counter">45 karakter</div>
+                            <input type="text" id="judulubah<?= $kat['id'] ?>" name="nama_kategori" class="form-control" value="<?= $kat['nama_kategori'] ?>" maxlength="45" oninput="updateCharCounter('judulubah<?= $kat['id'] ?>', 'charCounterubah<?= $kat['id'] ?>')" required>
+                            <div id="charCounterubah<?= $kat['id'] ?>" class="char-counter">0/45 karakter</div>
                         </div>
                         <div class="mb-2 p-2 pt-0">
                             <label for="username">Deskripsi</label>
-                            <textarea name="deskripsi_kategori" class="form-control" rows="5" id="deskripsiubah" maxlength="100" oninput="updateCharCounterdeskripsiubah()"><?= $kat['deskripsi_kategori'] ?></textarea>
-                            <div id="charCounterdeskripsiubah" class="char-counter">100 karakter</div>
+                            <textarea name="deskripsi_kategori" class="form-control" rows="5" id="deskripsiubah<?= $kat['id'] ?>" maxlength="100" oninput="updateCharCounter('deskripsiubah<?= $kat['id'] ?>', 'charCounterdeskripsiubah<?= $kat['id'] ?>')"><?= $kat['deskripsi_kategori'] ?></textarea>
+                            <div id="charCounterdeskripsiubah<?= $kat['id'] ?>" class="char-counter">0/100 karakter</div>
                         </div>
                         <div class="p-2 pt-0">
                             <label for="newProfilePicture">Pilih ikon:</label>
@@ -276,66 +276,34 @@ Kategori
         updatePreview(input, 'previewUbah_' + id, 'fileErrorUbah_' + id);
     }
 </script>
-<!-- validasi judul -->
+<!-- validasi judul dan deskripsi -->
 <script>
-    function updateCharCounter() {
-        const input = document.getElementById('judul');
-        const counter = document.getElementById('charCounter');
+    function updateCharCounter(inputId, counterId) {
+        const input = document.getElementById(inputId);
+        const counter = document.getElementById(counterId);
         const maxLength = input.getAttribute('maxlength');
         const currentLength = input.value.length;
 
-        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
+        counter.textContent = `${currentLength}/${maxLength} karakter`;
+    }
+
+    function initializeCharCounters() {
+        // Initialize counters for 'Tambah kategori' modal
+        updateCharCounter('judul', 'charCounter');
+        updateCharCounter('deskripsi', 'charCounterdeskripsi');
+
+        // Initialize counters for 'Ubah kategori' modals
+        <?php foreach ($kategori as $kat) : ?>
+            updateCharCounter('judulubah<?= $kat['id'] ?>', 'charCounterubah<?= $kat['id'] ?>');
+            updateCharCounter('deskripsiubah<?= $kat['id'] ?>', 'charCounterdeskripsiubah<?= $kat['id'] ?>');
+        <?php endforeach; ?>
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {
-        updateCharCounter();
+        initializeCharCounters();
     });
 </script>
-<!-- validasi judul ubah-->
-<script>
-    function updateCharCounterubah() {
-        const input = document.getElementById('judulubah');
-        const counter = document.getElementById('charCounterubah');
-        const maxLength = input.getAttribute('maxlength');
-        const currentLength = input.value.length;
 
-        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
-    }
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-        updateCharCounterubah();
-    });
-</script>
-<!-- validasi deskripsi -->
-<script>
-    function updateCharCounterdeskripsi() {
-        const input = document.getElementById('deskripsi');
-        const counter = document.getElementById('charCounterdeskripsi');
-        const maxLength = input.getAttribute('maxlength');
-        const currentLength = input.value.length;
-
-        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
-    }
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-        updateCharCounterdeskripsi();
-    });
-</script>
-<!-- validasi deskripsi ubah -->
-<script>
-    function updateCharCounterdeskripsiubah() {
-        const input = document.getElementById('deskripsiubah');
-        const counter = document.getElementById('charCounterdeskripsiubah');
-        const maxLength = input.getAttribute('maxlength');
-        const currentLength = input.value.length;
-
-        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
-    }
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-        updateCharCounterdeskripsiubah();
-    });
-</script>
 
 
 <?php $this->endSection() ?>
