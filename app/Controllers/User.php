@@ -24,6 +24,7 @@ class User extends BaseController
         $model = new UserModel();
         $user = $model->where('nama', $username)->first();
 
+
         if ($user && password_verify($password, $user['password'])) {
             $session = session();
             $session->set([
