@@ -29,11 +29,13 @@ tentang kami
                                 <div class="mb-3 p-2 pt-0" style="text-align: left;">
                                     <input type="text" value="<?= $head[0]['id'] ?>" name="id" id="id" hidden>
                                     <label for="exampleFormControlInput1" class="form-label">Judul :</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Masukan Nama Artikel" name="judul_banner" value="<?= $head[0]['judul_banner'] ?>">
+                                    <input type="text" id="judulubah<?= $head[0]['id'] ?>" class="form-control" maxlength="45" oninput="updateCharCounter('judulubah<?= $head[0]['id'] ?>', 'charCounterubah<?= $head[0]['id'] ?>')" required placeholder="Masukan Nama Artikel" name="judul_banner" value="<?= $head[0]['judul_banner'] ?>">
+                                    <div id="charCounterubah<?= $head[0]['id'] ?>" class="char-counter">0/45 karakter</div>
                                 </div>
                                 <div class="col-12 mb-3 p-2 pt-0" style="text-align: left;">
                                     <label for="exampleFormControlTextarea1" class="form-label">Deskripsi :</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="deskripsi"><?= $head[0]['deskripsi'] ?></textarea>
+                                    <textarea class="form-control" id="deskripsiubah<?= $head[0]['id'] ?>" maxlength="100" oninput="updateCharCounter('deskripsiubah<?= $head[0]['id'] ?>', 'charCounterdeskripsiubah<?= $head[0]['id'] ?>')" rows="5" name="deskripsi"><?= $head[0]['deskripsi'] ?></textarea>
+                                    <div id="charCounterdeskripsiubah<?= $head[0]['id'] ?>" class="char-counter">0/100 karakter</div>
                                 </div>
                                 <div class="col-12 mb-3 p-2 pt-0" style="text-align: left;">
                                     <label for="exampleFormControlTextarea1" class="form-label">Gambar :</label>
@@ -78,11 +80,13 @@ tentang kami
                             <div class="modal-body">
                                 <div class="mb-3 p-2 pt-0" style="text-align: left;">
                                     <label for="exampleFormControlInput1" class="form-label">Judul :</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Judul Informasi" name="judul">
+                                    <input type="text" id="judul" class="form-control" maxlength="45" oninput="updateCharCounter('judul', 'charCounter')" placeholder="Judul Informasi" name="judul">
+                                    <div id="charCounter" class="char-counter">0/45 karakter</div>
                                 </div>
                                 <div class="col-12 mb-3 p-2 pt-0" style="text-align: left;">
                                     <label for="exampleFormControlTextarea1" class="form-label">Deskripsi :</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="8.5" name="deskripsi"></textarea>
+                                    <textarea class="form-control" rows="8.5" name="deskripsi" id="deskripsi" maxlength="500" oninput="updateCharCounter('deskripsi', 'charCounterdeskripsi')"></textarea>
+                                    <div id="charCounterdeskripsi" class="char-counter">0/500 karakter</div>
                                 </div>
                             </div>
                             <div class="modal-footer border-top pe-4">
@@ -137,12 +141,14 @@ tentang kami
                                             <div class="mb-3 p-2 pt-0" style="text-align: left;">
                                                 <label for="exampleFormControlInput1" class="form-label">Judul
                                                     :</label>
-                                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Masukan Nama Solusi" value="<?= $value['judul'] ?>" name="judul" id="deskripsi">
+                                                <input type="text" class="form-control" id="judulubahinformasi<?= $value['id'] ?>" placeholder="Masukan Nama Solusi" value="<?= $value['judul'] ?>" name="judul" maxlength="45" oninput="updateCharCounter('judulubahinformasi<?= $value['id'] ?>', 'charCounterubahinformasi<?= $value['id'] ?>')" required>
+                                                <div id="charCounterubahinformasi<?= $value['id'] ?>" class="char-counter">0/45 karakter</div>
                                             </div>
                                             <div class="col-12 mb-3 p-2 pt-0" style="text-align: left;">
                                                 <label for="exampleFormControlTextarea1" class="form-label">Deskripsi
                                                     :</label>
-                                                <textarea class="form-control" id="deskripsi" rows="8.5" name="deskripsi"><?= $value['deskripsi'] ?></textarea>
+                                                <textarea class="form-control" id="deskripsiubahinformasi<?= $value['id'] ?>" rows="8.5" name="deskripsi" maxlength="500" oninput="updateCharCounter('deskripsiubahinformasi<?= $value['id'] ?>', 'charCounterdeskripsiubahinformasi<?= $value['id'] ?>')"><?= $value['deskripsi'] ?></textarea>
+                                                <div id="charCounterdeskripsiubahinformasi<?= $value['id'] ?>" class="char-counter">0/100 karakter</div>
                                             </div>
                                         </div>
                                         <div class="modal-footer border-top pe-4">
@@ -194,4 +200,31 @@ tentang kami
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/sidebarmenu.js"></script>
 <script src="preaviewgambar.js"></script>
+<!-- validasi judul dan deskripsi -->
+<script>
+    function updateCharCounter(inputId, counterId) {
+        const input = document.getElementById(inputId);
+        const counter = document.getElementById(counterId);
+        const maxLength = input.getAttribute('maxlength');
+        const currentLength = input.value.length;
+
+        counter.textContent = `${currentLength}/${maxLength} karakter`;
+    }
+
+    function initializeCharCounters() {
+        updateCharCounter('judul', 'charCounter');
+        updateCharCounter('deskripsi', 'charCounterdeskripsi');
+
+        updateCharCounter('judulubah<?= $head[0]['id'] ?>', 'charCounterubah<?= $head[0]['id'] ?>');
+        updateCharCounter('deskripsiubah<?= $head[0]['id'] ?>', 'charCounterdeskripsiubah<?= $head[0]['id'] ?>');
+        <?php foreach ($tentang as $key => $value) { ?>
+            updateCharCounter('judulubahinformasi<?= $value['id'] ?>', 'charCounterubahinformasi<?= $value['id'] ?>');
+            updateCharCounter('deskripsiubahinformasi<?= $value['id'] ?>', 'charCounterdeskripsiubahinformasi<?= $value['id'] ?>');
+        <?php } ?>
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        initializeCharCounters();
+    });
+</script>
 <?php $this->endsection() ?>

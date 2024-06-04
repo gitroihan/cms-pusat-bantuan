@@ -44,7 +44,8 @@ Beranda
                         <?= csrf_field() ?>
                         <div class="mb-3 p-2 pt-0">
                             <label for="nama">Teks :</label>
-                            <input type="text" name="teks" class="form-control" value="<?= $list['teks'] ?>" required>
+                            <input type="text" name="teks" class="form-control" value="<?= $list['teks'] ?>" id="judul" maxlength="45" oninput="updateCharCounter('judul', 'charCounter')" required>
+                            <div id="charCounter" class="char-counter">0/45 karakter</div>
                         </div>
                         <div class="mb-3 p-2 pt-0">
                             <label for="newProfilePicture">Pilih Gambar :</label>
@@ -77,5 +78,23 @@ Beranda
     </div>
 <?php endforeach; ?>
 <script src="preaviewgambar.js"></script>
+<script>
+    function updateCharCounter(inputId, counterId) {
+        const input = document.getElementById(inputId);
+        const counter = document.getElementById(counterId);
+        const maxLength = input.getAttribute('maxlength');
+        const currentLength = input.value.length;
+
+        counter.textContent = `${currentLength}/${maxLength} karakter`;
+    }
+
+    function initializeCharCounters() {
+        updateCharCounter('judul', 'charCounter');
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        initializeCharCounters();
+    });
+</script>
 
 <?php $this->endSection() ?>
