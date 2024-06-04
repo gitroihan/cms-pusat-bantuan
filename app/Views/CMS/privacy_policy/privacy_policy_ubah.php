@@ -44,6 +44,8 @@ privacy policy
     </div>
 
 </div>
+<!-- ckeditor -->
+<script src="<?= base_url('ckeditor5-41.3.1-z2x1ah3b0t8e/build/ckeditor.js') ?>"></script>
 <script>
     ClassicEditor
         .create(document.querySelector('#editor'))
