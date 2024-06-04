@@ -1,4 +1,4 @@
-// photorofile
+// photorofile, tentang kamio dan beranda
 function readURL(input) {
     const file = input.files[0];
     const preview = document.getElementById('preaview');

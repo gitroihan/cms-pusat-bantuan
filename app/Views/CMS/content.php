@@ -5,30 +5,29 @@ Beranda
 <?php $this->endSection() ?>
 <?php $this->section('content') ?>
 <link rel="stylesheet" href="cms/css2/style-konten2.css">
- 
+
 <div class="bungkus">
     <div class="konten-banner">
-        
-    <div class="d-sm-flex align-items-center justify-content-between mb-3 ml-3">
+
+        <div class="d-sm-flex align-items-center justify-content-between mb-3 ml-3">
             <h1 class="h3 mr-auto mb-0 text-gray-800">Beranda</h1>
         </div>
         <?php foreach ($banner as $list) : ?>
-        <div class="col-12 d-flex flex-wrap gap-3 mb-4" style="height: fit-content; display: flex; flex-wrap: wrap; ">
-            <div class="card " style="padding: 24px; height: fit-content; width: 100%; flex: 1 0 500px;">
-                <div class="card-kanan-atas">
-                    <i class="fa-solid fa-pen-to-square mr-3" style="font-size: 30px;" type="button" data-bs-toggle="modal" data-bs-target="#ubahbanner<?= $list['id'] ?>"></i>
-                </div>
-                <div class="align-items-center justify-content-center p-0 ml-5 mt-3">
-                    <div class="image-box border align-items-center justify-content-center" style="width: 1000px; height: 400px;">
-                        <img src="<?= base_url('uploads/' . esc($list['gambar'])) ?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
-                        
+            <div class="col-12 d-flex flex-wrap gap-3 mb-4" style="height: fit-content; display: flex; flex-wrap: wrap; ">
+                <div class="card " style="padding: 24px; height: fit-content; width: 100%; flex: 1 0 500px;">
+                    <div class="card-kanan-atas">
+                        <i class="fa-solid fa-pen-to-square mr-3" style="font-size: 25px;" type="button" data-bs-toggle="modal" data-bs-target="#ubahbanner<?= $list['id'] ?>"></i>
+                    </div>
+                    <div class="align-items-center justify-content-center p-0 ml-5 mt-3">
+                        <div class="image-box border align-items-center justify-content-center" style="width: 1000px; height: 400px;">
+                            <img src="<?= base_url('uploads/' . esc($list['gambar'])) ?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <h3 class="h3-0 m-0 fs-5-vw mt-3"><?= $list['teks'] ?></h3>
                     </div>
                 </div>
-                <div class="col text-center">
-                    <h3 class="h3-0 m-0 fs-5-vw mt-3"><?= $list['teks'] ?></h3>
-                </div>
             </div>
-        </div>
         <?php endforeach; ?>
     </div>
 </div>
@@ -49,7 +48,24 @@ Beranda
                         </div>
                         <div class="mb-3 p-2 pt-0">
                             <label for="newProfilePicture">Pilih Gambar :</label>
-                            <input type="file" name="gambar" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            <input type="file" onchange="readURL(this);" name="gambar" class="form-control mb-3" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            <small id="fileError" class="text-danger"></small>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="image-box border" style="width: 500px; height: 200px;">
+                                    <img id="preaview" src="<?= base_url('uploads/' . esc($list['gambar'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <p>Deskripsi :</p>
+                                    <ul>
+                                        <li>Ukuran file maksimum 2MB</li>
+                                        <li>Extensi file .jpeg|.jpg|.png</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3 p-2 pt-0 text-right">
                             <button type="submit" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2"></i>SIMPAN</button>
@@ -60,5 +76,6 @@ Beranda
         </div>
     </div>
 <?php endforeach; ?>
+<script src="preaviewgambar.js"></script>
 
 <?php $this->endSection() ?>

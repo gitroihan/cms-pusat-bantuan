@@ -33,11 +33,28 @@ tentang kami
                                 </div>
                                 <div class="col-12 mb-3 p-2 pt-0" style="text-align: left;">
                                     <label for="exampleFormControlTextarea1" class="form-label">Deskripsi :</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="8.5" name="deskripsi"><?= $head[0]['deskripsi'] ?></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="deskripsi"><?= $head[0]['deskripsi'] ?></textarea>
                                 </div>
                                 <div class="col-12 mb-3 p-2 pt-0" style="text-align: left;">
                                     <label for="exampleFormControlTextarea1" class="form-label">Gambar :</label>
-                                    <input type="file" class="form-control" id="exampleFormControlInput1" placeholder="Masukan Nama Artikel" name="gambar" required>
+                                    <input type="file" onchange="readURL(this);" class="form-control" id="exampleFormControlInput1" name="gambar" required>
+                                    <small id="fileError" class="text-danger"></small>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="image-box border" style="width: 200px; height: 200px;">
+                                            <img id="preaview" src="<?= base_url('uploads/' . esc($head[0]['gambar'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: fit;">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div>
+                                            <p>Deskripsi :</p>
+                                            <ul>
+                                                <li>Ukuran file maksimum 2MB</li>
+                                                <li>Extensi file .jpeg|.jpg|.png</li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer border-top pe-4">
@@ -176,4 +193,5 @@ tentang kami
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/sidebarmenu.js"></script>
+<script src="preaviewgambar.js"></script>
 <?php $this->endsection() ?>

@@ -60,7 +60,7 @@ Detail Artikel
                 <div class="form-group col-12">
                     <label for="judul">Judul :</label>
                     <input type="text" class="form-control border-dark" id="judul" value="<?= $artikel['judul_artikel'] ?>" name="judul_artikel" maxlength="100" oninput="updateCharCounter()">
-                    <div id="charCounter" class="char-counter">100 karakter</div>
+                    <div id="charCounter" class="char-counter">0/100 karakter</div>
                 </div>
             </div>
             <div class="d-sm-flex mb-1 col-md-12 mx-auto mt-0">
@@ -185,7 +185,7 @@ Detail Artikel
         const maxLength = input.getAttribute('maxlength');
         const currentLength = input.value.length;
 
-        counter.textContent = `${maxLength - currentLength} karakter tersisa`;
+        counter.textContent = `${currentLength}/${maxLength} karakter`;
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {
