@@ -192,10 +192,10 @@ class Artikel extends BaseController
             $alamat_ip = $this->request->getIPAddress();
 
             // Siapkan deskripsi aktivitas
-            $aktivitas = 'menambahkan artikel: ' . $data['judul_artikel'];
+            $aktivitas = 'menambahkan draft artikel: ' . $data['judul_artikel'];
 
             $logData = [
-                'id_ref' => $userId,
+                'id_ref' => $artikelId,
                 'log_tipe' => 'tambah',
                 'aktivitas' => $aktivitas,
                 'alamat_ip' => $alamat_ip,
@@ -303,10 +303,10 @@ class Artikel extends BaseController
             $alamat_ip = $this->request->getIPAddress();
 
             // Siapkan deskripsi aktivitas
-            $aktivitas = 'menambahkan artikel: ' . $data['judul_artikel'];
+            $aktivitas = 'menambahkan publish artikel: ' . $data['judul_artikel'];
 
             $logData = [
-                'id_ref' => $userId,
+                'id_ref' => $artikelId,
                 'log_tipe' => 'tambah',
                 'aktivitas' => $aktivitas,
                 'alamat_ip' => $alamat_ip,
@@ -464,8 +464,8 @@ class Artikel extends BaseController
             $aktivitas .= implode(', ', $changes);
 
             $logData = [
-                'id_ref' => $userId,
-                'log_tipe' => 'ubah',
+                'id_ref' => $id,
+                'log_tipe' => 'ubah dan simpan draft',
                 'aktivitas' => $aktivitas,
                 'alamat_ip' => $alamat_ip,
                 'id_user' => $userId,
@@ -473,7 +473,16 @@ class Artikel extends BaseController
             ];
             // Simpan log ke tabel riwayat
             $riwayatModel->insert($logData);
-        }
+        }else{
+            $logData = [
+                'id_ref' => $id,
+                'log_tipe' => 'draft',
+                'aktivitas' => 'memasukan artikel ke draft',
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            $riwayatModel->insert($logData);}
 
         // return redirect()->to('/detail_artikel/' . $id);
         return redirect()->to('/cmsartikel');
@@ -591,14 +600,24 @@ class Artikel extends BaseController
             $aktivitas .= implode(', ', $changes);
 
             $logData = [
-                'id_ref' => $userId,
-                'log_tipe' => 'ubah',
+                'id_ref' => $id,
+                'log_tipe' => 'ubah dan publish',
                 'aktivitas' => $aktivitas,
                 'alamat_ip' => $alamat_ip,
                 'id_user' => $userId,
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
             // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+        }else{
+            $logData = [
+                'id_ref' => $id,
+                'log_tipe' => 'publish',
+                'aktivitas' => 'mempublish artikel',
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
             $riwayatModel->insert($logData);
         }
 
@@ -624,7 +643,7 @@ class Artikel extends BaseController
             $aktivitas = 'menghapus artikel: ' . $originalData['judul_artikel'];
 
             $logData = [
-                'id_ref' => $userId,
+                'id_ref' => $id,
                 'log_tipe' => 'hapus',
                 'aktivitas' => $aktivitas,
                 'alamat_ip' => $alamat_ip,
