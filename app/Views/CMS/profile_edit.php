@@ -30,7 +30,8 @@ User
                 <input type="text" class="form-control" value="<?= esc($data['role']); ?>" readonly>
             </div>
             <div class="text-right">
-                <button type="submit" id="editProfileButton" class="btn text-light mt-3" style="background-color: #03C988;">SIMPAN</button>
+                <button type="submit" id="editProfileButton" class="btn text-light mt-3" style="background-color: #03C988;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
+                SIMPAN</button>
             </div>
         </form>
     </div>
@@ -51,10 +52,11 @@ User
                                 <input class="form-control border-dark" type='file' onchange="readURL(this);" accept="image/*" name="foto_profile" />
                                 <small id="fileError" class="text-danger"></small>
                                 <div class="d-flex position-relative justify-content-center align-items-center mb-3 mt-3 bordered ">
-                                    <img id="preaview" class="rounded-circle border" alt="preview" src="" width="150" height="150">
+                                    <img id="preaview" class="rounded-circle border" alt="preview" src="<?= base_url('uploads/' . esc($data['foto_profile'])); ?>" width="150" height="150">
                                 </div>
                             </div>
-                            <button type="submit" class="btn text-light ml-0" style="background-color: #03C988;">simpan</button>
+                            <button type="submit" class="btn text-light ml-0" style="background-color: #03C988;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
+                            SIMPAN</button>
                         </form>
                     </div>
                 </div>

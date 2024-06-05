@@ -68,6 +68,8 @@ class Home extends BaseController
         $kontakmodel = new kontakmodel();
 
         $id = $this->request->getPost('id');
+        $originalData = $kontakmodel->find($id);
+
         $data = [
             'nama' => $this->request->getPost('nama'),
             'email' => $this->request->getPost('email'),
@@ -80,21 +82,50 @@ class Home extends BaseController
         // Simpan perubahan ke dalam database
         $kontakmodel->update($id, $data);
         session()->setFlashdata('kontak_updated', true);
+
         // Data untuk tabel riwayat
         $session = session();
         $userId = $session->get('user_id');
         $riwayatModel = new LogAktivitasModel();
         $alamat_ip = $this->request->getIPAddress();
-        $logData = [
-            'id_ref' => $userId,
-            'log_tipe' => 'ubah',
-            'aktivitas' => 'mengubah informasi kontak',
-            'alamat_ip' => $alamat_ip,
-            'id_user' => $userId,
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-        // Simpan log ke tabel riwayat
-        $riwayatModel->insert($logData);
+        
+        // Tentukan aktivitas berdasarkan perubahan yang dilakukan
+        $aktivitas = 'mengubah informasi kontak: ';
+        $changes = [];
+
+        if ($data['nama'] !== $originalData['nama']) {
+            $changes[] = 'nama';
+        }
+        if ($data['email'] !== $originalData['email']) {
+            $changes[] = 'email';
+        }
+        if ($data['nomor_telepon'] !== $originalData['nomor_telepon']) {
+            $changes[] = 'nomor telepon';
+        }
+        if ($data['alamat'] !== $originalData['alamat']) {
+            $changes[] = 'alamat';
+        }
+        if ($data['link_whatsapp'] !== $originalData['link_whatsapp']) {
+            $changes[] = 'link whatsapp';
+        }
+        if ($data['link_instagram'] !== $originalData['link_instagram']) {
+            $changes[] = 'link instagram';
+        }
+
+        if (!empty($changes)) {
+            $aktivitas .= implode(', ', $changes);
+
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'ubah',
+                'aktivitas' => $aktivitas,
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+        }
 
         return redirect()->to('/cmskontak');
     }
@@ -116,20 +147,52 @@ class Home extends BaseController
     public function ubah_content($id)
     {
         $bannermodel = new BannerModel();
+        $originalData = $bannermodel->find($id);
 
         $data = [
             'teks' => $this->request->getPost('teks'),
         ];
 
         $image = $this->request->getFile('gambar');
+        $isImageUpdated = false;
         if ($image->isValid() && !$image->hasMoved()) {
             $originalName = $image->getClientName();
             $image->move(ROOTPATH . 'public/uploads/', $originalName);
             $data['gambar'] = $originalName;
+            $isImageUpdated = true;
         }
 
         // Simpan perubahan ke dalam database
         $bannermodel->update($id, $data);
+
+        // Data untuk tabel riwayat
+        $session = session();
+        $userId = $session->get('user_id');
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+
+        // Tentukan aktivitas berdasarkan perubahan yang dilakukan
+        $aktivitas = '';
+        if ($data['teks'] !== $originalData['teks'] && $isImageUpdated) {
+            $aktivitas = 'mengubah judul dan gambar di beranda';
+        } elseif ($data['teks'] !== $originalData['teks']) {
+            $aktivitas = 'mengubah judul di beranda';
+        } elseif ($isImageUpdated) {
+            $aktivitas = 'mengubah gambar di beranda';
+        }
+
+        if ($aktivitas) {
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'ubah',
+                'aktivitas' => $aktivitas,
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+        }
 
         return redirect()->to("/cmscontent");
     }
@@ -171,6 +234,22 @@ class Home extends BaseController
         // Simpan perubahan ke dalam database
         $privacymodel->update($id, $data);
 
+        // Data untuk tabel riwayat
+        $session = session();
+        $userId = $session->get('user_id');
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+        $logData = [
+            'id_ref' => $userId,
+            'log_tipe' => 'ubah',
+            'aktivitas' => 'mengubah teks dari privacy policy',
+            'alamat_ip' => $alamat_ip,
+            'id_user' => $userId,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        // Simpan log ke tabel riwayat
+        $riwayatModel->insert($logData);
+
         return redirect()->to('/cmsprivacy');
     }
 
@@ -210,6 +289,22 @@ class Home extends BaseController
 
         // Simpan perubahan ke dalam database
         $termsmodel->update($id, $data);
+
+        // Data untuk tabel riwayat
+        $session = session();
+        $userId = $session->get('user_id');
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+        $logData = [
+            'id_ref' => $userId,
+            'log_tipe' => 'ubah',
+            'aktivitas' => 'mengubah teks dari terms and condition',
+            'alamat_ip' => $alamat_ip,
+            'id_user' => $userId,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+        // Simpan log ke tabel riwayat
+        $riwayatModel->insert($logData);
 
         return redirect()->to('/cmsterms_and_condition');
     }

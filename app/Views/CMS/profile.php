@@ -44,11 +44,11 @@ User
                 <input type="text" class="form-control" value="<?= esc($data['role']); ?>" readonly>
             </div>
             <div class="text-right">
-                <a href="/ubah_profile" class="btn text-light mt-3" style="background-color: #03C988;">
+                <a href="/ubah_profile" class="btn text-light mt-3" style="background-color: #03C988;"><i class="fa-solid fa-pen-to-square mr-1"></i>
                     UBAH
                 </a>
-                <button type="button" class="btn text-light shadow-sm mt-3" data-bs-toggle="modal" data-bs-target="#passwordModal" style="background-color: #03C988;">
-                    UBAH PASSWORD
+                <button class="btn text-light  mt-3" data-bs-toggle="modal" data-bs-target="#passwordModal" style="background-color: #03C988;"><i class="fa-solid fa-pen-to-square mr-1"></i>
+                UBAH PASSWORD
                 </button>
             </div>
         </div>
@@ -59,9 +59,7 @@ User
             <div class="modal-content">
                 <div class="modal-header border-bottom">
                     <h5 class="modal-title" id="passwordModalLabel">Ubah Password</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="form-ubah-password" method="post" enctype="multipart/form-data">
@@ -75,7 +73,8 @@ User
                             <input type="password" name="password-baru" class="form-control" required>
                         </div>
                         <div class="text-right">
-                            <button type="button" id="btn-ubah" class="btn" style="background-color: #03C988; color: white;">SIMPAN</button>
+                            <button type="button" id="btn-ubah" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
+                            SIMPAN</button>
                         </div>
                     </form>
                 </div>
@@ -118,7 +117,6 @@ User
                     } else {
                         $('.overlay').hide();
                         alert('Anda gagal menyimpan data');
-                        $('#passwordModal').modal('hide');
                         $('#form-ubah-password')[0].reset();
                     }
                 },

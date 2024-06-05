@@ -75,10 +75,17 @@ class Kategori extends BaseController
         // Data untuk tabel riwayat
         $riwayatModel = new LogAktivitasModel();
         $alamat_ip = $this->request->getIPAddress();
+
+        // Mengambil ID kategori yang baru saja disimpan
+        $newKategoriId = $kategoriModel->insertID();
+
+        // Menyiapkan deskripsi aktivitas yang lebih detail
+        $aktivitas = "menambah kategori: {$data['nama_kategori']} dengan deskripsi: {$data['deskripsi_kategori']} dan ikon: {$path}";
+
         $logData = [
-            'id_ref' => $userId,
+            'id_ref' => $newKategoriId,
             'log_tipe' => 'tambah',
-            'aktivitas' => 'menambah kategori',
+            'aktivitas' => $aktivitas,
             'alamat_ip' => $alamat_ip,
             'id_user' => $userId,
             'updated_at' => date('Y-m-d H:i:s'),
@@ -96,9 +103,12 @@ class Kategori extends BaseController
         // Mendapatkan nama kategori di database
         $kategoriLama = $kategoriModel->find($id);
         $namaKategoriLama = $kategoriLama['nama_kategori'];
+        $deskripsiKategoriLama = $kategoriLama['deskripsi_kategori'];
+        $ikonLama = $kategoriLama['ikon'];
 
         // Mendapatkan nama kategori baru
         $namaKategoriBaru = $this->request->getPost('nama_kategori');
+        $deskripsiKategoriBaru = $this->request->getPost('deskripsi_kategori');
 
         // Membuat slug unik jika nama kategori berubah
         $slug = $namaKategoriLama === $namaKategoriBaru ? $kategoriLama['slug'] : $this->generateUniqueSlug($namaKategoriBaru);
@@ -124,14 +134,31 @@ class Kategori extends BaseController
         $userId = $session->get('user_id');
         $riwayatModel = new LogAktivitasModel();
         $alamat_ip = $this->request->getIPAddress();
+
+        // Menyiapkan deskripsi aktivitas yang lebih detail
+        $aktivitas = "mengubah kategori: ";
+
+        if ($namaKategoriLama !== $namaKategoriBaru) {
+            $aktivitas .= "nama dari '{$namaKategoriLama}' menjadi '{$namaKategoriBaru}', ";
+        }
+        if ($deskripsiKategoriLama !== $deskripsiKategoriBaru) {
+            $aktivitas .= "deskripsi dari '{$deskripsiKategoriLama}' menjadi '{$deskripsiKategoriBaru}', ";
+        }
+        if (isset($data['ikon'])) {
+            $aktivitas .= "ikon dari '{$ikonLama}' menjadi '{$data['ikon']}'";
+        }
+
+        $aktivitas = rtrim($aktivitas, ', '); // Menghapus koma terakhir jika ada
+
         $logData = [
-            'id_ref' => $userId,
+            'id_ref' => $id,
             'log_tipe' => 'ubah',
-            'aktivitas' => 'mengubah kategori',
+            'aktivitas' => $aktivitas,
             'alamat_ip' => $alamat_ip,
             'id_user' => $userId,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
+
         // Simpan log ke tabel riwayat
         $riwayatModel->insert($logData);
 
@@ -141,7 +168,13 @@ class Kategori extends BaseController
     public function hapus_kategori($id)
     {
         $kategoriModel = new KategoriModel();
-        if ($kategoriModel->find($id)) {
+        $kategori = $kategoriModel->find($id);
+
+        if ($kategori) {
+            // Simpan data kategori sebelum dihapus untuk keperluan log
+            $namaKategori = $kategori['nama_kategori'];
+
+            // Hapus kategori dari database
             $kategoriModel->delete($id);
 
             // Data untuk tabel riwayat
@@ -149,14 +182,19 @@ class Kategori extends BaseController
             $userId = $session->get('user_id');
             $riwayatModel = new LogAktivitasModel();
             $alamat_ip = $this->request->getIPAddress();
+
+            // Menyiapkan deskripsi aktivitas yang lebih detail
+            $aktivitas = "menghapus kategori: {$namaKategori}";
+
             $logData = [
-                'id_ref' => $userId,
+                'id_ref' => $id,
                 'log_tipe' => 'hapus',
-                'aktivitas' => 'menghapus kategori',
+                'aktivitas' => $aktivitas,
                 'alamat_ip' => $alamat_ip,
                 'id_user' => $userId,
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
+
             // Simpan log ke tabel riwayat
             $riwayatModel->insert($logData);
 
@@ -273,14 +311,19 @@ class Kategori extends BaseController
         ];
 
         $kategoriModel->save($data);
+        $kategoriId = $kategoriModel->getInsertID();
 
         // Data untuk tabel riwayat
         $riwayatModel = new LogAktivitasModel();
         $alamat_ip = $this->request->getIPAddress();
+
+        // Menyiapkan deskripsi aktivitas yang lebih detail
+        $aktivitas = "menambah subkategori: {$namakategori}";
+
         $logData = [
-            'id_ref' => $userId,
+            'id_ref' => $kategoriId,
             'log_tipe' => 'tambah',
-            'aktivitas' => 'menambah subkategori',
+            'aktivitas' => $aktivitas,
             'alamat_ip' => $alamat_ip,
             'id_user' => $userId,
             'updated_at' => date('Y-m-d H:i:s'),
@@ -296,15 +339,33 @@ class Kategori extends BaseController
         $kategoriModel = new KategoriModel();
         $id_subkategori = $this->request->getPost('id_parent');
 
-        // Mendapatkan nama kategori di database
+        // Mendapatkan data kategori lama
         $kategoriLama = $kategoriModel->find($id);
         $namaKategoriLama = $kategoriLama['nama_kategori'];
+        $deskripsiKategoriLama = $kategoriLama['deskripsi_kategori'];
+        $ikonLama = $kategoriLama['ikon'];
 
-        // Mendapatkan nama kategori baru
+        // Mendapatkan data kategori baru dari formulir
         $namaKategoriBaru = $this->request->getPost('nama_kategori');
+        $deskripsiKategoriBaru = $this->request->getPost('deskripsi_kategori');
+        $gambarBaru = $this->request->getFile('ikon');
 
         // Membuat slug unik jika nama kategori berubah
         $slug = $namaKategoriLama === $namaKategoriBaru ? $kategoriLama['slug'] : $this->generateUniqueSlug($namaKategoriBaru);
+
+
+        // Menyiapkan deskripsi aktivitas yang lebih detail
+        $aktivitas = "mengubah subkategori: ";
+
+        if ($namaKategoriLama !== $namaKategoriBaru) {
+            $aktivitas .= "nama dari '{$namaKategoriLama}' menjadi '{$namaKategoriBaru}', ";
+        }
+        if ($deskripsiKategoriLama !== $deskripsiKategoriBaru) {
+            $aktivitas .= "deskripsi dari '{$deskripsiKategoriLama}' menjadi '{$deskripsiKategoriBaru}', ";
+        }
+        if ($gambarBaru->isValid() && !$gambarBaru->hasMoved()) {
+            $aktivitas .= "ikon dari '{$ikonLama}' menjadi '{$gambarBaru->getClientName()}'";
+        }
 
         $data = [
             'nama_kategori' => $this->request->getPost('nama_kategori'),
@@ -312,11 +373,16 @@ class Kategori extends BaseController
             'slug' => $slug
         ];
 
-        $image = $this->request->getFile('ikon');
-        if ($image->isValid() && !$image->hasMoved()) {
-            $originalName = $image->getClientName();
-            $image->move(ROOTPATH . 'public/uploads/icons', $originalName);
-            $data['ikon'] = $originalName;
+        // Jika ada gambar baru yang diunggah, simpan gambar baru
+        if ($gambarBaru->isValid() && !$gambarBaru->hasMoved()) {
+            $namaGambarBaru = $gambarBaru->getClientName();
+            $gambarBaru->move(ROOTPATH . 'public/uploads/icons', $namaGambarBaru);
+            $data['ikon'] = $namaGambarBaru;
+
+            // Hapus gambar lama jika ada perubahan gambar
+            if ($ikonLama != 'default.png') {
+                unlink(ROOTPATH . 'public/uploads/icons/' . $ikonLama);
+            }
         }
 
         // Simpan perubahan ke dalam database
@@ -327,15 +393,16 @@ class Kategori extends BaseController
         $userId = $session->get('user_id');
         $riwayatModel = new LogAktivitasModel();
         $alamat_ip = $this->request->getIPAddress();
+
+        // Simpan log ke tabel riwayat
         $logData = [
-            'id_ref' => $userId,
+            'id_ref' => $id,
             'log_tipe' => 'ubah',
-            'aktivitas' => 'mengubah subkategori',
+            'aktivitas' => $aktivitas,
             'alamat_ip' => $alamat_ip,
             'id_user' => $userId,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
-        // Simpan log ke tabel riwayat
         $riwayatModel->insert($logData);
 
         // Redirect pengguna ke halaman yang sesuai
@@ -346,7 +413,15 @@ class Kategori extends BaseController
     {
         $kategoriModel = new KategoriModel();
         $id_subkategori = $this->request->getPost('id_parent');
-        if ($kategoriModel->find($id)) {
+        
+        // Mendapatkan data kategori lama sebelum dihapus
+        $kategoriLama = $kategoriModel->find($id);
+        if ($kategoriLama) {
+            $namaKategoriLama = $kategoriLama['nama_kategori'];
+            $deskripsiKategoriLama = $kategoriLama['deskripsi_kategori'];
+            $ikonLama = $kategoriLama['ikon'];
+
+            // Menghapus kategori dari database
             $kategoriModel->delete($id);
 
             // Data untuk tabel riwayat
@@ -354,15 +429,22 @@ class Kategori extends BaseController
             $userId = $session->get('user_id');
             $riwayatModel = new LogAktivitasModel();
             $alamat_ip = $this->request->getIPAddress();
+
+            // Menyiapkan deskripsi aktivitas yang lebih detail
+            $aktivitas = "menghapus subkategori: ";
+            $aktivitas .= "nama '{$namaKategoriLama}', ";
+            $aktivitas .= "deskripsi '{$deskripsiKategoriLama}', ";
+            $aktivitas .= "ikon '{$ikonLama}'";
+
+            // Simpan log ke tabel riwayat
             $logData = [
-                'id_ref' => $userId,
+                'id_ref' => $id,
                 'log_tipe' => 'hapus',
-                'aktivitas' => 'menghapus subkategori',
+                'aktivitas' => $aktivitas,
                 'alamat_ip' => $alamat_ip,
                 'id_user' => $userId,
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
-            // Simpan log ke tabel riwayat
             $riwayatModel->insert($logData);
             return redirect()->to("/cmssubkategori/{$id_subkategori}")->with('message', 'Kategori berhasil dihapus.');
         } else {

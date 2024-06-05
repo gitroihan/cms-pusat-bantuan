@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ArtikelModel;
 use App\Models\KategoriModel;
 use App\Models\LayoutModel;
+use App\Models\LogAktivitasModel;
 use App\Models\TagModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -185,6 +186,26 @@ class Artikel extends BaseController
                     }
                 }
             }
+
+            // Data untuk tabel riwayat
+            $riwayatModel = new LogAktivitasModel();
+            $alamat_ip = $this->request->getIPAddress();
+
+            // Siapkan deskripsi aktivitas
+            $aktivitas = 'menambahkan artikel: ' . $data['judul_artikel'];
+
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'tambah',
+                'aktivitas' => $aktivitas,
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+
             return redirect()->to('/cmsartikel');
         }
     }
@@ -277,6 +298,24 @@ class Artikel extends BaseController
                     }
                 }
             }
+            // Data untuk tabel riwayat
+            $riwayatModel = new LogAktivitasModel();
+            $alamat_ip = $this->request->getIPAddress();
+
+            // Siapkan deskripsi aktivitas
+            $aktivitas = 'menambahkan artikel: ' . $data['judul_artikel'];
+
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'tambah',
+                'aktivitas' => $aktivitas,
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
         }
 
         return redirect()->to('/tambah_artikel');
@@ -388,6 +427,54 @@ class Artikel extends BaseController
             }
         }
 
+        // Data untuk tabel riwayat
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+
+        // Tentukan aktivitas berdasarkan perubahan yang dilakukan
+        $aktivitas = 'mengubah artikel: ';
+        $changes = [];
+
+        if ($data['judul_artikel'] !== $artikel['judul_artikel']) {
+            $changes[] = 'judul artikel';
+        }
+        if ($data['isi'] !== $artikel['isi']) {
+            $changes[] = 'paragraf 1';
+        }
+        if ($data['isi2'] !== $artikel['isi2']) {
+            $changes[] = 'paragraf 2';
+        }
+        if ($data['id_kategori'] !== $artikel['id_kategori']) {
+            $changes[] = 'kategori';
+        }
+        if ($data['id_layout'] !== $artikel['id_layout']) {
+            $changes[] = 'layout';
+        }
+        if ($gambarArtikel && $gambarArtikel->isValid() && $data['gambar_artikel'] !== $artikel['gambar_artikel']) {
+            $changes[] = 'gambar artikel';
+        }
+        if ($gambar1 && $gambar1->isValid() && $data['gambar_1'] !== $artikel['gambar_1']) {
+            $changes[] = 'gambar 1';
+        }
+        if ($gambar2 && $gambar2->isValid() && $data['gambar_2'] !== $artikel['gambar_2']) {
+            $changes[] = 'gambar 2';
+        }
+
+        if (!empty($changes)) {
+            $aktivitas .= implode(', ', $changes);
+
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'ubah',
+                'aktivitas' => $aktivitas,
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+        }
+
         // return redirect()->to('/detail_artikel/' . $id);
         return redirect()->to('/cmsartikel');
     }
@@ -467,6 +554,54 @@ class Artikel extends BaseController
             }
         }
 
+        // Data untuk tabel riwayat
+        $riwayatModel = new LogAktivitasModel();
+        $alamat_ip = $this->request->getIPAddress();
+
+        // Tentukan aktivitas berdasarkan perubahan yang dilakukan
+        $aktivitas = 'mengubah artikel: ';
+        $changes = [];
+
+        if ($data['judul_artikel'] !== $artikel['judul_artikel']) {
+            $changes[] = 'judul artikel';
+        }
+        if ($data['isi'] !== $artikel['isi']) {
+            $changes[] = 'paragraf 1';
+        }
+        if ($data['isi2'] !== $artikel['isi2']) {
+            $changes[] = 'paragraf 2';
+        }
+        if ($data['id_kategori'] !== $artikel['id_kategori']) {
+            $changes[] = 'kategori';
+        }
+        if ($data['id_layout'] !== $artikel['id_layout']) {
+            $changes[] = 'layout';
+        }
+        if ($gambarArtikel && $gambarArtikel->isValid() && $data['gambar_artikel'] !== $artikel['gambar_artikel']) {
+            $changes[] = 'gambar artikel';
+        }
+        if ($gambar1 && $gambar1->isValid() && $data['gambar_1'] !== $artikel['gambar_1']) {
+            $changes[] = 'gambar 1';
+        }
+        if ($gambar2 && $gambar2->isValid() && $data['gambar_2'] !== $artikel['gambar_2']) {
+            $changes[] = 'gambar 2';
+        }
+
+        if (!empty($changes)) {
+            $aktivitas .= implode(', ', $changes);
+
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'ubah',
+                'aktivitas' => $aktivitas,
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+        }
+
         // return redirect()->to('/detail_artikel/' . $id);
         return redirect()->to('/cmsartikel');
     }
@@ -474,7 +609,32 @@ class Artikel extends BaseController
     public function hapus_artikel($id)
     {
         $artikelModel = new ArtikelModel();
-        $artikelModel->delete($id);
+        $riwayatModel = new LogAktivitasModel();
+        $originalData = $artikelModel->find($id);
+        if ($originalData) {
+            // Hapus artikel dari database
+            $artikelModel->delete($id);
+
+            // Data untuk tabel riwayat
+            $session = session();
+            $userId = $session->get('user_id');
+            $alamat_ip = $this->request->getIPAddress();
+
+            // Siapkan deskripsi aktivitas
+            $aktivitas = 'menghapus artikel: ' . $originalData['judul_artikel'];
+
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'hapus',
+                'aktivitas' => $aktivitas,
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+        }
 
         return redirect()->to('/cmsartikel');
     }

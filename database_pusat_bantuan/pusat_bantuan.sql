@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2024 at 09:07 AM
+-- Generation Time: Jun 05, 2024 at 06:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -113,7 +113,7 @@ CREATE TABLE `header_tentang_kami` (
 --
 
 INSERT INTO `header_tentang_kami` (`id`, `judul_banner`, `deskripsi`, `gambar`) VALUES
-(1, 'pt goldstep indonesiaan', 'default', 'banner.jpg');
+(1, 'pt goldstep indonesia', 'default ', 'banner.jpg');
 
 -- --------------------------------------------------------
 
@@ -165,7 +165,7 @@ CREATE TABLE `kontak` (
 --
 
 INSERT INTO `kontak` (`id`, `nama`, `email`, `alamat`, `nomor_telepon`, `link_whatsapp`, `link_instagram`) VALUES
-(1, 'goldstep', 'goldstep.co.id', 'Taman Kopo Indah 3, Ruko D35\r\nBandung, Indonesiaa', '+62 812-2218-8524', '', '');
+(1, 'goldstep teknologi indonesia', 'goldstep.co.id', 'Taman Kopo Indah 3, Ruko D35\r\nBandung, Indonesiaa', '+62 812-2218-8524', '', '');
 
 -- --------------------------------------------------------
 
@@ -324,7 +324,60 @@ INSERT INTO `log_aktivitas` (`id`, `id_ref`, `log_tipe`, `aktivitas`, `alamat_ip
 (134, 2, 'tambah', 'menambah kategori', 0, 2, '2024-06-03 02:38:10'),
 (135, 2, 'ubah', 'mengubah kategori', 0, 2, '2024-06-03 02:38:22'),
 (136, 2, 'ubah', 'mengubah kategori', 0, 2, '2024-06-03 02:38:31'),
-(137, 2, 'hapus', 'menghapus kategori', 0, 2, '2024-06-03 02:39:53');
+(137, 2, 'hapus', 'menghapus kategori', 0, 2, '2024-06-03 02:39:53'),
+(138, 2, 'tambah', 'menambah kategori', 0, 2, '2024-06-04 19:30:33'),
+(139, 2, 'ubah', 'mengubah kategori', 0, 2, '2024-06-04 19:31:31'),
+(140, 2, 'hapus', 'menghapus kategori', 0, 2, '2024-06-04 19:31:53'),
+(141, 2, 'ubah', 'mengubah isi dari terms and condition', 0, 2, '2024-06-04 19:39:35'),
+(142, 2, 'ubah', 'mengubah teks dari privacy policy', 0, 2, '2024-06-04 19:41:56'),
+(143, 2, 'ubah', 'mengubah judul di beranda', 0, 2, '2024-06-04 19:48:41'),
+(144, 2, 'ubah', 'mengubah judul dan gambar di beranda', 0, 2, '2024-06-04 19:49:02'),
+(145, 2, 'ubah', 'mengubah gambar di beranda', 0, 2, '2024-06-04 19:49:27'),
+(146, 2, 'ubah', 'mengubah informasi kontak: nama, email, link whatsapp', 0, 2, '2024-06-04 19:54:55'),
+(147, 2, 'ubah', 'mengubah informasi kontak: email, link whatsapp', 0, 2, '2024-06-04 19:55:27'),
+(148, 2, 'tambah', 'menambahkan entri Tentang Kami: 1', 0, 2, '2024-06-04 19:58:39'),
+(149, 2, 'tambah', 'menambahkan entri Tentang Kami: halooo', 0, 2, '2024-06-04 20:01:46'),
+(150, 2, 'hapus', 'menghapus entri Tentang Kami: halooo', 0, 2, '2024-06-04 20:01:50'),
+(151, 2, 'ubah', 'mengubah entri Tentang Kami: deskripsi', 0, 2, '2024-06-04 20:04:44'),
+(152, 2, 'ubah', 'mengubah entri Tentang Kami: judul', 0, 2, '2024-06-04 20:05:04'),
+(153, 2, 'ubah', 'mengubah entri Tentang Kami: judul, deskripsi', 0, 2, '2024-06-04 20:05:16'),
+(154, 2, 'ubah', 'mengubah header Tentang Kami: judul banner, deskripsi, gambar', 0, 2, '2024-06-04 20:09:41'),
+(155, 2, 'ubah', 'mengubah header Tentang Kami: gambar', 0, 2, '2024-06-04 20:10:09'),
+(156, 2, 'tambah', 'menambahkan artikel: tes', 0, 2, '2024-06-04 20:23:20'),
+(157, 2, 'ubah', 'mengubah artikel: paragraf 2', 0, 2, '2024-06-04 20:29:24'),
+(158, 2, 'ubah', 'mengubah artikel: paragraf 1, paragraf 2', 0, 2, '2024-06-04 20:30:21'),
+(159, 2, 'hapus', 'menghapus artikel: tes', 0, 2, '2024-06-04 20:30:42'),
+(160, 116, 'tambah', 'menambah kategori: tes dengan deskripsi:  dan ikon: default.png', 0, 2, '2024-06-04 20:33:36'),
+(161, 2, 'hapus', 'menghapus kategori', 0, 2, '2024-06-04 20:33:53'),
+(162, 117, 'tambah', 'menambah kategori: tes dengan deskripsi: 123 dan ikon: default.png', 0, 2, '2024-06-04 20:37:20'),
+(163, 117, 'ubah', 'mengubah kategori: nama dari \'tes\' menjadi \'tes  gg\'', 0, 2, '2024-06-04 20:37:40'),
+(164, 117, 'ubah', 'mengubah kategori: deskripsi dari \'123\' menjadi \'123  \'', 0, 2, '2024-06-04 20:37:55'),
+(165, 117, 'ubah', 'mengubah kategori: nama dari \'tes  gg\' menjadi \'tes  gg    \', deskripsi dari \'123  \' menjadi \'123      \'', 0, 2, '2024-06-04 20:38:06'),
+(166, 117, 'hapus', 'menghapus kategori: tes  gg    ', 0, 2, '2024-06-04 20:40:22'),
+(167, 118, 'tambah', 'menambah kategori: tes sub dengan deskripsi:  dan ikon: default.png', 0, 2, '2024-06-04 20:40:51'),
+(168, 119, 'tambah', 'menambah subkategori: tes tambah', 0, 2, '2024-06-04 20:43:07'),
+(169, 119, 'tambah', 'menambah subkategori: tes tambah', 0, 2, '2024-06-04 20:43:07'),
+(170, 120, 'tambah', 'menambah subkategori: tes', 0, 2, '2024-06-04 20:43:26'),
+(171, 120, 'tambah', 'menambah subkategori: tes', 0, 2, '2024-06-04 20:43:26'),
+(172, 2, 'hapus', 'menghapus subkategori', 0, 2, '2024-06-04 20:44:04'),
+(173, 121, 'tambah', 'menambah subkategori: tes tambah2', 0, 2, '2024-06-04 20:44:11'),
+(174, 121, 'ubah', 'mengubah subkategori: tes tambah2 menjadi tes tambah2', 0, 2, '2024-06-04 20:46:07'),
+(175, 118, 'ubah', 'mengubah kategori: ikon dari \'default.png\' menjadi \'klinik.png\'', 0, 2, '2024-06-04 20:47:44'),
+(176, 118, 'ubah', 'mengubah kategori: nama dari \'tes sub\' menjadi \'tes subww\', deskripsi dari \'\' menjadi \'www\', ikon dari \'klinik.png\' menjadi \'gambarartikelanakkecil.png\'', 0, 2, '2024-06-04 20:48:01'),
+(178, 121, 'ubah', 'mengubah subkategori: nama dari \'tes tambah2   \' menjadi \'tes tambah3\', ', 0, 2, '2024-06-04 20:58:30'),
+(179, 121, 'ubah', 'mengubah subkategori: deskripsi dari \'tambah deskripsi dan gambar\' menjadi \'tambah deskripsi dan gambar  \', ikon dari \'rumah sakit.jpeg\' menjadi \'klinik.png\'', 0, 2, '2024-06-04 20:58:52'),
+(180, 121, 'hapus', 'menghapus subkategori: nama \'tes tambah3\', deskripsi \'tambah deskripsi dan gambar  \', ikon \'klinik.png\'', 0, 2, '2024-06-04 21:01:45'),
+(181, 119, 'hapus', 'menghapus subkategori: nama \'tes tambah\', deskripsi \'\', ikon \'default.png\'', 0, 2, '2024-06-04 21:01:53'),
+(182, 118, 'hapus', 'menghapus kategori: tes subww', 0, 2, '2024-06-04 21:01:57'),
+(183, 2, 'Update Profile', 'mengubah informasi profile:', 0, 2, '2024-06-04 21:07:03'),
+(184, 2, 'Update Profile', 'mengubah informasi profile: nama dari \'surya\' menjadi \'surili\'', 0, 2, '2024-06-04 21:07:34'),
+(185, 2, 'Update Profile', 'mengubah informasi profile: nama dari \'surili\' menjadi \'surya\', email dari \'sur@gmail.com\' menjadi \'surya@gmail.com\'', 0, 2, '2024-06-04 21:07:49'),
+(186, 2, 'Update Foto Profile', 'mengubah foto profil dari \'gambarartikelanakkecil.png\' menjadi \'gambarartikellab.png\'', 0, 2, '2024-06-04 21:12:18'),
+(187, 2, 'ubah password', 'mengubah password', 0, 2, '2024-06-04 21:15:42'),
+(188, 2, 'logout', 'logout oleh ', 0, 2, '2024-06-04 21:20:15'),
+(189, 2, 'login', 'login', 0, 2, '2024-06-04 21:20:18'),
+(190, 2, 'logout', 'logout', 0, 2, '2024-06-04 21:21:00'),
+(191, 1, 'login', 'login', 0, 1, '2024-06-04 21:21:04');
 
 -- --------------------------------------------------------
 
@@ -342,7 +395,7 @@ CREATE TABLE `privacy_policy` (
 --
 
 INSERT INTO `privacy_policy` (`id`, `isi`) VALUES
-(1, '<h2><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong></h2><p>&nbsp;</p><p>&nbsp;</p><h3><strong>1. Pendahuluan</strong></h3><p>Kami di goldstep menghargai privasi Anda dan berkomitmen untuk melindungi data pribadi Anda. Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda saat Anda mengunjungi situs web kami.</p><h3><strong>2. Informasi yang Kami Kumpulkan</strong></h3><p>Kami dapat mengumpulkan berbagai jenis informasi dari Anda, termasuk:</p><ul><li><strong>Informasi Pribadi</strong>: Nama, alamat email, nomor telepon, alamat pos, dll.</li><li><strong>Informasi Teknis</strong>: Alamat IP, jenis browser, sistem operasi, informasi perangkat.</li><li><strong>Informasi Penggunaan</strong>: Halaman yang dikunjungi, waktu yang dihabiskan di halaman tersebut, klik, dan aktivitas serupa.</li></ul><h3><strong>3. Bagaimana Kami Menggunakan Informasi Anda</strong></h3><p>Informasi yang kami kumpulkan dapat digunakan untuk:</p><ul><li>Menyediakan, mengoperasikan, dan memelihara situs web kami.</li><li>Meningkatkan, mempersonalisasi, dan memperluas situs web kami.</li><li>Berkomunikasi dengan Anda, termasuk melalui email, tentang pembaruan, promosi, dan layanan lainnya.</li><li>Menganalisis bagaimana pengguna menggunakan situs web kami untuk meningkatkan pengalaman pengguna.</li></ul><h3><strong>4. Bagaimana Kami Melindungi Informasi Anda</strong></h3><p>Kami menggunakan berbagai langkah keamanan teknis dan organisasi untuk melindungi data pribadi Anda dari akses yang tidak sah, penggunaan yang tidak semestinya, atau pengungkapan. Meskipun kami berusaha keras untuk melindungi data pribadi Anda, tidak ada metode transmisi melalui internet atau metode penyimpanan elektronik yang 100% aman.</p><h3><strong>5. Pengungkapan kepada Pihak Ketiga</strong></h3><p>Kami tidak akan menjual, memperdagangkan, atau menyewakan informasi pribadi Anda kepada pihak ketiga tanpa persetujuan Anda, kecuali jika diharuskan oleh hukum atau sebagai bagian dari layanan yang Anda gunakan.</p><h3><strong>6. Cookies</strong></h3><p>Situs web kami menggunakan cookies untuk meningkatkan pengalaman pengguna Anda. Cookies adalah file teks kecil yang disimpan di perangkat Anda. Anda dapat memilih untuk menonaktifkan cookies melalui pengaturan browser Anda, tetapi ini mungkin mempengaruhi fungsi situs web kami.</p><h3><strong>7. Hak Anda</strong></h3><p>Anda memiliki hak untuk:</p><ul><li>Mengakses informasi pribadi yang kami miliki tentang Anda.</li><li>Meminta perbaikan atau penghapusan informasi pribadi Anda.</li><li>Menolak atau membatasi pemrosesan data pribadi Anda.</li><li>Menarik persetujuan Anda kapan saja (jika pemrosesan didasarkan pada persetujuan).</li></ul><h3><strong>8. Perubahan pada Kebijakan Privasi</strong></h3><p>Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Perubahan akan diberitahukan dengan memperbarui tanggal di bagian atas kebijakan ini dan/atau melalui pemberitahuan langsung kepada Anda.</p><h3><strong>9. Hubungi Kami</strong></h3><p>Jika Anda memiliki pertanyaan atau kekhawatiran tentang kebijakan privasi ini atau praktik privasi kami, silakan hubungi kami di:</p><ul><li>Email: [Alamat Email Anda]</li><li>Alamat: [Alamat Kantor Anda]</li></ul>');
+(1, '<h3><strong>1. Pendahuluan</strong></h3><p>Kami di goldstep menghargai privasi Anda dan berkomitmen untuk melindungi data pribadi Anda. Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda saat Anda mengunjungi situs web kami.</p><h3><strong>2. Informasi yang Kami Kumpulkan</strong></h3><p>Kami dapat mengumpulkan berbagai jenis informasi dari Anda, termasuk:</p><ul><li><strong>Informasi Pribadi</strong>: Nama, alamat email, nomor telepon, alamat pos, dll.</li><li><strong>Informasi Teknis</strong>: Alamat IP, jenis browser, sistem operasi, informasi perangkat.</li><li><strong>Informasi Penggunaan</strong>: Halaman yang dikunjungi, waktu yang dihabiskan di halaman tersebut, klik, dan aktivitas serupa.</li></ul><h3><strong>3. Bagaimana Kami Menggunakan Informasi Anda</strong></h3><p>Informasi yang kami kumpulkan dapat digunakan untuk:</p><ul><li>Menyediakan, mengoperasikan, dan memelihara situs web kami.</li><li>Meningkatkan, mempersonalisasi, dan memperluas situs web kami.</li><li>Berkomunikasi dengan Anda, termasuk melalui email, tentang pembaruan, promosi, dan layanan lainnya.</li><li>Menganalisis bagaimana pengguna menggunakan situs web kami untuk meningkatkan pengalaman pengguna.</li></ul><h3><strong>4. Bagaimana Kami Melindungi Informasi Anda</strong></h3><p>Kami menggunakan berbagai langkah keamanan teknis dan organisasi untuk melindungi data pribadi Anda dari akses yang tidak sah, penggunaan yang tidak semestinya, atau pengungkapan. Meskipun kami berusaha keras untuk melindungi data pribadi Anda, tidak ada metode transmisi melalui internet atau metode penyimpanan elektronik yang 100% aman.</p><h3><strong>5. Pengungkapan kepada Pihak Ketiga</strong></h3><p>Kami tidak akan menjual, memperdagangkan, atau menyewakan informasi pribadi Anda kepada pihak ketiga tanpa persetujuan Anda, kecuali jika diharuskan oleh hukum atau sebagai bagian dari layanan yang Anda gunakan.</p><h3><strong>6. Cookies</strong></h3><p>Situs web kami menggunakan cookies untuk meningkatkan pengalaman pengguna Anda. Cookies adalah file teks kecil yang disimpan di perangkat Anda. Anda dapat memilih untuk menonaktifkan cookies melalui pengaturan browser Anda, tetapi ini mungkin mempengaruhi fungsi situs web kami.</p><h3><strong>7. Hak Anda</strong></h3><p>Anda memiliki hak untuk:</p><ul><li>Mengakses informasi pribadi yang kami miliki tentang Anda.</li><li>Meminta perbaikan atau penghapusan informasi pribadi Anda.</li><li>Menolak atau membatasi pemrosesan data pribadi Anda.</li><li>Menarik persetujuan Anda kapan saja (jika pemrosesan didasarkan pada persetujuan).</li></ul><h3><strong>8. Perubahan pada Kebijakan Privasi</strong></h3><p>Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Perubahan akan diberitahukan dengan memperbarui tanggal di bagian atas kebijakan ini dan/atau melalui pemberitahuan langsung kepada Anda.</p><h3><strong>9. Hubungi Kami</strong></h3><p>Jika Anda memiliki pertanyaan atau kekhawatiran tentang kebijakan privasi ini atau praktik privasi kami, silakan hubungi kami di:</p><ul><li>Email: [Alamat Email Anda]</li><li>Alamat: [Alamat Kantor Anda]</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -403,7 +456,7 @@ CREATE TABLE `terms_and_condition` (
 --
 
 INSERT INTO `terms_and_condition` (`id`, `isi`) VALUES
-(1, '<h2><strong>Syarat dan Ketentuan</strong></h2><h3><strong>1. Pendahuluan</strong></h3><p>Selamat datang di [Nama Perusahaan/Website]! Dengan mengakses atau menggunakan situs web kami yang terletak di [URL Situs Web] (selanjutnya disebut \"Situs\"), Anda menyetujui untuk terikat oleh syarat dan ketentuan berikut (selanjutnya disebut \"Syarat dan Ketentuan\"). Jika Anda tidak setuju dengan bagian manapun dari Syarat dan Ketentuan ini, harap jangan menggunakan Situs kami.</p><h3><strong>2. Penggunaan Situs</strong></h3><ul><li><strong>Kelayakan</strong>: Anda harus berusia minimal [usia minimum] tahun untuk menggunakan Situs ini.</li><li><strong>Akses dan Penggunaan</strong>: Anda setuju untuk menggunakan Situs ini hanya untuk tujuan yang sah dan sesuai dengan Syarat dan Ketentuan ini.</li><li><strong>Larangan Penggunaan</strong>: Anda setuju untuk tidak menggunakan Situs ini untuk tindakan yang melanggar hukum, merusak, atau merugikan pihak ketiga.</li></ul><h3><strong>3. Akun Pengguna</strong></h3><ul><li><strong>Pendaftaran Akun</strong>: Untuk mengakses beberapa fitur Situs, Anda mungkin diminta untuk mendaftar dan membuat akun pengguna.</li><li><strong>Keamanan Akun</strong>: Anda bertanggung jawab atas menjaga kerahasiaan informasi akun Anda, termasuk kata sandi, dan untuk semua aktivitas yang terjadi di bawah akun Anda.</li><li><strong>Kewajiban Akun</strong>: Anda setuju untuk memberikan informasi yang akurat, lengkap, dan terkini saat mendaftar dan menggunakan akun Anda.</li></ul><h3><strong>4. Konten Pengguna</strong></h3><ul><li><strong>Kepemilikan Konten</strong>: Anda mempertahankan kepemilikan atas semua konten yang Anda kirimkan, posting, atau tampilkan di atau melalui Situs.</li><li><strong>Lisensi Konten</strong>: Dengan mengirimkan, memposting, atau menampilkan konten di atau melalui Situs, Anda memberikan lisensi non-eksklusif, bebas royalti, dan dapat dipindahtangankan kepada kami untuk menggunakan, menyalin, memodifikasi, dan menampilkan konten tersebut.</li></ul><h3><strong>5. Kekayaan Intelektual</strong></h3><ul><li><strong>Kepemilikan</strong>: Semua hak cipta, merek dagang, dan hak kekayaan intelektual lainnya dalam dan atas Situs dan kontennya adalah milik kami atau pemberi lisensi kami.</li><li><strong>Penggunaan Terbatas</strong>: Anda tidak diperbolehkan menggunakan konten kami tanpa izin tertulis dari kami.</li></ul><h3><strong>6. Batasan Tanggung Jawab</strong></h3><ul><li><strong>Tidak Ada Jaminan</strong>: Situs ini disediakan \"sebagaimana adanya\" dan \"sebagaimana tersedia\". Kami tidak memberikan jaminan apapun terkait ketersediaan, keakuratan, atau kelengkapan Situs.</li><li><strong>Batasan Kerugian</strong>: Dalam hal apapun, kami tidak bertanggung jawab atas kerugian atau kerusakan tidak langsung, insidental, khusus, atau konsekuensial yang timbul dari penggunaan atau ketidakmampuan menggunakan Situs.</li></ul><h3><strong>7. Perubahan pada Syarat dan Ketentuan</strong></h3><p>Kami berhak untuk memperbarui atau mengubah Syarat dan Ketentuan ini kapan saja tanpa pemberitahuan sebelumnya. Perubahan akan berlaku segera setelah diposting di Situs. Anda disarankan untuk meninjau Syarat dan Ketentuan ini secara berkala.</p><h3><strong>8. Hukum yang Berlaku</strong></h3><p>Syarat dan Ketentuan ini diatur oleh dan ditafsirkan sesuai dengan hukum [Negara/Wilayah Anda]. Setiap sengketa yang timbul dari atau terkait dengan Syarat dan Ketentuan ini akan diselesaikan di pengadilan [Negara/Wilayah Anda].</p><h3><strong>9. Kontak Kami</strong></h3><p>Jika Anda memiliki pertanyaan atau kekhawatiran mengenai Syarat dan Ketentuan ini, silakan hubungi kami di:</p><ul><li>Email: [Alamat Email Anda]</li><li>Alamat: [Alamat Kantor Anda]</li></ul>');
+(1, '<h2><strong>Syarat dan Ketentuan</strong></h2><h3><strong>1. Pendahuluan</strong></h3><p>Selamat datang di [Nama Perusahaan/Website]! Dengan mengakses atau menggunakan situs web kami yang terletak di [URL Situs Web] (selanjutnya disebut \"Situs\"), Anda menyetujui untuk terikat oleh syarat dan ketentuan berikut (selanjutnya disebut \"Syarat dan Ketentuan\"). Jika Anda tidak setuju dengan bagian manapun dari Syarat dan Ketentuan ini, harap jangan menggunakan Situs kami.</p><h3><strong>2. Penggunaan Situs</strong></h3><ul><li><strong>Kelayakan</strong>: Anda harus berusia minimal [usia minimum] tahun untuk menggunakan Situs ini.</li><li><strong>Akses dan Penggunaan</strong>: Anda setuju untuk menggunakan Situs ini hanya untuk tujuan yang sah dan sesuai dengan Syarat dan Ketentuan ini.</li><li><strong>Larangan Penggunaan</strong>: Anda setuju untuk tidak menggunakan Situs ini untuk tindakan yang melanggar hukum, merusak, atau merugikan pihak ketiga.</li></ul><h3><strong>3. Akun Pengguna</strong></h3><ul><li><strong>Pendaftaran Akun</strong>: Untuk mengakses beberapa fitur Situs, Anda mungkin diminta untuk mendaftar dan membuat akun pengguna.</li><li><strong>Keamanan Akun</strong>: Anda bertanggung jawab atas menjaga kerahasiaan informasi akun Anda, termasuk kata sandi, dan untuk semua aktivitas yang terjadi di bawah akun Anda.</li><li><strong>Kewajiban Akun</strong>: Anda setuju untuk memberikan informasi yang akurat, lengkap, dan terkini saat mendaftar dan menggunakan akun Anda.</li></ul><h3><strong>4. Konten Pengguna</strong></h3><ul><li><strong>Kepemilikan Konten</strong>: Anda mempertahankan kepemilikan atas semua konten yang Anda kirimkan, posting, atau tampilkan di atau melalui Situs.</li><li><strong>Lisensi Konten</strong>: Dengan mengirimkan, memposting, atau menampilkan konten di atau melalui Situs, Anda memberikan lisensi non-eksklusif, bebas royalti, dan dapat dipindahtangankan kepada kami untuk menggunakan, menyalin, memodifikasi, dan menampilkan konten tersebut.</li></ul><h3><strong>5. Kekayaan Intelektual</strong></h3><ul><li><strong>Kepemilikan</strong>: Semua hak cipta, merek dagang, dan hak kekayaan intelektual lainnya dalam dan atas Situs dan kontennya adalah milik kami atau pemberi lisensi kami.</li><li><strong>Penggunaan Terbatas</strong>: Anda tidak diperbolehkan menggunakan konten kami tanpa izin tertulis dari kami.</li></ul><h3><strong>6. Batasan Tanggung Jawab</strong></h3><ul><li><strong>Tidak Ada Jaminan</strong>: Situs ini disediakan \"sebagaimana adanya\" dan \"sebagaimana tersedia\". Kami tidak memberikan jaminan apapun terkait ketersediaan, keakuratan, atau kelengkapan Situs.</li><li><strong>Batasan Kerugian</strong>: Dalam hal apapun, kami tidak bertanggung jawab atas kerugian atau kerusakan tidak langsung, insidental, khusus, atau konsekuensial yang timbul dari penggunaan atau ketidakmampuan menggunakan Situs.</li></ul><h3><strong>7. Perubahan pada Syarat dan Ketentuan</strong></h3><p>Kami berhak untuk memperbarui atau mengubah Syarat dan Ketentuan ini kapan saja tanpa pemberitahuan sebelumnya. Perubahan akan berlaku segera setelah diposting di Situs. Anda disarankan untuk meninjau Syarat dan Ketentuan ini secara berkala.</p><h3><strong>8. Hukum yang Berlaku</strong></h3><p>Syarat dan Ketentuan ini diatur oleh dan ditafsirkan sesuai dengan hukum [Negara/Wilayah Anda]. Setiap sengketa yang timbul dari atau terkait dengan Syarat dan Ketentuan ini akan diselesaikan di pengadilan [Negara/Wilayah Anda].</p><h3><strong>9. Kontak Kami</strong></h3><p>Jika Anda memiliki pertanyaan atau kekhawatiran mengenai Syarat dan Ketentuan ini, silakan hubungi kami di:</p><ul><li>Email:</li><li>Alamat:&nbsp;</li></ul>');
 
 -- --------------------------------------------------------
 
@@ -451,7 +504,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `status`, `role`, `foto_profile`) VALUES
 (1, 'aditha', 'adit@gmail.com', '$2y$10$OFgQpOnn9agbFLh1bO3tA.JJJqaIu.r1RpPdPKc/ZG5zQq55DMe4a', 'a', 'admin', 'dokter.png'),
-(2, 'surya', 'sur@gmail.com', '$2y$10$zI7nJPabQu0.9D0.JLiaeeViAV1tjc49iw03Wu8/PAgKS.6k3k0Te', 'a', 'admin', 'banner.jpg'),
+(2, 'surya', 'surya@gmail.com', '$2y$10$enTgOgTKWA36H6R085TiMOESmebXkmSdMWrTpaFlbT1fhYVakPWHa', 'a', 'admin', 'gambarartikellab.png'),
 (3, '1', '1@gmail.com', '$2y$10$vFu9kblhVMv3gE8jc74SE.zIqEHqul9iwyJizojcxwI6Ce5xjD0ba', '', '', '');
 
 --
@@ -553,7 +606,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `artikel`
 --
 ALTER TABLE `artikel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `artikel_layout`
@@ -577,7 +630,7 @@ ALTER TABLE `header_tentang_kami`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT for table `kontak`
@@ -589,7 +642,7 @@ ALTER TABLE `kontak`
 -- AUTO_INCREMENT for table `log_aktivitas`
 --
 ALTER TABLE `log_aktivitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
 
 --
 -- AUTO_INCREMENT for table `privacy_policy`
@@ -607,7 +660,7 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `tentang_kami`
 --
 ALTER TABLE `tentang_kami`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `terms_and_condition`

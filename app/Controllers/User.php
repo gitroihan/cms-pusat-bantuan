@@ -22,6 +22,7 @@ class User extends BaseController
         $password = $this->request->getPost('password');
 
         $model = new UserModel();
+        $riwayatModel = new LogAktivitasModel();
         $user = $model->where('nama', $username)->first();
 
 
@@ -31,6 +32,20 @@ class User extends BaseController
                 'user_id' => $user['id'],
                 'logged_in' => true
             ]);
+
+            // Data untuk tabel riwayat
+            $alamat_ip = $this->request->getIPAddress();
+            $logData = [
+                'id_ref' => $user['id'],
+                'log_tipe' => 'login',
+                'aktivitas' => 'login',
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $user['id'],
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
 
             return redirect()->to('/cmshome');
         } else {
@@ -42,6 +57,25 @@ class User extends BaseController
     public function logout()
     {
         $session = session();
+        $riwayatModel = new LogAktivitasModel();
+
+        // Ambil user ID dari sesi
+        $userId = $session->get('user_id');
+        $username = $session->get('username');
+
+        // Data untuk tabel riwayat
+        $alamat_ip = $this->request->getIPAddress();
+        $logData = [
+            'id_ref' => $userId,
+            'log_tipe' => 'logout',
+            'aktivitas' => 'logout',
+            'alamat_ip' => $alamat_ip,
+            'id_user' => $userId,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        // Simpan log ke tabel riwayat
+        $riwayatModel->insert($logData);
         $session->remove(['user_id', 'username', 'logged_in']);
 
         return redirect()->to('/login');
@@ -75,6 +109,7 @@ class User extends BaseController
 
         $model = new UserModel();
         $riwayatModel = new LogAktivitasModel();
+
         // Ambil data dari form
         $nama = $this->request->getPost('nama');
         $email = $this->request->getPost('email');
@@ -87,6 +122,11 @@ class User extends BaseController
         ])) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
+
+        // Mendapatkan data user lama dari database
+        $userLama = $model->find($userId);
+        $namaLama = $userLama['nama'];
+        $emailLama = $userLama['email'];
 
         // Update data user
         $data = [
@@ -101,11 +141,21 @@ class User extends BaseController
         // Update data user
         $model->update($userId, $data);
 
+        // Menyiapkan deskripsi aktivitas yang lebih detail
+        $aktivitas = "mengubah informasi profile: ";
+        if ($namaLama !== $nama) {
+            $aktivitas .= "nama dari '{$namaLama}' menjadi '{$nama}', ";
+        }
+        if ($emailLama !== $email) {
+            $aktivitas .= "email dari '{$emailLama}' menjadi '{$email}', ";
+        }
+        $aktivitas = rtrim($aktivitas, ', ');
+
         // Data untuk tabel riwayat
         $logData = [
             'id_ref' => $userId,
             'log_tipe' => 'Update Profile',
-            'aktivitas' => 'mengubah informasi profile',
+            'aktivitas' => $aktivitas,
             'alamat_ip' => $alamat_ip,
             'id_user' => $userId,
             'updated_at' => date('Y-m-d H:i:s'),
@@ -133,6 +183,8 @@ class User extends BaseController
         $session = session();
         $userId = $session->get('user_id');
         $fotoProfile = $this->request->getFile('foto_profile');
+        $model = new UserModel();
+        $riwayatModel = new LogAktivitasModel();
 
         // Proses unggahan foto profil
         if ($fotoProfile->isValid() && !$fotoProfile->hasMoved()) {
@@ -140,16 +192,44 @@ class User extends BaseController
             // Pindahkan file ke direktori uploads
             $fotoProfile->move(ROOTPATH  . 'uploads', $newName);
 
+            // Ambil nama file foto lama dari database untuk log
+            $userLama = $model->find($userId);
+            $fotoLama = $userLama['foto_profile'];
+
             // Simpan nama file ke basis data
             $model = new UserModel();
             $data['foto_profile'] = $newName;
 
+            // Mulai transaksi
+            $db = \Config\Database::connect();
+            $db->transStart();
+
             // Update data pengguna dengan foto profil yang baru
             if ($model->update($userId, $data)) {
-                // Redirect ke halaman profil dengan pesan sukses
+                // Menyiapkan deskripsi aktivitas yang lebih detail
+                $aktivitas = "mengubah foto profil dari '{$fotoLama}' menjadi '{$newName}'";
+
+                // Data untuk tabel riwayat
+                $alamat_ip = $this->request->getIPAddress();
+                $logData = [
+                    'id_ref' => $userId,
+                    'log_tipe' => 'Update Foto Profile',
+                    'aktivitas' => $aktivitas,
+                    'alamat_ip' => $alamat_ip,
+                    'id_user' => $userId,
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ];
+
+                // Simpan log ke tabel riwayat
+                $riwayatModel->insert($logData);
+
+                // Selesaikan transaksi
+                $db->transComplete();
+
                 return redirect()->to('/ubah_profile')->with('success', 'Foto profil berhasil diubah.');
             } else {
-                // Jika gagal update, kembalikan pesan error
+                // Rollback transaksi jika update gagal
+                $db->transRollback();
                 return redirect()->to('/ubah_profile')->with('error', 'Gagal mengubah foto profil.');
             }
         } else {
@@ -157,40 +237,58 @@ class User extends BaseController
             return redirect()->to('/ubah_profile')->with('error', 'Unggahan foto profil tidak valid.');
         }
     }
-    public function editpassword() {
+    public function editpassword()
+    {
         header('Content-Type: application/json');
         $users = new UserModel();
+        $riwayatModel = new LogAktivitasModel();
+        $session = session();
+        $userId = $session->get('user_id');
+
         $id = $this->request->getPost('id');
         $password = $this->request->getPost('password');
         $passwordBaru = $this->request->getPost('password-baru');
-    
+
         $response = [];
-    
+
         if (empty($id) || empty($password) || empty($passwordBaru)) {
             $response['status'] = false;
             $response['message'] = 'Data tidak lengkap';
             echo json_encode($response);
             return;
         }
-    
+
         $user = $users->cekpassword($id, $password);
-    
+
         if ($user) {
             $pwbaru = $users->ubahpassword($passwordBaru);
-    
+
             $users->save([
                 'id' => $id,
                 'password' => $pwbaru
             ]);
-    
+
+            // Data untuk tabel riwayat
+            $alamat_ip = $this->request->getIPAddress();
+            $logData = [
+                'id_ref' => $userId,
+                'log_tipe' => 'ubah password',
+                'aktivitas' => 'mengubah password',
+                'alamat_ip' => $alamat_ip,
+                'id_user' => $userId,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+
+            // Simpan log ke tabel riwayat
+            $riwayatModel->insert($logData);
+
             $response['status'] = true;
             $response['message'] = 'Password berhasil diubah';
         } else {
             $response['status'] = false;
             $response['message'] = 'Password lama tidak cocok';
         }
-    
+
         echo json_encode($response);
     }
-    
 }

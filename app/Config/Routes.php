@@ -8,11 +8,9 @@ use CodeIgniter\Router\RouteCollection;
 
 // login
 $routes->get('/', 'Home::index');
-// $routes->get('/cmshome', 'Home::dashboard');
 $routes->get('/login', 'User::index');
 $routes->post('/aksilogin', 'User::login');
 $routes->get('/cmshome', 'Home::dashboard', ['filter' => 'auth']);
-$routes->post('/logout', 'User::logout');
 $routes->post('/logout', 'User::logout');
 // =============
 
