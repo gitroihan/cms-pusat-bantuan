@@ -27,34 +27,30 @@ Kategori
         </div>
     </div>
 
-    <!-- Breadcrumb -->
-    <!-- <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">
                 <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmskategori">kategori</a>
             </li>
-            </?php foreach ($breadcrumb as $category) : ?>
-                <li class="breadcrumb-item">
-                    <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmssubkategori/</?= $category['id_parent'] ?>"></?= esc($category['nama_kategori']) ?></a>
-                </li>
-            </?php endforeach; ?>
+            <?php
+            $lastCategoryIndex = count($breadcrumb) - 1; // Mendapatkan indeks elemen terakhir
+            foreach ($breadcrumb as $index => $category) :
+                if ($index === $lastCategoryIndex) : ?>
+                    <li class="breadcrumb-item">
+                        <span class="h5 mr-auto mb-0 text-gray-800"><?= esc($category['nama_induk'] ?? $category['nama_kategori']) ?></span>
+                    </li>
+                <?php else : ?>
+                    <li class="breadcrumb-item">
+                        <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmssubkategori/<?= $category['id'] ?>">
+                            <?= esc($category['nama_induk'] ?? $category['nama_kategori']) ?>
+                        </a>
+                    </li>
+            <?php endif;
+            endforeach; ?>
         </ol>
     </nav>
-    <nav aria-label="breadcrumb"> -->
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <?php foreach ($breadcrumb as $category) : ?>
-                <li class="breadcrumb-item">
-                    <?php if ($category['id_parent'] === null) : ?>
-                        <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmskategori"><?= esc($category['nama_kategori']) ?></a>
-                    <?php else : ?>
-                        <a class="text-decoration-none h5 mr-auto mb-0 text-gray-800" href="/cmssubkategori/<?= $category['id_parent'] ?>"><?= esc($category['nama_kategori']) ?></a>
-                    <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
-        </ol>
-    </nav>
+
+
 
     <div class="kategori" style="overflow-y: auto; height: 500px;">
         <?php foreach ($subkategori as $sub) : ?>

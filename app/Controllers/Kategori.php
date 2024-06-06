@@ -423,7 +423,7 @@ class Kategori extends BaseController
     {
         $kategoriModel = new KategoriModel();
         $id_subkategori = $this->request->getPost('id_parent');
-        
+
         // Mendapatkan data kategori lama sebelum dihapus
         $kategoriLama = $kategoriModel->find($id);
         if ($kategoriLama) {
