@@ -68,13 +68,21 @@ Artikel
                 }
             },
             columns: [{
-                    data: 'judul_artikel'
+                    data: 'judul_artikel',
+                    className: 'text-center'
                 },
                 {
-                    data: 'pembuat'
+                    data: 'pembuat',
+                    className: 'text-center'
                 },
                 {
-                    data: 'tanggal_unggah'
+                    data: 'tanggal_unggah',
+                    className: 'text-center',
+                    render: function(data, type, row) {
+                        var date = new Date(data);
+                        var formattedDate = date.toLocaleTimeString('id-ID') + ' ' + date.toLocaleDateString('id-ID');
+                        return formattedDate;
+                    }
                 },
                 {
                     data: 'status',
@@ -86,7 +94,8 @@ Artikel
                         } else {
                             return data;
                         }
-                    }
+                    },
+                    className: 'text-center'
                 },
                 {
                     data: 'id',
