@@ -71,10 +71,12 @@ class Home extends BaseController
         $originalData = $kontakmodel->find($id);
 
         $data = [
+            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
             'nama' => $this->request->getPost('nama'),
             'email' => $this->request->getPost('email'),
             'nomor_telepon' => $this->request->getPost('nomor'),
             'alamat' => $this->request->getPost('alamat'),
+            'hak_cipta' => $this->request->getPost('hak_cipta'),
             'link_whatsapp' => $this->request->getPost('whatsapp'),
             'link_instagram' => $this->request->getPost('instagram')
         ];
@@ -88,11 +90,14 @@ class Home extends BaseController
         $userId = $session->get('user_id');
         $riwayatModel = new LogAktivitasModel();
         $alamat_ip = $this->request->getIPAddress();
-        
+
         // Tentukan aktivitas berdasarkan perubahan yang dilakukan
         $aktivitas = 'mengubah informasi kontak: ';
         $changes = [];
 
+        if ($data['nama_lengkap'] !== $originalData['nama_lengkap']) {
+            $changes[] = "nama lengkap dari '{$originalData['nama_lengkap']}' menjadi '{$data['nama_lengkap']}'";
+        }
         if ($data['nama'] !== $originalData['nama']) {
             $changes[] = 'nama';
         }
@@ -104,6 +109,9 @@ class Home extends BaseController
         }
         if ($data['alamat'] !== $originalData['alamat']) {
             $changes[] = 'alamat';
+        }
+        if ($data['hak_cipta'] !== $originalData['hak_cipta']) {
+            $changes[] = "hak cipta dari '{$originalData['hak_cipta']}' menjadi '{$data['hak_cipta']}'";
         }
         if ($data['link_whatsapp'] !== $originalData['link_whatsapp']) {
             $changes[] = 'link whatsapp';

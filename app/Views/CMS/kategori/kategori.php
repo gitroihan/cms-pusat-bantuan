@@ -52,7 +52,7 @@ Kategori
                                         <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
                                         edit
                                     </a>
-                                    <?php if (!in_array($kat['id'], $id_parents)) : ?>
+                                    <?php if (!in_array($kat['id'], $id_parents)&& !$subkategori_articles[$kat['id']]) : ?>
                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal<?= $kat['id'] ?>">
                                             <i class="fa-solid fa-trash mr-2 text-gray-400"></i>
                                             hapus

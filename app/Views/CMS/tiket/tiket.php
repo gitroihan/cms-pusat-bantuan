@@ -11,11 +11,11 @@ Tiket
         <div class="d-sm-flex align-items-center justify-content-between mb-3">
             <h1 class="h3 mr-auto mb-0 text-gray-800">Tiket</h1>
         </div>
-        <table id="table_tiket" class="table table-hover table-md" style="text-align: center; ">
+        <table id="table_tiket" class="table table-bordered table-md" style="text-align: center; ">
             <thead class="thead-dark">
-                <td style="width: 20%;">nama</td>
-                <td>email</td>
-                <td style="width: 10%;"></td>
+                <td style="width: 20%; background-color: #03C988; color: #ffff;" class="text-center">nama</td>
+                <td class="text-center" style="background-color: #03C988; color: #ffff;">email</td>
+                <td style="width: 10%; background-color: #03C988; color: #ffff;" class="text-center"></td>
             </thead>
             <tbody>
             </tbody>

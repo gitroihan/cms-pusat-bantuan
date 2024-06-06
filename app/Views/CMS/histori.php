@@ -13,12 +13,12 @@ Riwayat
         </div>
         <table id="table_riwayat" class="table table-bordered table-md" style="text-align: center; ">
             <thead class="thead-dark">
-                <td>id_ref</td>
-                <td>log_tipe</td>
-                <td>aktivitas</td>
-                <td>Alamat IP</td>
-                <td>user</td>
-                <td>tanggal</td>
+                <!-- <td>id_ref</td> -->
+                <td class="text-center" style="background-color: #03C988; color: #ffff;">log_tipe</td>
+                <td class="text-center" style="background-color: #03C988; color: #ffff;">aktivitas</td>
+                <!-- <td>Alamat IP</td> -->
+                <td class="text-center" style="background-color: #03C988; color: #ffff;">user</td>
+                <td class="text-center" style="background-color: #03C988; color: #ffff;">tanggal</td>
             </thead>
             <tbody>
             </tbody>
@@ -63,18 +63,19 @@ Riwayat
                     "sSortDescending": ": aktifkan untuk mengurutkan kolom secara menurun"
                 }
             },
-            columns: [{
-                    data: 'id_ref'
-                },
+            columns: [
+                // {
+                //     data: 'id_ref'
+                // },
                 {
                     data: 'log_tipe'
                 },
                 {
                     data: 'aktivitas'
                 },
-                {
-                    data: 'alamat_ip'
-                },
+                // {
+                //     data: 'alamat_ip'
+                // },
                 {
                     data: 'nama_user'
                 },

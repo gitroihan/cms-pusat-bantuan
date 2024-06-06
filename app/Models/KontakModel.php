@@ -13,7 +13,7 @@ class KontakModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'nama', 'email', 'alamat', 'nomor_telepon', 'link_whatsapp', 'link_instagram'
+        'nama_lengkap','nama', 'email', 'alamat', 'nomor_telepon','hak_cipta', 'link_whatsapp', 'link_instagram'
     ];
     
 

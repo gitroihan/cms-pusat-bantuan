@@ -17,13 +17,13 @@ Artikel
                 </a>
             </div>
         </div>
-        <table id="table_artikel" class="table table-hover table-md" style="width:100%">
+        <table id="table_artikel" class="table table-bordered table-md" style="width:100%">
             <thead>
-                    <td>Judul Artikel</td>
-                    <td>Pembuat</td>
-                    <td>Tanggal Unggah</td>
-                    <td>Status</td>
-                    <td class="text-center"></td>
+                    <td style="background-color: #03C988; color: #ffff;">Judul Artikel</td>
+                    <td style="background-color: #03C988; color: #ffff;">Pembuat</td>
+                    <td style="background-color: #03C988; color: #ffff;">Tanggal Unggah</td>
+                    <td style="background-color: #03C988; color: #ffff;">Status</td>
+                    <td style="background-color: #03C988; color: #ffff;" class="text-center"></td>
             </thead>
             <tbody>
             </tbody>
@@ -80,9 +80,9 @@ Artikel
                     data: 'status',
                     render: function(data, type, row) {
                         if (data === 'publish') {
-                            return '<div style="background-color: green; color: white;  border-radius: 3px;">Publish</div>';
+                            return '<div class="badge text-bg-success text-center" style="color: white; display: inline-block; width: 100%;">Publish</div>';
                         } else if (data === 'draft') {
-                            return '<div style="background-color: yellow; color: black; border-radius: 3px;">Draft</div>';
+                            return '<div class="badge text-bg-warning text-center" style="color: black; display: inline-block; width: 100%;">Draft</div>';
                         } else {
                             return data;
                         }

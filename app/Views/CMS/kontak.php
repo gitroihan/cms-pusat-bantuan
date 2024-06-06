@@ -14,27 +14,35 @@ Kontak
         </div>
         <?php foreach ($kontak as $list) : ?>
             <div class="mb-3 p-1">
-                <label for="nama">nama</label>
+                <label for="nama_lengkap">Nama Lengkap</label>
+                <input type="text" name="nama_lengkap" class="form-control bg-light" value="<?= $list['nama_lengkap'] ?>" readonly>
+            </div>
+            <div class="mb-3 p-1">
+                <label for="nama">Nama</label>
                 <input type="text" name="nama" class="form-control bg-light" value="<?= $list['nama'] ?>" readonly>
             </div>
             <div class="mb-3 p-1">
-                <label for="email">email</label>
+                <label for="email">Email</label>
                 <input type="text" name="email" class="form-control bg-light" value="<?= $list['email'] ?>" readonly>
             </div>
             <div class="mb-3 p-1">
-                <label for="nomor">no telepon</label>
+                <label for="nomor">No Telepon</label>
                 <input type="text" name="nomor" class="form-control bg-light" value="<?= $list['nomor_telepon'] ?>" readonly>
             </div>
             <div class="mb-3 p-1">
-                <label for="nama">alamat</label>
+                <label for="nama">Alamat</label>
                 <textarea name="alamat" id="" class="form-control bg-light" readonly><?= $list['alamat'] ?></textarea>
             </div>
             <div class="mb-3 p-1">
-                <label for="whatsapp">link whatsapp</label>
+                <label for="hak_cipta">Hak Cipta</label>
+                <input type="text" name="hak_cipta" class="form-control bg-light" value="<?= $list['hak_cipta'] ?>" readonly>
+            </div>
+            <div class="mb-3 p-1">
+                <label for="whatsapp">Link Whatsapp</label>
                 <input type="text" name="whatsapp" class="form-control bg-light" value="<?= $list['link_whatsapp'] ?>" readonly>
             </div>
             <div class="mb-3 p-1">
-                <label for="instagram">link instagram</label>
+                <label for="instagram">Link Instagram</label>
                 <input type="text" name="instagram" class="form-control bg-light" value="<?= $list['link_instagram'] ?>" readonly>
             </div>
             <div class="mb-3 p-1 text-right">

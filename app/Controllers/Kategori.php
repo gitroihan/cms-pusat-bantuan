@@ -18,10 +18,20 @@ class Kategori extends BaseController
 
         $model = new UserModel();
         $kategoriModel = new KategoriModel();
+        $artikelModel = new ArtikelModel();
         $data['data'] = $model->getUserById($userId);
         $kategoriData = $kategoriModel->data_id_parent_null();
         $data['kategori'] = $kategoriData['kategori'];
         $data['id_parents'] = $kategoriData['id_parents'];
+        $data['subkategori_has_articles'] = false;
+        $data['subkategori_articles'] = [];
+        foreach ($data['kategori'] as $sub) {
+            $articles = $artikelModel->where('id_kategori', $sub['id'])->findAll();
+            $data['subkategori_articles'][$sub['id']] = count($articles) > 0;
+            if (count($articles) > 0) {
+                $data['subkategori_has_articles'] = true;
+            }
+        }
         return view('CMS/kategori/kategori',  $data);
     }
     private function generateUniqueSlug($title)
@@ -380,9 +390,9 @@ class Kategori extends BaseController
             $data['ikon'] = $namaGambarBaru;
 
             // Hapus gambar lama jika ada perubahan gambar
-            if ($ikonLama != 'default.png') {
-                unlink(ROOTPATH . 'public/uploads/icons/' . $ikonLama);
-            }
+            // if ($ikonLama != 'default.png') {
+            //     unlink(ROOTPATH . 'public/uploads/icons/' . $ikonLama);
+            // }
         }
 
         // Simpan perubahan ke dalam database
