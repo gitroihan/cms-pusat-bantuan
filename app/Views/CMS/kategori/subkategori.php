@@ -52,7 +52,7 @@ Kategori
 
 
 
-    <div class="kategori" style="overflow-y: auto; height: 500px;">
+    <div class="kategori" style="overflow-y: auto; height: 520px;">
         <?php foreach ($subkategori as $sub) : ?>
             <div class="row col-12">
                 <div class="col-md-12 mb-2 my-2">
@@ -65,12 +65,12 @@ Kategori
 
 
                                 <div class="d-flex flex-column flex-grow-1">
-                                    <?php if ($total_subkategori < 3 && !$subkategori_has_articles && $subkategori_depth < 3) : ?>
+                                    <?php if (  !$subkategori_has_articles && $subkategori_depth < 3) : ?>
                                         <a href="/cmssubkategori/<?= $sub['id'] ?>" class="text-decoration-none">
                                         <?php endif; ?>
                                         <h5 class="card-title custom-title mb-2" style="color: #13005A;"><?= esc($sub['nama_kategori']) ?></h5>
                                         </a>
-                                        <p class="card-text mb-0 " style="max-width: 700px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        <p class="card-text mb-0 " style="max-width: 900px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                             <?= esc($sub['deskripsi_kategori']) ?>
                                         </p>
                                 </div>

@@ -36,11 +36,13 @@ Kategori
                             <img src="<?= base_url('uploads/icons/' . esc($kat['ikon'])); ?>" alt="" style="width: 100%; height: 100%; object-fit: fit;">
                         </div>
                         <div class="title-category flex-grow-1">
-                            <a href="/cmssubkategori/<?= $kat['id'] ?>" style="text-decoration: none;">
-                                <p class="m-0 fw-semibold"  style="font-size: 20px; color: #13005A; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <?php if (!$kategori_articles[$kat['id']]) : ?>
+                                <a href="/cmssubkategori/<?= $kat['id'] ?>" style="text-decoration: none;">
+                                <?php endif; ?>
+                                <p class="m-0 fw-semibold" style="font-size: 20px; color: #13005A; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     <?= esc($kat['nama_kategori']) ?>
                                 </p>
-                            </a>
+                                </a>
                         </div>
                         <div class="menu">
                             <div class="dropdown no-arrow">
@@ -52,7 +54,7 @@ Kategori
                                         <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
                                         edit
                                     </a>
-                                    <?php if (!in_array($kat['id'], $id_parents)&& !$subkategori_articles[$kat['id']]) : ?>
+                                    <?php if (!in_array($kat['id'], $id_parents) && !$kategori_articles[$kat['id']]) : ?>
                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal<?= $kat['id'] ?>">
                                             <i class="fa-solid fa-trash mr-2 text-gray-400"></i>
                                             hapus

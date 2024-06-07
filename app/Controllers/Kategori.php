@@ -23,15 +23,18 @@ class Kategori extends BaseController
         $kategoriData = $kategoriModel->data_id_parent_null();
         $data['kategori'] = $kategoriData['kategori'];
         $data['id_parents'] = $kategoriData['id_parents'];
-        $data['subkategori_has_articles'] = false;
-        $data['subkategori_articles'] = [];
+
+        $data['kategori_has_articles'] = false;
+        $data['kategori_articles'] = [];
         foreach ($data['kategori'] as $sub) {
             $articles = $artikelModel->where('id_kategori', $sub['id'])->findAll();
-            $data['subkategori_articles'][$sub['id']] = count($articles) > 0;
+            $data['kategori_articles'][$sub['id']] = count($articles) > 0;
             if (count($articles) > 0) {
-                $data['subkategori_has_articles'] = true;
+                $data['kategori_has_articles'] = true;
             }
         }
+
+
         return view('CMS/kategori/kategori',  $data);
     }
     private function generateUniqueSlug($title)
