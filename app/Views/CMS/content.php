@@ -19,7 +19,7 @@ Beranda
                         <i class="fa-solid fa-pen-to-square mr-3" style="font-size: 25px;" type="button" data-bs-toggle="modal" data-bs-target="#ubahbanner<?= $list['id'] ?>"></i>
                     </div>
                     <div class="align-items-center justify-content-center p-0 ml-5 mt-3">
-                        <div class="image-box border align-items-center justify-content-center" style="width: 1000px; height: 400px;">
+                        <div class="image-box border align-items-center justify-content-center" style="width: 1000px; height: 350px;">
                             <img src="<?= base_url('uploads/' . esc($list['gambar'])) ?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                     </div>
@@ -54,7 +54,7 @@ Beranda
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                <div class="image-box border" style="width: 500px; height: 200px;">
+                                <div class="image-box border" style="width: 500px; height: 180px;">
                                     <img id="preaview" src="<?= base_url('uploads/' . esc($list['gambar'])) ?>" alt="preview" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                             </div>

@@ -15,7 +15,8 @@ Tiket
             <thead class="thead-dark">
                 <td style="width: 20%; background-color: #03C988; color: #ffff;" class="text-center">nama</td>
                 <td class="text-center" style="background-color: #03C988; color: #ffff;">email</td>
-                <td class="text-center" style="background-color: #03C988; color: #ffff;">tanggal</td>
+                <td class="text-center" style="background-color: #03C988; color: #ffff;">tanggal pengiriman</td>
+                <td class="text-center" style="background-color: #03C988; color: #ffff;">status</td>
                 <td style="width: 10%; background-color: #03C988; color: #ffff;" class="text-center"></td>
             </thead>
             <tbody>
@@ -67,8 +68,40 @@ Tiket
                 {
                     data: 'email'
                 },
+                
                 {
-                    data: 'tanggal'
+                    data: 'tanggal',
+                    render: function(data, type, row) {
+                        var date = new Date(data);
+                        // Format waktu menjadi "HH:mm"
+                        var optionsTime = {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false
+                        };
+                        var formattedTime = date.toLocaleTimeString('id-ID', optionsTime);
+                        // Format tanggal menjadi "d/M/yyyy"
+                        var optionsDate = {
+                            day: 'numeric',
+                            month: 'numeric',
+                            year: 'numeric'
+                        };
+                        var formattedDate = date.toLocaleDateString('id-ID', optionsDate);
+                        // Gabungkan waktu dan tanggal dengan spasi
+                        return formattedTime + ' ' + formattedDate;
+                    }
+                },
+                {
+                    data: 'status',
+                    render: function(data, type, row) {
+                        if (data === 'Selesai') {
+                            return '<div class="badge text-bg-success text-center" style="color: white; display: inline-block; width: 100%;">Selesai</div>';
+                        } else if (data === 'Tertunda') {
+                            return '<div class="badge text-bg-warning text-center" style="color: black; display: inline-block; width: 100%;">Tertunda</div>';
+                        } else {
+                            return data;
+                        }
+                    },
                 },
                 {
                     data: 'id',

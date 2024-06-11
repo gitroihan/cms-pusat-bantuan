@@ -80,7 +80,32 @@ Riwayat
                     data: 'nama_user'
                 },
                 {
-                    data: 'updated_at'
+                    data: 'updated_at',
+                    // render: function(data, type, row) {
+                    //     var date = new Date(data);
+                    //     var formattedDate = date.toLocaleTimeString('id-ID') + ' ' + date.toLocaleDateString('id-ID');
+                    //     return formattedDate;
+                    // }
+
+                    render: function(data, type, row) {
+                        var date = new Date(data);
+                        // Format waktu menjadi "HH:mm"
+                        var optionsTime = {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false
+                        };
+                        var formattedTime = date.toLocaleTimeString('id-ID', optionsTime);
+                        // Format tanggal menjadi "d/M/yyyy"
+                        var optionsDate = {
+                            day: 'numeric',
+                            month: 'numeric',
+                            year: 'numeric'
+                        };
+                        var formattedDate = date.toLocaleDateString('id-ID', optionsDate);
+                        // Gabungkan waktu dan tanggal dengan spasi
+                        return formattedTime + ' ' + formattedDate;
+                    }
                 }
             ]
         });

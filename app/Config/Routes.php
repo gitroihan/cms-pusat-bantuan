@@ -54,6 +54,7 @@ $routes->post('/ubah_artikel_publish/(:num)', 'Artikel::ubah_artikel_publish/$1'
 $routes->post('/tiket/getTiketData', 'Tiket::getTiketData');
 $routes->get('/cmstiket', 'Tiket::index', ['filter' => 'auth']);
 $routes->get('/detail_tiket/(:num)', 'Tiket::detail_tiket/$1');
+$routes->post('/ubah_status/(:num)', 'Tiket::ubah_status/$1');
 // =============
 
 // kontak

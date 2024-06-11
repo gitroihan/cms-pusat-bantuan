@@ -29,10 +29,10 @@ User
                 <label for="">Email</label>
                 <input type="text" class="form-control" id="email" name="email" value="<?= esc($data['email']); ?>" required>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="">Role</label>
                 <input type="text" class="form-control" value="<?= esc($data['role']); ?>" readonly>
-            </div>
+            </div> -->
             <div class="text-right">
                 <button type="submit" id="editProfileButton" class="btn text-light mt-3" style="background-color: #03C988;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
                     SIMPAN</button>

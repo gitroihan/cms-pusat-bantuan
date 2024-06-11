@@ -114,8 +114,8 @@ tentang kami
                 </div>
             </div>
             <div class="col-6">
-                <div class="col-12 p-3">
-                    <img src="<?= ('uploads/' . esc($head[0]['gambar'])); ?>" alt="" class="img-thumbnail">
+                <div class="image-box col-12 p-3">
+                    <img src=" <?= ('uploads/' . esc($head[0]['gambar'])); ?>" alt="" class="img-thumbnail">
                 </div>
             </div>
 

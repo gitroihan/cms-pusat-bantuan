@@ -43,10 +43,10 @@ User
                 <label for="">Email</label>
                 <input type="text" class="form-control" required value="<?= esc($data['email']); ?>" readonly>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="">Role</label>
                 <input type="text" class="form-control" value="<?= esc($data['role']); ?>" readonly>
-            </div>
+            </div> -->
             <div class="text-right">
                 <a href="/ubah_profile" class="btn text-light mt-3" style="background-color: #03C988;"><i class="fa-solid fa-pen-to-square mr-1"></i>
                     UBAH

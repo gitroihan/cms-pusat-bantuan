@@ -9,6 +9,7 @@ use App\Models\LogAktivitasModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
+date_default_timezone_set('Asia/Jakarta');
 class Kategori extends BaseController
 {
     public function index()
@@ -101,6 +102,7 @@ class Kategori extends BaseController
 
         // Menyiapkan deskripsi aktivitas yang lebih detail
         $aktivitas = "menambah kategori: {$data['nama_kategori']} dengan deskripsi: {$data['deskripsi_kategori']} dan ikon: {$path}";
+
 
         $logData = [
             'id_ref' => $newKategoriId,
