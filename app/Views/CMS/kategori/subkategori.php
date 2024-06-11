@@ -76,7 +76,12 @@ Kategori
                                         <?= esc($sub['deskripsi_kategori']) ?>
                                     </p>
                                     <p class="mt-2 mb-0" style="font-size: 13px;">
-                                        <?= $subkategori_sub_count[$sub['id']] ?> Subkategori, <?= $subkategori_article_count[$sub['id']] ?> Artikel
+                                        <?php if ($subkategori_sub_count[$sub['id']] > 0) : ?>
+                                            <?= $subkategori_sub_count[$sub['id']] ?> Subkategori<?= $subkategori_article_count[$sub['id']] > 0 ? ',' : '' ?>
+                                        <?php endif; ?>
+                                        <?php if ($subkategori_article_count[$sub['id']] > 0) : ?>
+                                            <?= $subkategori_article_count[$sub['id']] ?> Artikel
+                                        <?php endif; ?>
                                     </p>
                                 </div>
                                 <div class="dropdown no-arrow">

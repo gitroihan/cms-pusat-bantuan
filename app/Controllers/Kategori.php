@@ -226,94 +226,95 @@ class Kategori extends BaseController
         }
     }
     public function cari_kategori()
-{
-    $session = session();
-    $userId = $session->get('user_id');
-    $model = new UserModel();
-    $kategoriModel = new KategoriModel();
-    $artikelModel = new ArtikelModel();
-    $data['data'] = $model->getUserById($userId);
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+        $model = new UserModel();
+        $kategoriModel = new KategoriModel();
+        $artikelModel = new ArtikelModel();
+        $data['data'] = $model->getUserById($userId);
 
-    $cari = $this->request->getGet('cari');
-    $kategoriQuery = $kategoriModel->where('id_parent', null);
+        $cari = $this->request->getGet('cari');
+        $kategoriQuery = $kategoriModel->where('id_parent', null);
 
-    if ($cari) {
-        $kategoriQuery->like('nama_kategori', $cari);
-    }
-
-    $kategori = $kategoriQuery->findAll();
-
-    $data['kategori'] = $kategori;
-    $data['id_parents'] = [];
-
-    $data['kategori_has_articles'] = false;
-    $data['kategori_articles'] = [];
-    $data['kategori_sub_count'] = [];
-    $data['kategori_article_count'] = [];
-    
-    foreach ($data['kategori'] as $kat) {
-        $articles = $artikelModel->where('id_kategori', $kat['id'])->findAll();
-        $subcategories = $kategoriModel->where('id_parent', $kat['id'])->findAll();
-
-        $data['kategori_articles'][$kat['id']] = count($articles) > 0;
-        $data['kategori_article_count'][$kat['id']] = count($articles);
-        $data['kategori_sub_count'][$kat['id']] = count($subcategories);
-
-        if (count($articles) > 0) {
-            $data['kategori_has_articles'] = true;
+        if ($cari) {
+            $kategoriQuery->like('nama_kategori', $cari);
         }
-    }
 
-    return view('CMS/kategori/kategori', $data);
-}
+        $kategori = $kategoriQuery->findAll();
+
+        $data['kategori'] = $kategori;
+        $data['id_parents'] = [];
+
+        $data['kategori_has_articles'] = false;
+        $data['kategori_articles'] = [];
+        $data['kategori_sub_count'] = [];
+        $data['kategori_article_count'] = [];
+
+        foreach ($data['kategori'] as $kat) {
+            $articles = $artikelModel->where('id_kategori', $kat['id'])->findAll();
+            $subcategories = $kategoriModel->where('id_parent', $kat['id'])->findAll();
+
+            $data['kategori_articles'][$kat['id']] = count($articles) > 0;
+            $data['kategori_article_count'][$kat['id']] = count($articles);
+            $data['kategori_sub_count'][$kat['id']] = count($subcategories);
+
+            if (count($articles) > 0) {
+                $data['kategori_has_articles'] = true;
+            }
+        }
+
+        return view('CMS/kategori/kategori', $data);
+    }
 
 
 
     public function index_subkategori($id_kategori)
-{
-    $session = session();
-    $userId = $session->get('user_id');
+    {
+        $session = session();
+        $userId = $session->get('user_id');
 
-    $model = new UserModel();
-    $kategoriModel = new KategoriModel();
-    $artikelModel = new ArtikelModel();
+        $model = new UserModel();
+        $kategoriModel = new KategoriModel();
+        $artikelModel = new ArtikelModel();
 
-    $data['data'] = $model->getUserById($userId);
-    $subcategoryDetails = $kategoriModel->getSubcategoriesWithDetails($id_kategori);
-    $data['subkategori'] = $subcategoryDetails['subcategories'];
-    $data['parentIds'] = $subcategoryDetails['parentIds'];
-    $data['total_subkategori'] = count($data['subkategori']);
-    $data['id_kat'] = $id_kategori;
-    $data['parent_kategori'] = $kategoriModel->where('id', $id_kategori)->first();
+        $data['data'] = $model->getUserById($userId);
+        $subcategoryDetails = $kategoriModel->getSubcategoriesWithDetails($id_kategori);
+        $data['subkategori'] = $subcategoryDetails['subcategories'];
+        $data['parentIds'] = $subcategoryDetails['parentIds'];
+        $data['total_subkategori'] = count($data['subkategori']);
+        $data['id_kat'] = $id_kategori;
+        $data['parent_kategori'] = $kategoriModel->where('id', $id_kategori)->first();
 
-    $data['subkategori_has_articles'] = false;
-    $data['subkategori_articles'] = [];
-    $data['subkategori_sub_count'] = [];
-    $data['subkategori_article_count'] = [];
-    foreach ($data['subkategori'] as $sub) {
-        $articles = $artikelModel->where('id_kategori', $sub['id'])->findAll();
-        $subcategories = $kategoriModel->where('id_parent', $sub['id'])->findAll();
+        $data['subkategori_has_articles'] = false;
+        $data['subkategori_articles'] = [];
+        $data['subkategori_sub_count'] = [];
+        $data['subkategori_article_count'] = [];
+        foreach ($data['subkategori'] as $sub) {
+            $articles = $artikelModel->where('id_kategori', $sub['id'])->findAll();
+            $subcategories = $kategoriModel->where('id_parent', $sub['id'])->findAll();
 
-        $data['subkategori_articles'][$sub['id']] = count($articles) > 0;
-        $data['subkategori_article_count'][$sub['id']] = count($articles);
-        $data['subkategori_sub_count'][$sub['id']] = count($subcategories);
+            $data['subkategori_articles'][$sub['id']] = count($articles) > 0;
+            $data['subkategori_article_count'][$sub['id']] = count($articles);
+            $data['subkategori_sub_count'][$sub['id']] = count($subcategories);
 
-        if (count($articles) > 0) {
-            $data['subkategori_has_articles'] = true;
+            if (count($articles) > 0) {
+                $data['subkategori_has_articles'] = true;
+            }
         }
+
+        $data['breadcrumb'] = $this->getBreadcrumb($id_kategori, $kategoriModel);
+        $depth = 0;
+        $currentCategory = $kategoriModel->find($id_kategori);
+        while ($currentCategory && $currentCategory['id_parent'] !== null) {
+            $depth++;
+            $currentCategory = $kategoriModel->find($currentCategory['id_parent']);
+        }
+        $data['subkategori_depth'] = $depth;
+
+        return view('CMS/kategori/subkategori', $data);
     }
 
-    $data['breadcrumb'] = $this->getBreadcrumb($id_kategori, $kategoriModel);
-    $depth = 0;
-    $currentCategory = $kategoriModel->find($id_kategori);
-    while ($currentCategory && $currentCategory['id_parent'] !== null) {
-        $depth++;
-        $currentCategory = $kategoriModel->find($currentCategory['id_parent']);
-    }
-    $data['subkategori_depth'] = $depth;
-
-    return view('CMS/kategori/subkategori', $data);
-}
 
 
     private function getBreadcrumb($id_kategori, $kategoriModel)
@@ -500,67 +501,66 @@ class Kategori extends BaseController
         }
     }
     public function cari_subkategori()
-{
-    $session = session();
-    $userId = $session->get('user_id');
-    $model = new UserModel();
-    $kategoriModel = new KategoriModel();
-    $artikelModel = new ArtikelModel();
+    {
+        $session = session();
+        $userId = $session->get('user_id');
+        $model = new UserModel();
+        $kategoriModel = new KategoriModel();
+        $artikelModel = new ArtikelModel();
 
-    $data['data'] = $model->getUserById($userId);
+        $data['data'] = $model->getUserById($userId);
 
-    // Ambil nilai 'id_parent' dan kata kunci pencarian dari query string
-    $id_parent = $this->request->getGet('id_parent');
-    $cari = $this->request->getGet('cari');
+        // Ambil nilai 'id_parent' dan kata kunci pencarian dari query string
+        $id_parent = $this->request->getGet('id_parent');
+        $cari = $this->request->getGet('cari');
 
-    // Dapatkan subkategori berdasarkan id_parent
-    $subkategoriQuery = $kategoriModel->where('id_parent', $id_parent);
+        // Dapatkan subkategori berdasarkan id_parent
+        $subkategoriQuery = $kategoriModel->where('id_parent', $id_parent);
 
-    // Jika ada kata kunci pencarian, tambahkan kondisi LIKE
-    if ($cari) {
-        $subkategoriQuery->like('nama_kategori', $cari);
-    }
-
-    $subkategori = $subkategoriQuery->findAll();
-
-    $data['subkategori'] = $subkategori;
-    $data['total_subkategori'] = count($subkategori);
-    $data['id_kat'] = $id_parent;
-    $data['parent_kategori'] = $kategoriModel->where('id', $id_parent)->first();
-
-    $data['subkategori_has_articles'] = false;
-    $data['subkategori_articles'] = [];
-    $data['subkategori_sub_count'] = [];
-    $data['subkategori_article_count'] = [];
-    $parentIds = [];
-    foreach ($subkategori as $sub) {
-        $articles = $artikelModel->where('id_kategori', $sub['id'])->findAll();
-        $subcategories = $kategoriModel->where('id_parent', $sub['id'])->findAll();
-
-        $data['subkategori_articles'][$sub['id']] = count($articles) > 0;
-        $data['subkategori_article_count'][$sub['id']] = count($articles);
-        $data['subkategori_sub_count'][$sub['id']] = count($subcategories);
-
-        if (count($articles) > 0) {
-            $data['subkategori_has_articles'] = true;
+        // Jika ada kata kunci pencarian, tambahkan kondisi LIKE
+        if ($cari) {
+            $subkategoriQuery->like('nama_kategori', $cari);
         }
-        if ($sub['id_parent']) {
-            $parentIds[] = $sub['id_parent'];
+
+        $subkategori = $subkategoriQuery->findAll();
+
+        $data['subkategori'] = $subkategori;
+        $data['total_subkategori'] = count($subkategori);
+        $data['id_kat'] = $id_parent;
+        $data['parent_kategori'] = $kategoriModel->where('id', $id_parent)->first();
+
+        $data['subkategori_has_articles'] = false;
+        $data['subkategori_articles'] = [];
+        $data['subkategori_sub_count'] = [];
+        $data['subkategori_article_count'] = [];
+        $parentIds = [];
+        foreach ($subkategori as $sub) {
+            $articles = $artikelModel->where('id_kategori', $sub['id'])->findAll();
+            $subcategories = $kategoriModel->where('id_parent', $sub['id'])->findAll();
+
+            $data['subkategori_articles'][$sub['id']] = count($articles) > 0;
+            $data['subkategori_article_count'][$sub['id']] = count($articles);
+            $data['subkategori_sub_count'][$sub['id']] = count($subcategories);
+
+            if (count($articles) > 0) {
+                $data['subkategori_has_articles'] = true;
+            }
+            if ($sub['id_parent']) {
+                $parentIds[] = $sub['id_parent'];
+            }
         }
+        $data['parentIds'] = $parentIds;
+
+        // Inisialisasi breadcrumb sebagai array kosong jika tidak ada data
+        $data['breadcrumb'] = $this->getBreadcrumb($id_parent, $kategoriModel) ?? [];
+        $depth = 0;
+        $currentCategory = $kategoriModel->find($id_parent);
+        while ($currentCategory && $currentCategory['id_parent'] !== null) {
+            $depth++;
+            $currentCategory = $kategoriModel->find($currentCategory['id_parent']);
+        }
+        $data['subkategori_depth'] = $depth;
+
+        return view('CMS/kategori/subkategori', $data);
     }
-    $data['parentIds'] = $parentIds;
-
-    // Inisialisasi breadcrumb sebagai array kosong jika tidak ada data
-    $data['breadcrumb'] = $this->getBreadcrumb($id_parent, $kategoriModel) ?? [];
-    $depth = 0;
-    $currentCategory = $kategoriModel->find($id_parent);
-    while ($currentCategory && $currentCategory['id_parent'] !== null) {
-        $depth++;
-        $currentCategory = $kategoriModel->find($currentCategory['id_parent']);
-    }
-    $data['subkategori_depth'] = $depth;
-
-    return view('CMS/kategori/subkategori', $data);
-}
-
 }

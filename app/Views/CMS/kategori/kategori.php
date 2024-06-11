@@ -42,7 +42,9 @@ Kategori
                                 <p class="m-0 fw-semibold" style="font-size: 20px; color: #13005A; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     <?= esc($kat['nama_kategori']) ?>
                                 </p>
+                                <?php if (!$kategori_articles[$kat['id']]) : ?>
                                 </a>
+                            <?php endif; ?>
                         </div>
                         <div class="menu">
                             <div class="dropdown no-arrow">
@@ -71,13 +73,20 @@ Kategori
                     </div>
                     <div class="card-body mt-3">
                         <p style="font-size: 13px;">
-                            <?= $kategori_sub_count[$kat['id']] ?> Subkategori, <?= $kategori_article_count[$kat['id']] ?> Artikel
+                            <?php if ($kategori_sub_count[$kat['id']] > 0) : ?>
+                                <?= $kategori_sub_count[$kat['id']] ?> Subkategori<?= $kategori_article_count[$kat['id']] > 0 ? ',' : '' ?>
+                            <?php endif; ?>
+                            <?php if ($kategori_article_count[$kat['id']] > 0) : ?>
+                                <?= $kategori_article_count[$kat['id']] ?> Artikel
+                            <?php endif; ?>
                         </p>
                     </div>
                     <div class="card-footer bg-white border-0"></div>
                 </div>
             </div>
         <?php endforeach; ?>
+
+
     </div>
 
 
