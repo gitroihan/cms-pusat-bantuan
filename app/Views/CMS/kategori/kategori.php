@@ -52,12 +52,12 @@ Kategori
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updateCategoryModal<?= $kat['id'] ?>">
                                         <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
-                                        edit
+                                        Ubah
                                     </a>
                                     <?php if (!in_array($kat['id'], $id_parents) && !$kategori_articles[$kat['id']]) : ?>
                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal<?= $kat['id'] ?>">
                                             <i class="fa-solid fa-trash mr-2 text-gray-400"></i>
-                                            hapus
+                                            Hapus
                                         </a>
                                     <?php endif; ?>
                                 </div>
@@ -67,6 +67,11 @@ Kategori
                     <div class="card-body">
                         <p class="text-truncate" style="max-height: 4.5em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                             <?= esc($kat['deskripsi_kategori']) ?>
+                        </p>
+                    </div>
+                    <div class="card-body mt-3">
+                        <p style="font-size: 13px;">
+                            <?= $kategori_sub_count[$kat['id']] ?> Subkategori, <?= $kategori_article_count[$kat['id']] ?> Artikel
                         </p>
                     </div>
                     <div class="card-footer bg-white border-0"></div>

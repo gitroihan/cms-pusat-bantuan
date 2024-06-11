@@ -15,6 +15,7 @@ Tiket
             <thead class="thead-dark">
                 <td style="width: 20%; background-color: #03C988; color: #ffff;" class="text-center">nama</td>
                 <td class="text-center" style="background-color: #03C988; color: #ffff;">email</td>
+                <td class="text-center" style="background-color: #03C988; color: #ffff;">tanggal</td>
                 <td style="width: 10%; background-color: #03C988; color: #ffff;" class="text-center"></td>
             </thead>
             <tbody>
@@ -67,9 +68,12 @@ Tiket
                     data: 'email'
                 },
                 {
+                    data: 'tanggal'
+                },
+                {
                     data: 'id',
                     render: function(data, type, row) {
-                        return '<a class="btn btn-primary" href="/detail_tiket/' + data + '">detail</a>';
+                        return '<a class="btn btn-primary" href="/detail_tiket/' + data + '"><i class="fa-solid fa-list mr-2"></i>detail</a>';
                     },
                     orderable: false
                 }

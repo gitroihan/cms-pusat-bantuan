@@ -23,7 +23,7 @@ class User extends BaseController
 
         $model = new UserModel();
         $riwayatModel = new LogAktivitasModel();
-        $user = $model->where('nama', $username)->first();
+        $user = $model->where('username', $username)->first();
 
 
         if ($user && password_verify($password, $user['password'])) {
@@ -111,12 +111,14 @@ class User extends BaseController
         $riwayatModel = new LogAktivitasModel();
 
         // Ambil data dari form
+        $username = $this->request->getPost('username');
         $nama = $this->request->getPost('nama');
         $email = $this->request->getPost('email');
         $alamat_ip = $this->request->getIPAddress();
 
         // Validasi data
         if (!$this->validate([
+            'username' => 'required|min_length[3]|max_length[255]',
             'nama' => 'required|min_length[3]|max_length[255]',
             'email' => 'required|valid_email|max_length[255]',
         ])) {
@@ -125,11 +127,13 @@ class User extends BaseController
 
         // Mendapatkan data user lama dari database
         $userLama = $model->find($userId);
+        $usernameLama = $userLama['username'];
         $namaLama = $userLama['nama'];
         $emailLama = $userLama['email'];
 
         // Update data user
         $data = [
+            'username' => $username,
             'nama' => $nama,
             'email' => $email,
         ];
@@ -143,6 +147,9 @@ class User extends BaseController
 
         // Menyiapkan deskripsi aktivitas yang lebih detail
         $aktivitas = "mengubah informasi profile: ";
+        if ($usernameLama !== $username) {
+            $aktivitas .= "username dari '{$usernameLama}' menjadi '{$username}', ";
+        }
         if ($namaLama !== $nama) {
             $aktivitas .= "nama dari '{$namaLama}' menjadi '{$nama}', ";
         }
@@ -168,7 +175,7 @@ class User extends BaseController
         $db->transComplete();
 
         $session->set([
-            'nama' => $nama,
+            'username' => $username,
             'email' => $email,
         ]);
 

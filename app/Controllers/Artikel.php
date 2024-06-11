@@ -29,6 +29,10 @@ class Artikel extends BaseController
 
         // Total records
         $totalRecords = $builder->countAllResults(false);
+        
+        $builder->orderBy('tanggal_unggah', 'DESC')
+        ->limit($length, $start);
+
 
         // Filtered records
         if ($search) {

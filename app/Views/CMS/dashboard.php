@@ -20,52 +20,59 @@ Dashboard
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-lg font-weight-bold text-success text-uppercase mb-1 ml-3">
-                                kategori</div>
-                            <div class="h1 mb-0 font-weight-bold text-gray-800 ml-3"><?= $kategori ?></div>
+                            <a class="text-success" href="/cmskategori" style="text-decoration: none;">
+                                <div class="text-lg font-weight-bold text-success text-uppercase mb-1 ml-3">
+                                    kategori
+                            </a>
                         </div>
-                        <div class="col-auto">
-                            <i class="fa-regular fa-folder-open fa-5x text-success mr-5 mt-3"></i>
-
-                        </div>
+                        <div class="h1 mb-0 font-weight-bold text-gray-800 ml-3"><?= $kategori ?></div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-6 mb-3">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 ml-3">
-                                artikel </div>
-                            <div class="h1 mb-0 font-weight-bold text-gray-800 ml-3"><?= $artikel ?></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-regular fa-newspaper fa-5x text-primary mr-5 mt-3"></i>
+                    <div class="col-auto">
+                        <i class="fa-regular fa-folder-open fa-5x text-success mr-5 mt-3"></i>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-6 mb-3">
-            <div class="card border-left-warning shadow h-100 w-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-lg font-weight-bold text-warning text-uppercase mb-1 ml-3 ">
-                                tiket</div>
-                            <div class="h1 mb-0 font-weight-bold text-gray-800 ml-3"><?= $tiket ?></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-solid fa-ticket-simple fa-5x text-warning mr-5 mt-3"></i>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-xl-4 col-md-6 mb-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <a class="text-primary" href="/cmsartikel" style="text-decoration: none;">
+                            <div class="text-lg font-weight-bold text-primary text-uppercase mb-1 ml-3">
+                                artikel </div>
+                            <div class="h1 mb-0 font-weight-bold text-gray-800 ml-3"><?= $artikel ?></div>
+                            </a>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-regular fa-newspaper fa-5x text-primary mr-5 mt-3"></i>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6 mb-3">
+        <div class="card border-left-warning shadow h-100 w-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <a class="text-warning" href="/cmstiket" style="text-decoration: none;">
+                        <div class="text-lg font-weight-bold text-warning text-uppercase mb-1 ml-3 ">
+                            tiket</div>
+                        <div class="h1 mb-0 font-weight-bold text-gray-800 ml-3"><?= $tiket ?></div>
+                        </a>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-ticket-simple fa-5x text-warning mr-5 mt-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 <?php $this->endSection() ?>

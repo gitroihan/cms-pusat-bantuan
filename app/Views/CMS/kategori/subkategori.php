@@ -58,21 +58,26 @@ Kategori
                 <div class="col-md-12 mb-2 my-2">
                     <div class="card custom-card">
                         <div class="card-body">
-                            <div class="d-flex align-items-start justify-content-between mb-3">
+                            <div class="d-flex align-items-start justify-content-between">
                                 <div class="image-box mr-3" style="flex: 0 0 60px; width: 60px; height: 60px;">
                                     <img src="<?= base_url('uploads/icons/' . esc($sub['ikon'])); ?>" alt="" class="img-fluid" style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
 
 
                                 <div class="d-flex flex-column flex-grow-1">
-                                    <?php if (  !$subkategori_has_articles && $subkategori_depth < 3) : ?>
+                                    <?php if (!$subkategori_articles[$sub['id']] && $subkategori_depth < 3) : ?>
                                         <a href="/cmssubkategori/<?= $sub['id'] ?>" class="text-decoration-none">
                                         <?php endif; ?>
                                         <h5 class="card-title custom-title mb-2" style="color: #13005A;"><?= esc($sub['nama_kategori']) ?></h5>
+                                        <?php if (!$subkategori_articles[$sub['id']] && $subkategori_depth < 3) : ?>
                                         </a>
-                                        <p class="card-text mb-0 " style="max-width: 900px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            <?= esc($sub['deskripsi_kategori']) ?>
-                                        </p>
+                                    <?php endif; ?>
+                                    <p class="card-text mb-0 " style="max-width: 900px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        <?= esc($sub['deskripsi_kategori']) ?>
+                                    </p>
+                                    <p class="mt-2 mb-0" style="font-size: 13px;">
+                                        <?= $subkategori_sub_count[$sub['id']] ?> Subkategori, <?= $subkategori_article_count[$sub['id']] ?> Artikel
+                                    </p>
                                 </div>
                                 <div class="dropdown no-arrow">
                                     <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,7 +86,7 @@ Kategori
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#updateCategoryModal<?= $sub['id'] ?>">
                                             <i class="fa-regular fa-pen-to-square mr-2 text-gray-400"></i>
-                                            Edit
+                                            Ubah
                                         </a>
                                         <?php if (!in_array($sub['id'], $parentIds) && !$subkategori_articles[$sub['id']]) : ?>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteCategoryModal<?= $sub['id'] ?>">

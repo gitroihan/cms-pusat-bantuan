@@ -18,20 +18,24 @@ User
                 </button>
             </div>
             <div class="mb-3">
-                <label for="nama">Nama</label>
+                <label for="">Username</label>
+                <input type="text" class="form-control" id="username" name="username" value="<?= esc($data['username']); ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="">Nama</label>
                 <input type="text" class="form-control" id="nama" name="nama" value="<?= esc($data['nama']); ?>" required>
             </div>
             <div class="mb-3">
-                <label for="username">Email</label>
+                <label for="">Email</label>
                 <input type="text" class="form-control" id="email" name="email" value="<?= esc($data['email']); ?>" required>
             </div>
             <div class="mb-3">
-                <label for="nama">Role</label>
+                <label for="">Role</label>
                 <input type="text" class="form-control" value="<?= esc($data['role']); ?>" readonly>
             </div>
             <div class="text-right">
                 <button type="submit" id="editProfileButton" class="btn text-light mt-3" style="background-color: #03C988;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
-                SIMPAN</button>
+                    SIMPAN</button>
             </div>
         </form>
     </div>
@@ -56,7 +60,7 @@ User
                                 </div>
                             </div>
                             <button type="submit" class="btn text-light ml-0" style="background-color: #03C988;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
-                            SIMPAN</button>
+                                SIMPAN</button>
                         </form>
                     </div>
                 </div>

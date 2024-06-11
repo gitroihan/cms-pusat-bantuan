@@ -41,6 +41,7 @@ Artikel
 <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.6/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/r-3.0.2/datatables.min.js"></script>
 
 <!-- table artikel -->
+ 
 <script>
     $(document).ready(function() {
         $('#table_artikel').DataTable({
@@ -100,7 +101,7 @@ Artikel
                 {
                     data: 'id',
                     render: function(data, type, row) {
-                        return '<a class="btn btn-primary" href="/detail_artikel/' + data + '">detail</a>';
+                        return '<a class="btn btn-primary" href="/detail_artikel/' + data + '"><i class="fa-solid fa-list mr-2"></i>detail</a>';
                     },
                     orderable: false,
                     className: 'text-center'

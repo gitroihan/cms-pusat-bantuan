@@ -365,7 +365,7 @@ class Home extends BaseController
         $totalRecordwithFilter = $builder->countAllResults(false);
 
         // Limit and order
-        $builder->orderBy('log_aktivitas.id', 'DESC')
+        $builder->orderBy('log_aktivitas.id', 'ASC')
             ->limit($length, $start);
 
         $data = $builder->get()->getResultArray();

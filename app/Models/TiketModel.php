@@ -12,7 +12,7 @@ class TiketModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama_kontak','email','subjek','deskripsi','status'];
+    protected $allowedFields    = ['nama_kontak','email','subjek','deskripsi','tanggal','status'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

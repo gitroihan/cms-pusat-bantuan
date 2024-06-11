@@ -40,7 +40,7 @@ Tiket
             </div>
         </div>
         <div class="mb-3 p-1 text-right">
-            <button type="submit" class="btn text-light mt-3" style="background-color: #03C988;">ubah status</button>
+            <button type="submit" class="btn text-light mt-3" style="background-color: #03C988;"><i class="fa-regular fa-paper-plane mr-2"></i>ubah status</button>
         </div>
     <?php endforeach; ?>
 </div>

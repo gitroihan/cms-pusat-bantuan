@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['nama', 'email', 'password', 'status', 'role', 'foto_profile'];
+    protected $allowedFields = ['username','nama', 'email', 'password', 'status', 'role', 'foto_profile'];
 
     // cek password lama
     public function cekpassword($id, $password) {

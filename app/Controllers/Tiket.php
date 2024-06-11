@@ -41,6 +41,7 @@ class Tiket extends BaseController
             $data[] = [
                 'nama_kontak' => $record['nama_kontak'],
                 'email' => $record['email'],
+                'tanggal' => $record['tanggal'],
                 'id' => $record['id']
             ];
         }

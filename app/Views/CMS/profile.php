@@ -32,15 +32,19 @@ User
                 <img id="profilePicture" class="rounded-circle border " src="<?= base_url('uploads/' . esc($data['foto_profile'])); ?>" width="150" height="150">
             </div>
             <div class="mb-3">
-                <label for="nama">Nama</label>
+                <label for="">Username</label>
+                <input type="text" class="form-control" required value="<?= esc($data['username']); ?>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="">Nama</label>
                 <input type="text" class="form-control" required value="<?= esc($data['nama']); ?>" readonly>
             </div>
             <div class="mb-3">
-                <label for="username">Email</label>
+                <label for="">Email</label>
                 <input type="text" class="form-control" required value="<?= esc($data['email']); ?>" readonly>
             </div>
             <div class="mb-3">
-                <label for="nama">Role</label>
+                <label for="">Role</label>
                 <input type="text" class="form-control" value="<?= esc($data['role']); ?>" readonly>
             </div>
             <div class="text-right">
@@ -48,8 +52,8 @@ User
                     UBAH
                 </a>
                 <button class="btn text-light  mt-3" data-bs-toggle="modal" data-bs-target="#passwordModal" style="background-color: #03C988;"><i class="fa-solid fa-pen-to-square mr-1"></i>
-                UBAH PASSWORD
-                </button>
+                    UBAH PASSWORD
+                </button>
             </div>
         </div>
     </div>
@@ -74,7 +78,7 @@ User
                         </div>
                         <div class="text-right">
                             <button type="button" id="btn-ubah" class="btn" style="background-color: #03C988; color: white;"><i class="fa-solid fa-floppy-disk mr-2 mt-2"></i>
-                            SIMPAN</button>
+                                SIMPAN</button>
                         </div>
                     </form>
                 </div>
